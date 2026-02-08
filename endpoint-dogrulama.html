@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Endpoint Attestation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">EA</span>
+                </div>
+                <span class="font-semibold">Endpoint Attestation</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-medium">ATTESTATION</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Endpoint Attestation Sistemi</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">TPM 2.0 tabanlı remote attestation, measured boot ve device integrity verification. Hardware-rooted trust zinciri.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-emerald-400 mb-2">TPM 2.0</div>
+                        <div class="text-slate-400">Hardware Root</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-teal-400 mb-2">SHA-256</div>
+                        <div class="text-slate-400">PCR Hash</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">99.9%</div>
+                        <div class="text-slate-400">Trust Score</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-cyan-400 mb-2">Real-time</div>
+                        <div class="text-slate-400">Verification</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Chain -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Hardware Trust Zinciri</h2>
+                
+                <div class="bg-slate-900 rounded-xl p-8">
+                    <div class="grid grid-cols-7 gap-2 items-center text-center mb-8">
+                        <div>
+                            <div class="w-14 h-14 bg-emerald-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-emerald-500/50">
+                                <span class="text-xl">🔒</span>
+                            </div>
+                            <div class="text-xs text-slate-400">TPM</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-14 h-14 bg-teal-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-teal-500/50">
+                                <span class="text-xl">⚙️</span>
+                            </div>
+                            <div class="text-xs text-slate-400">UEFI</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-green-500/50">
+                                <span class="text-xl">🪟</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Bootloader</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-cyan-500/50">
+                                <span class="text-xl">✓</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Verify</div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="code-block rounded-lg p-4">
+                            <div class="text-xs text-slate-500 mb-2">// Measured Boot Sequence</div>
+                            <pre class="mono text-sm text-green-400">1. CRTM (Core Root of Trust)
+   ↓ PCR[0] = SHA256(CRTM)
+2. UEFI Firmware
+   ↓ PCR[1] = SHA256(UEFI)
+3. Bootloader
+   ↓ PCR[2] = SHA256(Bootloader)
+4. OS Kernel
+   ↓ PCR[3] = SHA256(Kernel)
+5. Drivers
+   ↓ PCR[4] = SHA256(Drivers)
+6. Applications
+   ↓ PCR[5] = SHA256(Apps)</pre>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="text-white font-semibold mb-2">PCR Registers</div>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-slate-400">PCR[0-7]</span>
+                                        <span class="text-emerald-400">Firmware</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-slate-400">PCR[8-15]</span>
+                                        <span class="text-teal-400">OS Components</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-slate-400">PCR[16-23]</span>
+                                        <span class="text-green-400">Debug/Reserved</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="text-white font-semibold mb-2">Quote Generation</div>
+                                <p class="text-sm text-slate-400">TPM 2.0 Quote = PCR values + Nonce + Signature</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Attestation Flow -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">Remote Attestation Akışı</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <h3 class="text-lg font-bold text-white mb-4">1. Attestation Request</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Server sends challenge
+AttestationRequest {
+    nonce: Random(32 bytes)
+    pcr_selection: [0, 1, 2, 3, 4, 5]
+    timestamp: UnixTime()
+    signature: ServerSign(request)
+}</pre>
+                        </div>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <h3 class="text-lg font-bold text-white mb-4">2. TPM Quote Generation</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Client generates quote
+TPM2_Quote {
+    pcr_digest: SHA256(PCR[0-5])
+    nonce: request.nonce
+    ak_handle: AttestationKey
+    signature: TPM_Sign(quote)
+}</pre>
+                        </div>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <h3 class="text-lg font-bold text-white mb-4">3. Evidence Collection</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Collect additional evidence
+Evidence {
+    tpm_quote: TPM2_Quote
+    event_log: TCG_Event_Log
+    device_cert: X.509_Certificate
+    health_data: DeviceHealth
+}</pre>
+                        </div>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <h3 class="text-lg font-bold text-white mb-4">4. Verification</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Server verifies
+VerifyAttestation(evidence) {
+    1. Verify AK certificate
+    2. Verify quote signature
+    3. Check PCR against gold
+    4. Evaluate event log
+    5. Return trust score
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Score Calculation -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Trust Score Hesaplama</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Scoring Factors</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-300">Secure Boot</span>
+                                    <span class="text-emerald-400 font-semibold">25%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-emerald-500 h-2 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-300">TPM Attestation</span>
+                                    <span class="text-teal-400 font-semibold">25%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-teal-500 h-2 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-300">Patch Level</span>
+                                    <span class="text-green-400 font-semibold">20%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-300">AV Status</span>
+                                    <span class="text-cyan-400 font-semibold">15%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-cyan-500 h-2 rounded-full" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-slate-300">Config Compliance</span>
+                                    <span class="text-blue-400 font-semibold">15%</span>
+                                </div>
+                                <div class="w-full bg-slate-700 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 15%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Trust Levels</h3>
+                        <div class="space-y-3">
+                            <div class="bg-green-500/10 rounded-lg p-4 border border-green-500/30">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-green-400">Trusted (90-100)</span>
+                                    <span class="text-xs text-slate-500">Full Access</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mt-1">All security controls verified</p>
+                            </div>
+                            <div class="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-yellow-400">Limited (70-89)</span>
+                                    <span class="text-xs text-slate-500">Restricted Access</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mt-1">Some controls missing, monitoring required</p>
+                            </div>
+                            <div class="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-orange-400">At Risk (50-69)</span>
+                                    <span class="text-xs text-slate-500">Quarantine</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mt-1">Significant issues, limited network access</p>
+                            </div>
+                            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold text-red-400">Untrusted (0-49)</span>
+                                    <span class="text-xs text-slate-500">Blocked</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mt-1">Critical issues, network access denied</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Continuous Monitoring -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Sürekli İzleme</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">🔄</div>
+                        <h3 class="font-semibold text-white mb-2">Periodic Attestation</h3>
+                        <p class="text-sm text-slate-400">Her 15 dakikada bir otomatik attestation. Anomaly detection ile runtime integrity.</p>
+                        <div class="mt-3 text-xs text-emerald-400">Interval: 15 minutes</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">⚡</div>
+                        <h3 class="font-semibold text-white mb-2">Event-Triggered</h3>
+                        <p class="text-sm text-slate-400">Yazılım kurulumu, driver değişikliği, config update sonrası otomatik re-attestation.</p>
+                        <div class="mt-3 text-xs text-emerald-400">Real-time triggers</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">📊</div>
+                        <h3 class="font-semibold text-white mb-2">Health Dashboard</h3>
+                        <p class="text-sm text-slate-400">Tüm endpoint'lerin trust durumu, trend analizi ve compliance raporları.</p>
+                        <div class="mt-3 text-xs text-emerald-400">Real-time visibility</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

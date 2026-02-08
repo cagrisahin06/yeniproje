@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Incident Response Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .severity-critical { border-left: 4px solid #ef4444; }
+        .severity-high { border-left: 4px solid #f97316; }
+        .severity-medium { border-left: 4px solid #eab308; }
+        .severity-low { border-left: 4px solid #22c55e; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-red-600 to-rose-700 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">IR</span>
+                </div>
+                <span class="font-semibold">Incident Response</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-sm font-medium">INCIDENT RESPONSE</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Incident Response Playbook</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Veri sızıntısı, insider threat ve güvenlik olayları için adım adım müdahale rehberi. NIST 800-61 uyumlu.</p>
+            </header>
+
+            <!-- Incident Types -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Olay Tipleri ve Seviyeleri</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="severity-critical bg-slate-800 rounded-xl p-5">
+                        <h3 class="font-bold text-red-400 mb-2">CRITICAL - Seviye 1</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Doğrulanmış veri sızıntısı</li>
+                            <li>• Kasıtlı insider saldırısı</li>
+                            <li>• Kritik sistem ihlali</li>
+                        </ul>
+                        <div class="mt-3 text-xs text-red-400">Yanıt Süresi: 15 dakika</div>
+                    </div>
+                    <div class="severity-high bg-slate-800 rounded-xl p-5">
+                        <h3 class="font-bold text-orange-400 mb-2">HIGH - Seviye 2</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Şüpheli kullanıcı aktivitesi</li>
+                            <li>• Kamera/screen recording tespiti</li>
+                            <li>• Policy ihlali</li>
+                        </ul>
+                        <div class="mt-3 text-xs text-orange-400">Yanıt Süresi: 1 saat</div>
+                    </div>
+                    <div class="severity-medium bg-slate-800 rounded-xl p-5">
+                        <h3 class="font-bold text-yellow-400 mb-2">MEDIUM - Seviye 3</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Davranış anomalisi</li>
+                            <li>• Attestation failure</li>
+                            <li>• Yanlış alarm (investigate)</li>
+                        </ul>
+                        <div class="mt-3 text-xs text-yellow-400">Yanıt Süresi: 4 saat</div>
+                    </div>
+                    <div class="severity-low bg-slate-800 rounded-xl p-5">
+                        <h3 class="font-bold text-green-400 mb-2">LOW - Seviye 4</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Bilgilendirme olayı</li>
+                            <li>• Rutin log</li>
+                            <li>• Trend analizi</li>
+                        </ul>
+                        <div class="mt-3 text-xs text-green-400">Yanıt Süresi: 24 saat</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Response Phases -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">NIST 800-61 Yanıt Fazları</h2>
+                
+                <div class="space-y-4">
+                    <!-- Preparation -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-blue-400 font-bold">1</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Preparation (Hazırlık)</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• IR team tanımlama</li>
+                                    <li>• İletişim planı</li>
+                                    <li>• Tool ve erişim hazırlığı</li>
+                                    <li>• Eğitim ve drill'ler</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Kontak Listesi</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• CISO: [REDACTED]</li>
+                                    <li>• SOC Manager: [REDACTED]</li>
+                                    <li>• Legal: [REDACTED]</li>
+                                    <li>• HR: [REDACTED]</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detection & Analysis -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-yellow-400 font-bold">2</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Detection & Analysis (Tespit & Analiz)</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Incident Detection Checklist
+□ Olay doğrulanmış mı? (False positive kontrolü)
+□ Etkilenen sistemler belirlendi mi?
+□ Sızıntı kaynağı tespit edildi mi? (Device ID, User)
+□ Sızıntı içeriği sınıflandırıldı mı?
+□ Potansiyel etki değerlendirildi mi?
+□ İlgili loglar toplandı mı?
+□ Evidence chain başlatıldı mı?</pre>
+                        </div>
+                    </div>
+
+                    <!-- Containment -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-orange-400 font-bold">3</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Containment (Sınırlama)</h3>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-white mb-2">Short-term</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Isolate device</li>
+                                    <li>• Disable user account</li>
+                                    <li>• Block network access</li>
+                                    <li>• Preserve evidence</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-white mb-2">System-level</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Revoke certificates</li>
+                                    <li>• Reset passwords</li>
+                                    <li>• Update firewall rules</li>
+                                    <li>• Enable enhanced monitoring</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <h4 class="font-semibold text-white mb-2">Long-term</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Policy updates</li>
+                                    <li>• Additional controls</li>
+                                    <li>• User retraining</li>
+                                    <li>• Process improvement</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Eradication -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-red-400 font-bold">4</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Eradication (Temizleme)</h3>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Sızıntı içeriğinin kaldırılması (public source'lardan)</li>
+                            <li>• Zararlı yazılım temizliği (varsa)</li>
+                            <li>• Güvenlik açıklarının kapatılması</li>
+                            <li>• Sistemlerin yeniden yapılandırılması</li>
+                        </ul>
+                    </div>
+
+                    <!-- Recovery -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-green-400 font-bold">5</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Recovery (Kurtarma)</h3>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Sistemlerin normal operasyona döndürülmesi</li>
+                            <li>• Kullanıcı hesaplarının yeniden aktive edilmesi (uygunsa)</li>
+                            <li>• Monitoring ve doğrulama</li>
+                            <li>• İş sürekliliği kontrolü</li>
+                        </ul>
+                    </div>
+
+                    <!-- Post-Incident -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-purple-400 font-bold">6</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Post-Incident Activity (Sonrası)</h3>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Lessons Learned</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Olay değerlendirme toplantısı</li>
+                                    <li>• Başarılı ve eksik yönler</li>
+                                    <li>• İyileştirme önerileri</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Documentation</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Olay raporu</li>
+                                    <li>• Timeline dokümantasyonu</li>
+                                    <li>• Evidence paketi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Evidence Collection -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Evidence Toplama</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Digital Evidence</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300 text-sm">Screenshot of leaked content</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300 text-sm">Watermark extraction result</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300 text-sm">Device identification data</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300 text-sm">User activity logs</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300 text-sm">Network traffic logs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Chain of Custody</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">Evidence ID: FW-2026-0207-001
+Collected: 2026-02-07 14:30:00
+Collector: [Analyst Name]
+Hash (SHA-256): abc123...
+Storage: Encrypted drive
+Access Log: [Audit trail]</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

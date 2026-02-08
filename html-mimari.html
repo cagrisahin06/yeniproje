@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Alternatif Mimari Opsiyonları</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .option-card { transition: all 0.3s ease; }
+        .option-card:hover { transform: translateY(-4px); }
+        .selected { border: 2px solid #22c55e; }
+        .alternative { border: 2px solid #eab308; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">A</span>
+                </div>
+                <span class="font-semibold">Alternatif Mimari</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm font-medium">ALTERNATİF MİMARİ</span>
+                    <span class="text-slate-500">v2.1.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Alternatif Mimari Opsiyonları</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Farklı mimari yaklaşımları, trade-off analizleri ve karar gerekçeleri.</p>
+            </header>
+
+            <!-- Architecture Options -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">Mimari Opsiyonları</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Option A: Selected -->
+                    <div class="option-card selected glass rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-green-500 text-white text-sm rounded-full">SEÇİLEN</span>
+                            <span class="text-slate-500">Opsiyon A</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Hybrid Kernel + GPU</h3>
+                        <p class="text-slate-400 text-sm mb-4">WDDM driver + CUDA hızlandırma ile kernel-seviye framebuffer erişimi.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">En yüksek performans</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">Uygulama bağımsız</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">144Hz desteği</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">Karmaşık geliştirme</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">WHQL gereksinimi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-800 rounded-lg p-3">
+                            <div class="text-xs text-slate-500 mb-1">Geliştirme Süresi</div>
+                            <div class="text-green-400 font-semibold">12-14 ay</div>
+                        </div>
+                    </div>
+
+                    <!-- Option B: Alternative -->
+                    <div class="option-card alternative glass rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-yellow-500 text-white text-sm rounded-full">ALTERNATİF</span>
+                            <span class="text-slate-500">Opsiyon B</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">User-Mode Hook</h3>
+                        <p class="text-slate-400 text-sm mb-4">DirectX/OpenGL API hook ile uygulama seviyesi yakalama.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">Daha basit geliştirme</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">WHQL gerekmez</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">Daha hızlı MVP</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">Uygulama başına entegrasyon</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">Daha düşük performans</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-800 rounded-lg p-3">
+                            <div class="text-xs text-slate-500 mb-1">Geliştirme Süresi</div>
+                            <div class="text-yellow-400 font-semibold">6-8 ay</div>
+                        </div>
+                    </div>
+
+                    <!-- Option C: Rejected -->
+                    <div class="option-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-slate-600 text-white text-sm rounded-full">DEĞERLENDİRİLDİ</span>
+                            <span class="text-slate-500">Opsiyon C</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">DisplayPort/HDMI Sniffer</h3>
+                        <p class="text-slate-400 text-sm mb-4">Harici donanım cihazı ile video sinyali yakalama.</p>
+                        
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">OS bağımsız</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-sm text-slate-300">Kırılamaz</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">Donanım maliyeti</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">Kurulum karmaşası</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">✗</span>
+                                <span class="text-sm text-slate-300">Ölçeklenebilirlik sorunu</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-800 rounded-lg p-3">
+                            <div class="text-xs text-slate-500 mb-1">Donanım Maliyeti</div>
+                            <div class="text-red-400 font-semibold">$200-500/cihaz</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trade-off Analysis -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Trade-off Analizi</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Kriter</th>
+                                <th class="text-center py-3 text-green-400">Opsiyon A<br><span class="text-xs">(Kernel+GPU)</span></th>
+                                <th class="text-center py-3 text-yellow-400">Opsiyon B<br><span class="text-xs">(User Hook)</span></th>
+                                <th class="text-center py-3 text-slate-400">Opsiyon C<br><span class="text-xs">(Hardware)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Performans</td>
+                                <td class="text-center text-green-400">★★★★★</td>
+                                <td class="text-center text-yellow-400">★★★☆☆</td>
+                                <td class="text-center text-green-400">★★★★★</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Geliştirme Süresi</td>
+                                <td class="text-center text-yellow-400">★★☆☆☆</td>
+                                <td class="text-center text-green-400">★★★★★</td>
+                                <td class="text-center text-red-400">★☆☆☆☆</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Maliyet</td>
+                                <td class="text-center text-green-400">★★★★☆</td>
+                                <td class="text-center text-green-400">★★★★★</td>
+                                <td class="text-center text-red-400">★☆☆☆☆</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Ölçeklenebilirlik</td>
+                                <td class="text-center text-green-400">★★★★★</td>
+                                <td class="text-center text-yellow-400">★★★☆☆</td>
+                                <td class="text-center text-red-400">★☆☆☆☆</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Güvenlik</td>
+                                <td class="text-center text-green-400">★★★★☆</td>
+                                <td class="text-center text-yellow-400">★★★☆☆</td>
+                                <td class="text-center text-green-400">★★★★★</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Bakım Kolaylığı</td>
+                                <td class="text-center text-yellow-400">★★★☆☆</td>
+                                <td class="text-center text-green-400">★★★★☆</td>
+                                <td class="text-center text-red-400">★★☆☆☆</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Platform Desteği</td>
+                                <td class="text-center text-yellow-400">Windows</td>
+                                <td class="text-center text-green-400">Windows/macOS</td>
+                                <td class="text-center text-green-400">Tümü</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Decision Matrix -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Karar Matrisi</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Ağırlıklı Puanlama</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-slate-400">Performans (%30)</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span>Opsiyon A</span>
+                                        <span class="text-green-400">30/30</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full">
+                                        <div class="h-full bg-green-500 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span>Opsiyon B</span>
+                                        <span class="text-yellow-400">18/30</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full">
+                                        <div class="h-full bg-yellow-500 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-slate-400">Maliyet (%25)</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span>Opsiyon A</span>
+                                        <span class="text-green-400">20/25</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full">
+                                        <div class="h-full bg-green-500 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span>Opsiyon B</span>
+                                        <span class="text-green-400">25/25</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full">
+                                        <div class="h-full bg-green-500 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-slate-400">Ölçeklenebilirlik (%25)</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs">
+                                        <span>Opsiyon A</span>
+                                        <span class="text-green-400">25/25</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full">
+                                        <div class="h-full bg-green-500 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span>Opsiyon B</span>
+                                        <span class="text-yellow-400">15/25</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full">
+                                        <div class="h-full bg-yellow-500 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Toplam Skor</h3>
+                        <div class="space-y-4">
+                            <div class="bg-slate-800 rounded-xl p-6 text-center">
+                                <div class="text-sm text-slate-400 mb-2">Opsiyon A (Kernel+GPU)</div>
+                                <div class="text-5xl font-bold text-green-400">87<span class="text-2xl text-slate-500">/100</span></div>
+                                <div class="text-green-400 text-sm mt-2">ÖNERİLEN</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-xl p-6 text-center">
+                                <div class="text-sm text-slate-400 mb-2">Opsiyon B (User Hook)</div>
+                                <div class="text-5xl font-bold text-yellow-400">68<span class="text-2xl text-slate-500">/100</span></div>
+                                <div class="text-yellow-400 text-sm mt-2">ALTERNATİF</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-xl p-6 text-center">
+                                <div class="text-sm text-slate-400 mb-2">Opsiyon C (Hardware)</div>
+                                <div class="text-5xl font-bold text-red-400">45<span class="text-2xl text-slate-500">/100</span></div>
+                                <div class="text-red-400 text-sm mt-2">RED</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark Alternatif Mimari v2.1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

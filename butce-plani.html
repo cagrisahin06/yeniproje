@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - 12 Aylık Bütçe Planı (TL)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .budget-card { transition: all 0.3s ease; }
+        .budget-card:hover { transform: translateY(-4px); }
+        .highlight-row { background: rgba(59, 130, 246, 0.1); }
+        .total-row { background: rgba(34, 197, 94, 0.15); }
+        .equipment-item { border-left: 3px solid #3b82f6; padding-left: 1rem; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">₺</span>
+                </div>
+                <span class="font-semibold">Bütçe Planı</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">BÜTÇE PLANI</span>
+                    <span class="text-slate-500">v1.0.0 | Şubat 2026</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">12 Aylık Bütçe Planı</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Forensic Watermark projesi için Türk Lirası bazlı detaylı bütçe planı. Ankara ofisi, 3 kişilik ekip, tam teknoloji altyapısı.</p>
+                
+                <!-- Quick Stats -->
+                <div class="grid md:grid-cols-4 gap-6 mt-8">
+                    <div class="glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-green-400 mb-2">₺6.04M</div>
+                        <div class="text-slate-400">12 Aylık Bütçe</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">₺504K</div>
+                        <div class="text-slate-400">Aylık Ortalama</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">₺7.29M</div>
+                        <div class="text-slate-400">Maksimum Bütçe</div>
+                    </div>
+                    <div class="glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">6. Ay</div>
+                        <div class="text-slate-400">Opsiyonlu Ek Bütçe</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Kur Bilgisi -->
+            <section class="glass rounded-2xl p-6 mb-8 border border-slate-700">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl">💱</span>
+                        <div>
+                            <div class="text-white font-semibold">Döviz Kuru Bilgisi</div>
+                            <div class="text-slate-400 text-sm">Planlama için kullanılan kur değeri</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold text-green-400">1 USD = 43.50 TL</div>
+                        <div class="text-slate-500 text-sm">TCMB Gösterge Kur | Şubat 2026</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ana Bütçe Özeti -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">📊</span> Ana Bütçe Özeti (12 Ay)
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-4 text-slate-400 font-medium">Kategori</th>
+                                <th class="text-right py-4 text-slate-400 font-medium">Tutar (TL)</th>
+                                <th class="text-right py-4 text-slate-400 font-medium">Oran</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">🏢</span>
+                                    Ofis Giderleri (Ankara)
+                                </td>
+                                <td class="py-4 text-right mono text-blue-400">960.000</td>
+                                <td class="py-4 text-right text-slate-500">%16</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">👥</span>
+                                    Personel Maliyetleri (3 kişi)
+                                </td>
+                                <td class="py-4 text-right mono text-purple-400">2.520.000</td>
+                                <td class="py-4 text-right text-slate-500">%42</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center">💻</span>
+                                    Teknoloji & Ekipman
+                                </td>
+                                <td class="py-4 text-right mono text-cyan-400">1.832.000</td>
+                                <td class="py-4 text-right text-slate-500">%30</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-pink-500/20 rounded-lg flex items-center justify-center">☁️</span>
+                                    Yazılım Lisansları & Bulut
+                                </td>
+                                <td class="py-4 text-right mono text-pink-400">336.600</td>
+                                <td class="py-4 text-right text-slate-500">%6</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">📋</span>
+                                    Diğer Giderler
+                                </td>
+                                <td class="py-4 text-right mono text-orange-400">395.000</td>
+                                <td class="py-4 text-right text-slate-500">%7</td>
+                            </tr>
+                            <tr class="total-row border-t-2 border-green-500/50">
+                                <td class="py-6 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">💰</span>
+                                    <span class="text-white font-bold text-lg">TOPLAM 12 AYLIK BÜTÇE</span>
+                                </td>
+                                <td class="py-6 text-right mono text-green-400 font-bold text-xl">6.043.600</td>
+                                <td class="py-6 text-right text-green-400 font-bold">%100</td>
+                            </tr>
+                            <tr class="text-slate-500">
+                                <td class="py-2 text-right" colspan="3">≈ $138.933 USD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Personel Maliyetleri Detayı -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">👥</span> Personel Maliyetleri Detayı
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">👨‍💻</span>
+                            <div>
+                                <div class="text-white font-semibold">Senior Yazılımcı</div>
+                                <div class="text-slate-400 text-sm">C++ / Kernel / Sürücü</div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Aylık (Brüt)</span>
+                                <span class="text-white mono">85.000 TL</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Yıllık Toplam</span>
+                                <span class="text-purple-400 font-semibold mono">1.020.000 TL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">💻</span>
+                            <div>
+                                <div class="text-white font-semibold">Junior Yazılımcı</div>
+                                <div class="text-slate-400 text-sm">Backend / Frontend / Test</div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Aylık (Brüt)</span>
+                                <span class="text-white mono">50.000 TL</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Yıllık Toplam</span>
+                                <span class="text-purple-400 font-semibold mono">600.000 TL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">📊</span>
+                            <div>
+                                <div class="text-white font-semibold">Proje Yöneticisi</div>
+                                <div class="text-slate-400 text-sm">CTO / Operasyon / İletişim</div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Aylık (Brüt)</span>
+                                <span class="text-white mono">75.000 TL</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Yıllık Toplam</span>
+                                <span class="text-purple-400 font-semibold mono">900.000 TL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-purple-500/10 rounded-xl p-6 border border-purple-500/30">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-semibold">Toplam Personel Maliyeti (3 kişi × 12 ay)</span>
+                        <span class="text-purple-400 font-bold text-2xl mono">2.520.000 TL</span>
+                    </div>
+                    <div class="text-slate-500 text-sm mt-2">* Brüt maaşlar üzerinden hesaplanmıştır. SGK ve vergi yükü dahildir.</div>
+                </div>
+            </section>
+
+            <!-- Ofis Giderleri -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">🏢</span> Ofis Giderleri (Ankara)
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Aylık Giderler (Faturalı)</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Ofis Kirası</span>
+                                <span class="text-white mono">45.000 TL</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Elektrik / Su / Doğalgaz</span>
+                                <span class="text-white mono">8.000 TL</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">İnternet (Fiber 1Gbps)</span>
+                                <span class="text-white mono">3.000 TL</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Temizlik & Bakım</span>
+                                <span class="text-white mono">5.000 TL</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Kırtasiye & Ofis Malzemeleri</span>
+                                <span class="text-white mono">4.000 TL</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Yemek & İkramlık</span>
+                                <span class="text-white mono">10.000 TL</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Vergi & Harçlar</span>
+                                <span class="text-white mono">5.000 TL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="bg-blue-500/10 rounded-xl p-8 border border-blue-500/30 text-center">
+                            <div class="text-slate-400 mb-2">Aylık Ofis Gideri</div>
+                            <div class="text-5xl font-bold text-blue-400 mb-2 mono">80.000 TL</div>
+                            <div class="text-slate-500">Faturalar ve vergiler dahil</div>
+                            <div class="mt-6 pt-6 border-t border-blue-500/30">
+                                <div class="text-slate-400 mb-2">12 Aylık Toplam</div>
+                                <div class="text-3xl font-bold text-white mono">960.000 TL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Teknoloji & Ekipman -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">💻</span> Teknoloji & Ekipman Listesi
+                </h2>
+                
+                <!-- Geliştirme Bilgisayarları -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-cyan-400 rounded-full"></span> Geliştirme Bilgisayarları
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">MacBook Pro 16" M3 Max</div>
+                            <div class="text-slate-400 text-sm">36GB RAM, 1TB SSD</div>
+                            <div class="text-cyan-400 font-semibold mt-2 mono">180.000 TL × 1</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">MacBook Pro 14" M3 Pro</div>
+                            <div class="text-slate-400 text-sm">18GB RAM, 512GB SSD</div>
+                            <div class="text-cyan-400 font-semibold mt-2 mono">120.000 TL × 1</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">MacBook Pro 16" M3 Max</div>
+                            <div class="text-slate-400 text-sm">36GB RAM, 1TB SSD</div>
+                            <div class="text-cyan-400 font-semibold mt-2 mono">180.000 TL × 1</div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-3 text-slate-400">Alt Toplam: <span class="text-white mono">480.000 TL</span></div>
+                </div>
+
+                <!-- Test Cihazları -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span> Test Cihazları
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">iPhone 15 Pro Max</div>
+                            <div class="text-slate-400 text-sm">256GB, iOS Test</div>
+                            <div class="text-green-400 font-semibold mt-2 mono">85.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">iPhone 15 Pro</div>
+                            <div class="text-slate-400 text-sm">128GB, iOS Test</div>
+                            <div class="text-green-400 font-semibold mt-2 mono">75.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Samsung Galaxy S24 Ultra</div>
+                            <div class="text-slate-400 text-sm">256GB, Android Test</div>
+                            <div class="text-green-400 font-semibold mt-2 mono">70.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">iPad Pro 12.9" M2</div>
+                            <div class="text-slate-400 text-sm">256GB, Tablet Test</div>
+                            <div class="text-green-400 font-semibold mt-2 mono">65.000 TL × 1</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Dell XPS 15</div>
+                            <div class="text-slate-400 text-sm">Windows Test Laptop</div>
+                            <div class="text-green-400 font-semibold mt-2 mono">95.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Android Tablet</div>
+                            <div class="text-slate-400 text-sm">Samsung Tab S9</div>
+                            <div class="text-green-400 font-semibold mt-2 mono">25.000 TL × 2</div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-3 text-slate-400">Alt Toplam: <span class="text-white mono">765.000 TL</span></div>
+                </div>
+
+                <!-- Monitör & Çevre Birimleri -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-purple-400 rounded-full"></span> Monitör & Çevre Birimleri
+                    </h3>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">LG 32" UltraFine 4K</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">45.000 TL × 3</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Apple Studio Display</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">55.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">MX Master 3S Mouse</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">3.500 TL × 3</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">MX Keys Klavye</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">4.500 TL × 3</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Sony WH-1000XM5</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">15.000 TL × 3</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Elgato Stream Deck</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">8.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4 col-span-2">
+                            <div class="text-white font-medium">Logitech Brio 4K Webcam</div>
+                            <div class="text-purple-400 font-semibold mt-2 mono">8.000 TL × 3</div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-3 text-slate-400">Alt Toplam: <span class="text-white mono">354.000 TL</span></div>
+                </div>
+
+                <!-- Ağ & Sunucu -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full"></span> Ağ & Sunucu Ekipmanları
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Ubiquiti Dream Machine Pro</div>
+                            <div class="text-slate-400 text-sm">Router & Firewall</div>
+                            <div class="text-orange-400 font-semibold mt-2 mono">35.000 TL</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Ubiquiti WiFi 6 AP</div>
+                            <div class="text-slate-400 text-sm">Access Point × 2</div>
+                            <div class="text-orange-400 font-semibold mt-2 mono">12.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Synology NAS DS923+</div>
+                            <div class="text-slate-400 text-sm">Yedekleme Sunucusu</div>
+                            <div class="text-orange-400 font-semibold mt-2 mono">45.000 TL</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">8TB NAS HDD</div>
+                            <div class="text-slate-400 text-sm">WD Red Pro × 4</div>
+                            <div class="text-orange-400 font-semibold mt-2 mono">8.000 TL × 4</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Network Switch 24 Port</div>
+                            <div class="text-slate-400 text-sm">Gigabit Switch</div>
+                            <div class="text-orange-400 font-semibold mt-2 mono">8.000 TL</div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-3 text-slate-400">Alt Toplam: <span class="text-white mono">144.000 TL</span></div>
+                </div>
+
+                <!-- Test & Ölçüm -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-pink-400 rounded-full"></span> Test & Ölçüm Ekipmanları
+                    </h3>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">Colorimeter</div>
+                            <div class="text-slate-400 text-sm">Ekran Kalibrasyonu</div>
+                            <div class="text-pink-400 font-semibold mt-2 mono">25.000 TL</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">HDMI Capture Card 4K60</div>
+                            <div class="text-slate-400 text-sm">Elgato × 2</div>
+                            <div class="text-pink-400 font-semibold mt-2 mono">12.000 TL × 2</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">USB-C Hub Seti</div>
+                            <div class="text-slate-400 text-sm">Anker/Apple × 5</div>
+                            <div class="text-pink-400 font-semibold mt-2 mono">5.000 TL × 5</div>
+                        </div>
+                        <div class="equipment-item bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-medium">KVM Switch</div>
+                            <div class="text-slate-400 text-sm">Test Setup</div>
+                            <div class="text-pink-400 font-semibold mt-2 mono">15.000 TL</div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-3 text-slate-400">Alt Toplam: <span class="text-white mono">89.000 TL</span></div>
+                </div>
+
+                <div class="bg-cyan-500/10 rounded-xl p-6 border border-cyan-500/30">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-semibold">Teknoloji & Ekipman Toplamı</span>
+                        <span class="text-cyan-400 font-bold text-2xl mono">1.832.000 TL</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Yazılım Lisansları -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">☁️</span> Yazılım Lisansları & Bulut Hizmetleri
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Aylık Abonelikler</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">GitHub Team (3 kullanıcı)</span>
+                                <span class="text-white mono">3.000 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Figma Professional</span>
+                                <span class="text-white mono">1.200 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Notion Team</span>
+                                <span class="text-white mono">800 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Slack Pro</span>
+                                <span class="text-white mono">2.500 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">AWS/GCP Bulut Altyapısı</span>
+                                <span class="text-white mono">8.000 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Cloudflare Pro</span>
+                                <span class="text-white mono">1.000 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Sentry Error Tracking</span>
+                                <span class="text-white mono">1.500 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Vercel Pro</span>
+                                <span class="text-white mono">1.000 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Microsoft 365 Business</span>
+                                <span class="text-white mono">1.500 TL/ay</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">1Password Teams</span>
+                                <span class="text-white mono">800 TL/ay</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Yıllık Lisanslar</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">JetBrains All Products (3)</span>
+                                <span class="text-white mono">45.000 TL/yıl</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Adobe Creative Cloud (3)</span>
+                                <span class="text-white mono">36.000 TL/yıl</span>
+                            </div>
+                        </div>
+                        <div class="bg-pink-500/10 rounded-xl p-6 border border-pink-500/30 mt-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-white font-semibold">Yazılım Toplamı</span>
+                                <span class="text-pink-400 font-bold text-xl mono">336.600 TL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Diğer Giderler -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">📋</span> Diğer Giderler
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Mali Müşavir & Muhasebe</div>
+                            <div class="text-slate-400 text-sm">Aylık 2.000 TL</div>
+                        </div>
+                        <span class="text-white mono">24.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Hukuki Danışmanlık</div>
+                            <div class="text-slate-400 text-sm">Sözleşme, KVKK, Fikri Mülkiyet</div>
+                        </div>
+                        <span class="text-white mono">36.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Marka & Patent Başvuruları</div>
+                            <div class="text-slate-400 text-sm">TPE başvuruları</div>
+                        </div>
+                        <span class="text-white mono">50.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Sertifikasyon</div>
+                            <div class="text-slate-400 text-sm">ISO 27001, SOC 2 hazırlık</div>
+                        </div>
+                        <span class="text-white mono">80.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Pazarlama & Tanıtım</div>
+                            <div class="text-slate-400 text-sm">Web sitesi, sosyal medya, PR</div>
+                        </div>
+                        <span class="text-white mono">100.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Seyahat & Konaklama</div>
+                            <div class="text-slate-400 text-sm">Müşteri ziyaretleri, fuarlar</div>
+                        </div>
+                        <span class="text-white mono">30.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Eğitim & Konferans</div>
+                            <div class="text-slate-400 text-sm">Teknik eğitimler, seminerler</div>
+                        </div>
+                        <span class="text-white mono">25.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Yedek Para (Beklenmeyen)</div>
+                            <div class="text-slate-400 text-sm">Acil durum fonu</div>
+                        </div>
+                        <span class="text-white mono">50.000 TL</span>
+                    </div>
+                </div>
+                <div class="bg-orange-500/10 rounded-xl p-6 border border-orange-500/30 mt-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-semibold">Diğer Giderler Toplamı</span>
+                        <span class="text-orange-400 font-bold text-xl mono">395.000 TL</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Ay Opsiyonlu Ek Bütçe -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-yellow-500/50 bg-yellow-500/5">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">⚡</span> 6. Ay Opsiyonlu Ek Bütçe
+                </h2>
+                <p class="text-slate-400 mb-6">İhtiyaç halinde 6. ayda talep edilebilecek ek bütçe kalemleri. Bu bütçe opsiyoneldir ve projenin ilerleyişine göre aktive edilir.</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Ek Personel (2 kişi × 6 ay)</div>
+                            <div class="text-slate-400 text-sm">1 Senior + 1 Junior</div>
+                        </div>
+                        <span class="text-yellow-400 mono">750.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Ek Bulut Altyapısı (6 ay)</div>
+                            <div class="text-slate-400 text-sm">Test sunucuları, CDN</div>
+                        </div>
+                        <span class="text-yellow-400 mono">50.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Ek Test Cihazları</div>
+                            <div class="text-slate-400 text-sm">Daha fazla cihaz desteği</div>
+                        </div>
+                        <span class="text-yellow-400 mono">200.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4">
+                        <div>
+                            <div class="text-white">Pazarlama Artırımı</div>
+                            <div class="text-slate-400 text-sm">Dijital pazarlama, reklam</div>
+                        </div>
+                        <span class="text-yellow-400 mono">150.000 TL</span>
+                    </div>
+                    <div class="flex justify-between bg-slate-800 rounded-lg p-4 md:col-span-2">
+                        <div>
+                            <div class="text-white">Sertifikasyon Tamamlama</div>
+                            <div class="text-slate-400 text-sm">ISO 27001, SOC 2 Type II denetim ve onay</div>
+                        </div>
+                        <span class="text-yellow-400 mono">100.000 TL</span>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-500/20 rounded-xl p-6 border border-yellow-500/50">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-semibold">Opsiyonlu Ek Bütçe Toplamı</span>
+                        <span class="text-yellow-400 font-bold text-2xl mono">1.250.000 TL</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-green-500/50 bg-green-500/5">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">💰</span> Genel Bütçe Özeti
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="text-slate-400 mb-2">12 Aylık Ana Bütçe</div>
+                        <div class="text-4xl font-bold text-green-400 mono">6.043.600 TL</div>
+                        <div class="text-slate-500 mt-2">≈ $138.933 USD</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="text-slate-400 mb-2">Opsiyonlu Ek Bütçe (6. ay)</div>
+                        <div class="text-4xl font-bold text-yellow-400 mono">1.250.000 TL</div>
+                        <div class="text-slate-500 mt-2">≈ $28.736 USD</div>
+                    </div>
+                </div>
+                
+                <div class="bg-green-500/20 rounded-xl p-8 border border-green-500/50 mt-6 text-center">
+                    <div class="text-slate-400 mb-2">MAKSİMUM TOPLAM BÜTÇE</div>
+                    <div class="text-6xl font-bold text-green-400 mono">7.293.600 TL</div>
+                    <div class="text-slate-500 mt-2">≈ $167.669 USD (Ana + Opsiyonlu)</div>
+                </div>
+            </section>
+
+            <!-- Yatırımcı Bilgilendirme -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-blue-500/50 bg-blue-500/5">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="text-2xl">ℹ️</span> Yatırımcı Bilgilendirme Notları
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-semibold mb-2">📍 Lokasyon</div>
+                            <div class="text-slate-400 text-sm">Ankara ofisi, faturalı kira ve operasyonel giderler. İstanbul ofisine göre %40 daha düşük maliyet.</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-semibold mb-2">👥 Personel</div>
+                            <div class="text-slate-400 text-sm">3 kişi ile lean başlangıç. MVP sonrası ekibi büyütme planı (opsiyonlu bütçede dahil).</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-semibold mb-2">💻 Ekipman</div>
+                            <div class="text-slate-400 text-sm">En yüksek özellikli cihazlar ile uzun vadeli kullanım. Test cihazları ile kapsamlı QA.</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-semibold mb-2">📅 Ödeme Planı</div>
+                            <div class="text-slate-400 text-sm">Aylık 504K TL ortalama. İlk 3 ay yüksek ekipman maliyeti, sonrası düzenli operasyon.</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-semibold mb-2">⚡ Esneklik</div>
+                            <div class="text-slate-400 text-sm">6. ay opsiyonlu bütçe ile ihtiyaçlara göre ölçeklenebilirlik.</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="text-white font-semibold mb-2">📊 Şeffaflık</div>
+                            <div class="text-slate-400 text-sm">Tüm giderler faturalı ve kayıtlı. Aylık raporlama ile tam görünürlük.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm pt-8 border-t border-slate-700">
+                <p>Forensic Watermark - Bütçe Planı v1.0.0 | Şubat 2026</p>
+                <p class="mt-2">Berasoft Yazılım LTD. ŞTİ. | Ankara, Türkiye</p>
+                <p class="mt-1">Kur Değeri: 1 USD = 43.50 TL (TCMB Şubat 2026)</p>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

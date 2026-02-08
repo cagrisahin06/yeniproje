@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Product Pricing Model</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .pricing-card { transition: all 0.3s ease; }
+        .pricing-card:hover { transform: translateY(-8px); }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">$</span>
+                </div>
+                <span class="font-semibold">Pricing</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12 text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium">PRICING</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Fiyatlandırma Modeli</h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto">Esnek lisanslama seçenekleri. Kullanıcı bazlı, modül bazlı ve kurumsal anlaşmalar.</p>
+            </header>
+
+            <!-- Pricing Tiers -->
+            <section class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Starter -->
+                <div class="pricing-card glass rounded-2xl p-8 border border-slate-700">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Starter</h3>
+                        <p class="text-slate-400 text-sm">Küçük ekipler için</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-white">$100</span>
+                        <span class="text-slate-400">/kullanıcı/yıl</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Screen Watermark
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Basic Detection
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Email Support
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500">
+                            <span class="text-slate-600">✗</span> Camera Detection
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500">
+                            <span class="text-slate-600">✗</span> AI Features
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500">
+                            <span class="text-slate-600">✗</span> Darkweb Monitor
+                        </li>
+                    </ul>
+                    <div class="w-full py-3 bg-slate-700 text-white rounded-xl font-semibold text-center">Starter Plan</div>
+                </div>
+
+                <!-- Professional -->
+                <div class="pricing-card glass rounded-2xl p-8 border-2 border-blue-500 relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="px-4 py-1 bg-blue-500 text-white text-sm rounded-full">POPULAR</span>
+                    </div>
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Professional</h3>
+                        <p class="text-slate-400 text-sm">Orta ölçekli kurumlar</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-blue-400">$150</span>
+                        <span class="text-slate-400">/kullanıcı/yıl</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Screen Watermark
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Advanced Detection
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Camera Detection
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Screen Recording Block
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Priority Support
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-500">
+                            <span class="text-slate-600">✗</span> Darkweb Monitor
+                        </li>
+                    </ul>
+                    <div class="w-full py-3 bg-blue-500 text-white rounded-xl font-semibold text-center">Professional Plan</div>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="pricing-card glass rounded-2xl p-8 border border-slate-700">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Enterprise</h3>
+                        <p class="text-slate-400 text-sm">Büyük kuruluşlar</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-purple-400">$200</span>
+                        <span class="text-slate-400">/kullanıcı/yıl</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> All Professional Features
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> AI Leak Detection
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Darkweb Monitoring
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Zero Trust Integration
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> 24/7 Dedicated Support
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <span class="text-green-400">✓</span> Custom Development
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 bg-purple-500 text-white rounded-xl font-semibold hover:bg-purple-600 transition">Kurumsal Teklif</button>
+                </div>
+            </section>
+
+            <!-- Volume Discounts -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Hacim İndirimleri</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Kullanıcı Sayısı</th>
+                                <th class="text-right py-3 text-slate-400">İndirim</th>
+                                <th class="text-right py-3 text-slate-400">Fiyat/Kullanıcı</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">1 - 100</td>
+                                <td class="py-3 text-right">-</td>
+                                <td class="py-3 text-right">List Fiyat</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">101 - 500</td>
+                                <td class="py-3 text-right text-green-400">%10</td>
+                                <td class="py-3 text-right">$135</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">501 - 1,000</td>
+                                <td class="py-3 text-right text-green-400">%15</td>
+                                <td class="py-3 text-right">$127</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">1,001 - 5,000</td>
+                                <td class="py-3 text-right text-green-400">%20</td>
+                                <td class="py-3 text-right">$120</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">5,000+</td>
+                                <td class="py-3 text-right text-green-400">Özel</td>
+                                <td class="py-3 text-right">İletişim</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Add-ons -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Modül Eklentileri</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="font-semibold text-white">AI Leak Detection</div>
+                                <div class="text-sm text-slate-400">Deepfake & AI content detection</div>
+                            </div>
+                            <div class="text-green-400 font-semibold">+$25/user</div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="font-semibold text-white">Darkweb Monitoring</div>
+                                <div class="text-sm text-slate-400">24/7 leak monitoring</div>
+                            </div>
+                            <div class="text-green-400 font-semibold">+$30/user</div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="font-semibold text-white">Zero Trust Integration</div>
+                                <div class="text-sm text-slate-400">Device attestation</div>
+                            </div>
+                            <div class="text-green-400 font-semibold">+$20/user</div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="font-semibold text-white">Advanced Camera Detection</div>
+                                <div class="text-sm text-slate-400">IR + RF sensors</div>
+                            </div>
+                            <div class="text-green-400 font-semibold">+$15/user</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

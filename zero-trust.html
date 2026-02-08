@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Zero Trust Mimarisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .trust-border { border-left: 4px solid #3b82f6; }
+        .verify-border { border-left: 4px solid #8b5cf6; }
+        .enforce-border { border-left: 4px solid #ec4899; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">ZT</span>
+                </div>
+                <span class="font-semibold">Zero Trust Mimarisi</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium">ZERO TRUST</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Zero Trust Endpoint Security</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">"Never Trust, Always Verify" - Pentagon seviyesinde insider threat önleme mimarisi. Cihaz, kullanıcı ve uygulama seviyesinde sürekli doğrulama.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">7</div>
+                        <div class="text-slate-400">Trust Layer</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">15s</div>
+                        <div class="text-slate-400">Re-auth Interval</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">99.9%</div>
+                        <div class="text-slate-400">Device Attestation</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">0</div>
+                        <div class="text-slate-400">Implicit Trust</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Zero Trust Principles -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Zero Trust Temel Prensipleri</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="trust-border bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">🔒</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Never Trust, Always Verify</h3>
+                        <p class="text-slate-400 text-sm">Hiçbir cihaz veya kullanıcı varsayılan olarak güvenilir değildir. Her erişim isteği kimlik doğrulama ve yetkilendirme gerektirir.</p>
+                    </div>
+                    <div class="verify-border bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">🔍</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Assume Breach</h3>
+                        <p class="text-slate-400 text-sm">Sistemin zaten ihlal edilmiş olduğu varsayımıyla tasarlanır. Lateral movement'ı engellemek için mikro-segmentasyon uygulanır.</p>
+                    </div>
+                    <div class="enforce-border bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">⚡</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Least Privilege Access</h3>
+                        <p class="text-slate-400 text-sm">Kullanıcılar ve cihazlar sadece görevlerini yerine getirmek için minimum yetkiyle çalışır. Just-in-Time (JIT) erişim.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7-Layer Trust Architecture -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">7-Katmanlı Trust Mimarisi</h2>
+                
+                <div class="space-y-4">
+                    <!-- Layer 1 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-red-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-red-400 font-bold">L1</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Hardware Root of Trust</h3>
+                                <p class="text-slate-400 mb-4">TPM 2.0, Secure Boot, measured boot ile donanım seviyesinde güven kökü.</p>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-red-400 font-semibold mb-1">TPM 2.0</div>
+                                        <div class="text-xs text-slate-400">PCR registers, sealed storage</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-red-400 font-semibold mb-1">Secure Boot</div>
+                                        <div class="text-xs text-slate-400">UEFI chain of trust</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-red-400 font-semibold mb-1">Measured Boot</div>
+                                        <div class="text-xs text-slate-400">Remote attestation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 2 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-orange-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-orange-400 font-bold">L2</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Device Identity</h3>
+                                <p class="text-slate-400 mb-4">X.509 sertifikaları, device fingerprinting, hardware-bound identity.</p>
+                                <div class="code-block rounded-lg p-4">
+                                    <pre class="mono text-sm text-green-400">Device Identity = SHA256(TPM_EK + CPU_ID + MAC + Disk_Serial)
+Certificate: X.509 v3 with TPM attestation extension
+Validity: 24 hours (short-lived)</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 3 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-yellow-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-yellow-400 font-bold">L3</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">User Identity & MFA</h3>
+                                <p class="text-slate-400 mb-4">FIDO2/WebAuthn, biometrik doğrulama, risk-based authentication.</p>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-yellow-400 font-semibold mb-1">FIDO2</div>
+                                        <div class="text-xs text-slate-400">Hardware security keys</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-yellow-400 font-semibold mb-1">Biometric</div>
+                                        <div class="text-xs text-slate-400">Windows Hello, TouchID</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-yellow-400 font-semibold mb-1">Risk Engine</div>
+                                        <div class="text-xs text-slate-400">Location, behavior, device</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 4 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-green-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-green-400 font-bold">L4</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Endpoint Health Attestation</h3>
+                                <p class="text-slate-400 mb-4">AV status, patch level, configuration compliance, runtime integrity.</p>
+                                <div class="code-block rounded-lg p-4">
+                                    <pre class="mono text-sm text-green-400">Health Score = w1*AV_Status + w2*Patch_Level + w3*Config_Compliance 
+             + w4*Runtime_Integrity + w5*Behavior_Score
+
+Threshold: Score >= 85 → ALLOW
+          Score 70-84 → LIMITED
+          Score < 70 → DENY + Quarantine</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 5 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-cyan-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-cyan-400 font-bold">L5</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Network Micro-Segmentation</h3>
+                                <p class="text-slate-400 mb-4">Software-defined perimeter, mTLS everywhere, east-west traffic inspection.</p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-cyan-400 font-semibold mb-1">SDP (Software-Defined Perimeter)</div>
+                                        <div class="text-xs text-slate-400">Dark cloud, single packet authorization</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-cyan-400 font-semibold mb-1">mTLS</div>
+                                        <div class="text-xs text-slate-400">Mutual authentication all services</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 6 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-blue-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-blue-400 font-bold">L6</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Application Access Control</h3>
+                                <p class="text-slate-400 mb-4">Just-in-Time access, dynamic authorization, session monitoring.</p>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-blue-400 font-semibold mb-1">JIT Access</div>
+                                        <div class="text-xs text-slate-400">Time-bound, purpose-limited</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-blue-400 font-semibold mb-1">ABAC</div>
+                                        <div class="text-xs text-slate-400">Attribute-based access control</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-blue-400 font-semibold mb-1">Session Recording</div>
+                                        <div class="text-xs text-slate-400">Privileged access monitoring</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 7 -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-purple-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-purple-400 font-bold">L7</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Data Protection & DLP</h3>
+                                <p class="text-slate-400 mb-4">Watermark embedding, encryption at rest/transit, data classification.</p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-purple-400 font-semibold mb-1">Forensic Watermark</div>
+                                        <div class="text-xs text-slate-400">Every screen pixel tagged with device ID</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-purple-400 font-semibold mb-1">Data Classification</div>
+                                        <div class="text-xs text-slate-400">Public, Internal, Confidential, Secret</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Continuous Verification Flow -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Sürekli Doğrulama Akışı</h2>
+                
+                <div class="bg-slate-900 rounded-xl p-8">
+                    <div class="grid grid-cols-8 gap-2 items-center text-center mb-8">
+                        <div>
+                            <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-blue-500/50">
+                                <span class="text-xl">👤</span>
+                            </div>
+                            <div class="text-xs text-slate-400">User</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-purple-500/50">
+                                <span class="text-xl">🔐</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Auth</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-green-500/50">
+                                <span class="text-xl">💻</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Device</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-14 h-14 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-orange-500/50">
+                                <span class="text-xl">⚡</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Policy</div>
+                        </div>
+                        <div>
+                            <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-red-500/50">
+                                <span class="text-xl">✓</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Allow/Deny</div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="code-block rounded-lg p-4">
+                            <div class="text-xs text-slate-500 mb-2">// Continuous Auth Check (Every 15s)</div>
+                            <pre class="mono text-sm text-green-400">func ContinuousAuth(device, user, resource) Decision {
+    // 1. Device attestation
+    if !VerifyTPMAttestation(device) {
+        return DENY
+    }
+    
+    // 2. Health score check
+    if GetHealthScore(device) < 85 {
+        return QUARANTINE
+    }
+    
+    // 3. Behavior analysis
+    if DetectAnomaly(user, resource) {
+        return STEP_UP_AUTH
+    }
+    
+    // 4. Policy evaluation
+    return EvaluateABACPolicy(user, device, resource)
+}</pre>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Auth Interval</span>
+                                    <span class="text-green-400 font-semibold">15 seconds</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Session Timeout</span>
+                                    <span class="text-green-400 font-semibold">5 minutes idle</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Max Concurrent Sessions</span>
+                                    <span class="text-green-400 font-semibold">1 per user</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Certificate Lifetime</span>
+                                    <span class="text-green-400 font-semibold">24 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Model -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Zero Trust Tehdit Modeli</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Mitre ATT&CK Coverage</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Initial Access</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Execution</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Persistence</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Privilege Escalation</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Defense Evasion</span>
+                                <span class="text-yellow-400">~ Detected</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Credential Access</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Lateral Movement</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Collection</span>
+                                <span class="text-yellow-400">~ Detected</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Exfiltration</span>
+                                <span class="text-green-400">✓ Blocked</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Insider Threat Vektörleri</h3>
+                        <div class="space-y-3">
+                            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+                                <div class="font-semibold text-red-400 mb-1">Malicious Insider</div>
+                                <p class="text-sm text-slate-400">Kasıtlı veri sızdırma, yetki kötüye kullanımı</p>
+                                <div class="text-xs text-green-400 mt-2">→ Watermark tracking + behavior analytics</div>
+                            </div>
+                            <div class="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
+                                <div class="font-semibold text-orange-400 mb-1">Compromised Account</div>
+                                <p class="text-sm text-slate-400">Çalınan kimlik bilgileriyle erişim</p>
+                                <div class="text-xs text-green-400 mt-2">→ MFA + device attestation + anomaly detection</div>
+                            </div>
+                            <div class="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
+                                <div class="font-semibold text-yellow-400 mb-1">Negligent Employee</div>
+                                <p class="text-sm text-slate-400">Dikkatsizlik sonucu veri sızıntısı</p>
+                                <div class="text-xs text-green-400 mt-2">→ DLP + watermark + training</div>
+                            </div>
+                            <div class="bg-purple-500/10 rounded-lg p-4 border border-purple-500/30">
+                                <div class="font-semibold text-purple-400 mb-1">Third Party Risk</div>
+                                <p class="text-sm text-slate-400">Tedarikçi, contractor riski</p>
+                                <div class="text-xs text-green-400 mt-2">→ Limited access + monitoring + JIT</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Integration Architecture -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Entegrasyon Mimarisi</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">🔌</div>
+                        <h3 class="font-semibold text-white mb-2">Identity Providers</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Azure AD / Entra ID</li>
+                            <li>• Okta</li>
+                            <li>• Ping Identity</li>
+                            <li>• Active Directory</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">📱</div>
+                        <h3 class="font-semibold text-white mb-2">MDM/EMM</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Microsoft Intune</li>
+                            <li>• VMware Workspace ONE</li>
+                            <li>• Jamf Pro</li>
+                            <li>• MobileIron</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">🛡️</div>
+                        <h3 class="font-semibold text-white mb-2">Security Tools</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• CrowdStrike Falcon</li>
+                            <li>• SentinelOne</li>
+                            <li>• Carbon Black</li>
+                            <li>• Splunk SOAR</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Metrics -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Performans Metrikleri</h2>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl font-bold text-blue-400 mb-2">&lt;50ms</div>
+                        <div class="text-slate-400 text-sm">Auth Latency</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl font-bold text-green-400 mb-2">99.99%</div>
+                        <div class="text-slate-400 text-sm">Uptime SLA</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">100K+</div>
+                        <div class="text-slate-400 text-sm">Auth/sec</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl font-bold text-orange-400 mb-2">0.001%</div>
+                        <div class="text-slate-400 text-sm">False Positive</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

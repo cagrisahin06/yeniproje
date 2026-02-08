@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Teknik Mimari Dokümanı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .tech-card { transition: all 0.3s ease; }
+        .tech-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .metric-box { background: linear-gradient(145deg, #1e293b, #0f172a); }
+        .flow-arrow { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .layer-border { border-left: 3px solid; }
+        .layer-kernel { border-color: #ef4444; }
+        .layer-driver { border-color: #f97316; }
+        .layer-service { border-color: #eab308; }
+        .layer-api { border-color: #22c55e; }
+        .layer-ui { border-color: #3b82f6; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">F</span>
+                </div>
+                <span class="font-semibold text-lg">Forensic Watermark</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium">TEKNİK MİMARİ</span>
+                    <span class="text-slate-500">v2.1.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Forensic Watermark Sistemi</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Kernel-seviye ekran watermark teknolojisi ile kurumsal veri sızıntısı önleme. WDDM 2.7+ entegrasyonu, CUDA hızlandırma ve hibrit DCT-DWT-SVD algoritması.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-sm">📋</span>
+                    Executive Summary
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="metric-box rounded-xl p-6">
+                        <div class="text-3xl font-bold text-blue-400 mb-2">&lt; 5ms</div>
+                        <div class="text-slate-400">Frame İşleme Süresi</div>
+                        <div class="text-xs text-slate-500 mt-2">144Hz desteği için optimize</div>
+                    </div>
+                    <div class="metric-box rounded-xl p-6">
+                        <div class="text-3xl font-bold text-green-400 mb-2">%97.3</div>
+                        <div class="text-slate-400">Watermark Tespit Oranı</div>
+                        <div class="text-xs text-slate-500 mt-2">JPEG %70 kalitede bile</div>
+                    </div>
+                    <div class="metric-box rounded-xl p-6">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">44.2 dB</div>
+                        <div class="text-slate-400">Ortalama PSNR</div>
+                        <div class="text-xs text-slate-500 mt-2">Görünmezlik garantisi</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5-Katmanlı Mimari -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">5-Katmanlı Mimari Yapı</h2>
+                
+                <div class="space-y-4">
+                    <!-- Layer 1: Kernel -->
+                    <div class="tech-card glass rounded-xl p-6 layer-border layer-kernel">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-red-400 font-bold">K1</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Kernel Layer (Ring 0)</h3>
+                                <p class="text-slate-400 mb-4">WDDM 2.7+ Miniport Driver - Windows Display Driver Model ile kernel-seviye framebuffer erişimi</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div class="code-block rounded-lg p-4">
+                                        <div class="text-xs text-slate-500 mb-2">// WDDM Miniport Driver - DxgkDdiPresent</div>
+                                        <pre class="mono text-sm text-green-400 overflow-x-auto">NTSTATUS DxgkDdiPresent(
+    CONST HANDLE hContext,
+    DXGKARG_PRESENT* pPresent
+) {
+    // Framebuffer'a erişim
+    PVOID pFrameBuffer = MapFrameBuffer(
+        pPresent->pDestination->SegmentAddress
+    );
+    
+    // Watermark uygula (async)
+    QueueWatermarkJob(pFrameBuffer, 
+        pPresent->pDestination->Width,
+        pPresent->pDestination->Height
+    );
+    
+    return STATUS_SUCCESS;
+}</pre>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-white mb-2">Teknoloji Seçimi:</h4>
+                                        <ul class="space-y-2 text-sm text-slate-400">
+                                            <li class="flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full"></span>WDDM 2.7+ (Windows 10 1903+)</li>
+                                            <li class="flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full"></span>Kernel Mode Driver Framework (KMF)</li>
+                                            <li class="flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full"></span>DirectX Graphics Kernel (Dxgkrnl)</li>
+                                            <li class="flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full"></span>Hardware Abstraction Layer (HAL)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+                                    <div class="text-red-400 font-semibold mb-2">⚠️ Kernel-Mode Gereksinimleri</div>
+                                    <div class="text-sm text-slate-400">WHQL sertifikasyonu, EV Code Signing, Windows Hardware Lab Kit (HLK) testleri gereklidir. Driver imzalama için Microsoft Sysdev hesabı ($99/yıl) ve Extended Validation sertifikası ($300-700/yıl) zorunludur.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 2: Driver -->
+                    <div class="tech-card glass rounded-xl p-6 layer-border layer-driver">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-orange-400 font-bold">D2</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Driver Integration Layer</h3>
+                                <p class="text-slate-400 mb-4">GPU Vendor SDK entegrasyonu ve CUDA/ROCm/DirectCompute hızlandırma katmanı</p>
+                                
+                                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-orange-400 font-semibold mb-2">NVIDIA</div>
+                                        <div class="text-sm text-slate-400">CUDA Toolkit 12.x</div>
+                                        <div class="text-sm text-slate-400">Nsight Systems</div>
+                                        <div class="text-sm text-slate-400">cuFFT, cuBLAS</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-orange-400 font-semibold mb-2">AMD</div>
+                                        <div class="text-sm text-slate-400">ROCm 5.x/6.x</div>
+                                        <div class="text-sm text-slate-400">HIP Runtime</div>
+                                        <div class="text-sm text-slate-400">MIOpen</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-orange-400 font-semibold mb-2">Intel</div>
+                                        <div class="text-sm text-slate-400">oneAPI DPC++</div>
+                                        <div class="text-sm text-slate-400">Level Zero</div>
+                                        <div class="text-sm text-slate-400">oneMKL</div>
+                                    </div>
+                                </div>
+
+                                <div class="code-block rounded-lg p-4">
+                                    <div class="text-xs text-slate-500 mb-2">// CUDA Kernel - DCT Watermark Embed</div>
+                                    <pre class="mono text-sm text-green-400 overflow-x-auto">__global__ void dctWatermarkKernel(
+    float* dctCoeffs,
+    const WatermarkPattern* pattern,
+    int width, int height,
+    float strength
+) {
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
+    
+    if (x >= width || y >= height) return;
+    
+    int idx = y * width + x;
+    float coeff = dctCoeffs[idx];
+    
+    // HVS-aware embedding - yüksek frekanslara daha güçlü
+    float freqWeight = sqrtf((float)(x*x + y*y)) / sqrtf(width*width + height*height);
+    float adaptiveStrength = strength * (0.5f + 0.5f * freqWeight);
+    
+    // QIM (Quantization Index Modulation)
+    float quantStep = QSTEP_BASE * (1.0f + freqWeight);
+    int quantIndex = (int)(coeff / quantStep);
+    int bit = pattern->bits[idx % pattern->length];
+    
+    dctCoeffs[idx] = (quantIndex + bit + 0.5f) * quantStep;
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 3: Service -->
+                    <div class="tech-card glass rounded-xl p-6 layer-border layer-service">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-yellow-400 font-bold">S3</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Core Watermark Service</h3>
+                                <p class="text-slate-400 mb-4">Hibrit DCT-DWT-SVD algoritması, HVS masking ve Reed-Solomon ECC</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-semibold text-white mb-3">Algoritma Pipeline</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center gap-3">
+                                                <span class="w-8 h-8 bg-yellow-500/20 rounded flex items-center justify-center text-yellow-400 text-sm">1</span>
+                                                <span class="text-slate-300">RGB → YCbCr dönüşümü</span>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="w-8 h-8 bg-yellow-500/20 rounded flex items-center justify-center text-yellow-400 text-sm">2</span>
+                                                <span class="text-slate-300">8x8 DCT blokları</span>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="w-8 h-8 bg-yellow-500/20 rounded flex items-center justify-center text-yellow-400 text-sm">3</span>
+                                                <span class="text-slate-300">Haar DWT 3-seviye</span>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="w-8 h-8 bg-yellow-500/20 rounded flex items-center justify-center text-yellow-400 text-sm">4</span>
+                                                <span class="text-slate-300">SVD singular value modifikasyonu</span>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="w-8 h-8 bg-yellow-500/20 rounded flex items-center justify-center text-yellow-400 text-sm">5</span>
+                                                <span class="text-slate-300">Reed-Solomon ECC (RS-255,223)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="code-block rounded-lg p-4">
+                                        <div class="text-xs text-slate-500 mb-2">// HVS Masking - Watson Model</div>
+                                        <pre class="mono text-sm text-green-400 overflow-x-auto">float computeVisibilityThreshold(
+    int freqU, int freqV,
+    float luminance,
+    float contrast
+) {
+    // CSF (Contrast Sensitivity Function)
+    float csf = 2.6f * (0.0192f + 0.114f * freq) 
+                * exp(-pow(0.114f * freq, 1.1f));
+    
+    // Luminance masking
+    float lumMask = pow(luminance / L0, 0.65f);
+    
+    // Contrast masking
+    float conMask = max(1.0f, pow(contrast / (csf * lumMask), 0.7f));
+    
+    return csf * lumMask * conMask;
+}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 4: API -->
+                    <div class="tech-card glass rounded-xl p-6 layer-border layer-api">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-green-400 font-bold">A4</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">API Gateway & Backend</h3>
+                                <p class="text-slate-400 mb-4">Go + Fiber framework, gRPC microservices, Redis cache, PostgreSQL + ClickHouse</p>
+                                
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-green-400 font-semibold mb-2">REST API</div>
+                                        <div class="text-xs text-slate-400 mb-2">Fiber v2.52+</div>
+                                        <div class="text-sm text-slate-500">~120k req/sn throughput</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-green-400 font-semibold mb-2">gRPC</div>
+                                        <div class="text-xs text-slate-400 mb-2">Internal services</div>
+                                        <div class="text-sm text-slate-500">~300k req/sn throughput</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-green-400 font-semibold mb-2">GraphQL</div>
+                                        <div class="text-xs text-slate-400 mb-2">gqlgen v0.17+</div>
+                                        <div class="text-sm text-slate-500">Flexible queries</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layer 5: UI -->
+                    <div class="tech-card glass rounded-xl p-6 layer-border layer-ui">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-blue-400 font-bold">U5</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Web Admin Dashboard</h3>
+                                <p class="text-slate-400 mb-4">Next.js 14, React 18, TypeScript, Tailwind CSS, shadcn/ui</p>
+                                
+                                <div class="grid md:grid-cols-4 gap-3">
+                                    <div class="bg-slate-800 rounded p-3 text-center">
+                                        <div class="text-blue-400 font-semibold">Next.js 14</div>
+                                        <div class="text-xs text-slate-500">App Router</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded p-3 text-center">
+                                        <div class="text-blue-400 font-semibold">React 18</div>
+                                        <div class="text-xs text-slate-500">Server Components</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded p-3 text-center">
+                                        <div class="text-blue-400 font-semibold">TanStack</div>
+                                        <div class="text-xs text-slate-500">Query + Table</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded p-3 text-center">
+                                        <div class="text-blue-400 font-semibold">Recharts</div>
+                                        <div class="text-xs text-slate-500">Data viz</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Flow -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Veri Akış Diyagramı</h2>
+                
+                <div class="relative">
+                    <!-- Flow Steps -->
+                    <div class="grid grid-cols-7 gap-2 items-center">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-slate-700 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                <span class="text-2xl">🖥️</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Windows</div>
+                        </div>
+                        <div class="text-center flow-arrow">
+                            <div class="text-slate-500">→</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-red-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-red-500/50">
+                                <span class="text-2xl">⚙️</span>
+                            </div>
+                            <div class="text-xs text-slate-400">WDDM</div>
+                        </div>
+                        <div class="text-center flow-arrow">
+                            <div class="text-slate-500">→</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-orange-500/50">
+                                <span class="text-2xl">🎮</span>
+                            </div>
+                            <div class="text-xs text-slate-400">CUDA</div>
+                        </div>
+                        <div class="text-center flow-arrow">
+                            <div class="text-slate-500">→</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-yellow-500/20 rounded-xl flex items-center justify-center mx-auto mb-2 border border-yellow-500/50">
+                                <span class="text-2xl">🔐</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Watermark</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 grid grid-cols-2 gap-8">
+                        <div class="code-block rounded-lg p-4">
+                            <div class="text-xs text-slate-500 mb-2">// Frame Processing Pipeline</div>
+                            <pre class="mono text-sm text-green-400">1. VSync interrupt (16.67ms @ 60Hz)
+2. DxgkDdiPresent callback
+3. Framebuffer mmap
+4. CUDA memcpy H2D
+5. DCT-DWT-SVD kernel
+6. CUDA memcpy D2H
+7. Framebuffer update
+8. Total: ~3.2ms</pre>
+                        </div>
+                        <div class="code-block rounded-lg p-4">
+                            <div class="text-xs text-slate-500 mb-2">// Detection Pipeline</div>
+                            <pre class="mono text-sm text-green-400">1. Image upload (JPEG/PNG)
+2. Preprocessing (resize, denoise)
+3. DCT-DWT-SVD inverse
+4. Reed-Solomon decode
+5. Pattern correlation
+6. Device ID extraction
+7. Database lookup
+8. Total: ~150ms</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Benchmarks -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Performans Benchmarkları</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">GPU Hızlandırma Karşılaştırması</h3>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-700">
+                                    <th class="text-left py-2 text-slate-400">Platform</th>
+                                    <th class="text-right py-2 text-slate-400">1080p</th>
+                                    <th class="text-right py-2 text-slate-400">4K</th>
+                                    <th class="text-right py-2 text-slate-400">Power</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300">
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">CPU (AVX2)</td>
+                                    <td class="text-right">45ms</td>
+                                    <td class="text-right">180ms</td>
+                                    <td class="text-right">85W</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">Intel UHD (iGPU)</td>
+                                    <td class="text-right">12ms</td>
+                                    <td class="text-right">48ms</td>
+                                    <td class="text-right">25W</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2 text-green-400">NVIDIA GTX 1660</td>
+                                    <td class="text-right text-green-400">2.1ms</td>
+                                    <td class="text-right text-green-400">4.8ms</td>
+                                    <td class="text-right text-green-400">45W</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2 text-green-400">NVIDIA RTX 3060</td>
+                                    <td class="text-right text-green-400">0.8ms</td>
+                                    <td class="text-right text-green-400">2.2ms</td>
+                                    <td class="text-right text-green-400">55W</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 text-green-400">AMD RX 6600</td>
+                                    <td class="text-right text-green-400">1.2ms</td>
+                                    <td class="text-right text-green-400">3.1ms</td>
+                                    <td class="text-right text-green-400">50W</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Watermark Dayanıklılık Testleri</h3>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-700">
+                                    <th class="text-left py-2 text-slate-400">Saldırı Tipi</th>
+                                    <th class="text-right py-2 text-slate-400">Şiddet</th>
+                                    <th class="text-right py-2 text-slate-400">Tespit</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300">
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">JPEG Sıkıştırma</td>
+                                    <td class="text-right">QF 50</td>
+                                    <td class="text-right text-green-400">%94.2</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">Gaussian Blur</td>
+                                    <td class="text-right">3x3</td>
+                                    <td class="text-right text-green-400">%96.8</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">Gaussian Noise</td>
+                                    <td class="text-right">σ=25</td>
+                                    <td class="text-right text-green-400">%91.5</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">Cropping</td>
+                                    <td class="text-right">%25</td>
+                                    <td class="text-right text-green-400">%88.3</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-2">Rotation</td>
+                                    <td class="text-right">5°</td>
+                                    <td class="text-right text-green-400">%93.7</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2">Print-Scan</td>
+                                    <td class="text-right">300dpi</td>
+                                    <td class="text-right text-green-400">%82.1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deployment Architecture -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Deployment Mimarisi</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-purple-400 font-semibold mb-3">On-Premises</div>
+                        <ul class="space-y-2 text-sm text-slate-400">
+                            <li>• Windows Server 2019/2022</li>
+                            <li>• Active Directory entegrasyonu</li>
+                            <li>• Local PostgreSQL + Redis</li>
+                            <li>• Air-gapped deployment</li>
+                            <li>• Maliyet: $15K-50K/yıl</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-purple-400 font-semibold mb-3">Hybrid Cloud</div>
+                        <ul class="space-y-2 text-sm text-slate-400">
+                            <li>• AWS/Azure/GCP backend</li>
+                            <li>• Local agent deployment</li>
+                            <li>• VPN/ExpressRoute</li>
+                            <li>• Multi-region failover</li>
+                            <li>• Maliyet: $8K-30K/yıl</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-purple-400 font-semibold mb-3">SaaS</div>
+                        <ul class="space-y-2 text-sm text-slate-400">
+                            <li>• Fully managed</li>
+                            <li>• Auto-scaling</li>
+                            <li>• CDN entegrasyonu</li>
+                            <li>• 99.99% SLA</li>
+                            <li>• Maliyet: $5-15/user/ay</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark Teknik Mimari v2.1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

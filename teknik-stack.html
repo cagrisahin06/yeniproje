@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Teknik Stack Tablosu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .tech-selected { border-left: 4px solid #22c55e; }
+        .tech-alternative { border-left: 4px solid #eab308; }
+        .tech-rejected { border-left: 4px solid #ef4444; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">S</span>
+                </div>
+                <span class="font-semibold">Teknik Stack</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm font-medium">TEKNİK STACK</span>
+                    <span class="text-slate-500">v2.1.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Teknoloji Stack Karşılaştırması</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Tüm teknoloji seçimleri, karşılaştırmalar ve seçim gerekçeleri. 86 teknoloji değerlendirildi, 54'si seçildi.</p>
+            </header>
+
+            <!-- Legend -->
+            <section class="glass rounded-2xl p-6 mb-8 border border-slate-700">
+                <div class="flex gap-6">
+                    <div class="flex items-center gap-2">
+                        <span class="w-4 h-4 bg-green-500 rounded"></span>
+                        <span class="text-slate-300">Seçilen</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-4 h-4 bg-yellow-500 rounded"></span>
+                        <span class="text-slate-300">Alternatif</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-4 h-4 bg-red-500 rounded"></span>
+                        <span class="text-slate-300">Değerlendirildi - Reddedildi</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Client Layer -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Client Layer</h2>
+                
+                <div class="space-y-4">
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">C++17</div>
+                                <div class="text-sm text-slate-400">Client uygulama dili</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Kernel driver uyumluluğu, CUDA entegrasyonu, performans. 
+                            <span class="text-yellow-400">Alternatif:</span> Rust (öğrenme eğrisi yüksek), C# (performans yetersiz)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">CUDA 12.x</div>
+                                <div class="text-sm text-slate-400">NVIDIA GPU hızlandırma</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> En yaygın GPU platformu, mükemmel dokümantasyon, cuFFT/cuBLAS kütüphaneleri.
+                            <span class="text-yellow-400">Alternatif:</span> ROCm (AMD), oneAPI (Intel)
+                        </div>
+                    </div>
+
+                    <div class="tech-alternative bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">ROCm 6.x</div>
+                                <div class="text-sm text-slate-400">AMD GPU hızlandırma</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">ALTERNATİF</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> AMD GPU'lar için fallback. Windows desteği sınırlı.
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">WDK 10.0.22621</div>
+                                <div class="text-sm text-slate-400">Windows Driver Kit</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> WDDM 2.7+ desteği, Windows 11 uyumluluğu.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Backend Layer -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Backend Layer</h2>
+                
+                <div class="space-y-4">
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Go 1.23</div>
+                                <div class="text-sm text-slate-400">Backend dili</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Yüksek performans, düşük latency, native concurrency, statik binary.
+                            <span class="text-red-400">Reddedilen:</span> Node.js (tek thread), Python (GIL), Java (GC latency)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Fiber v2.52</div>
+                                <div class="text-sm text-slate-400">Web framework</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Fasthttp tabanlı, Express-like API, 120k req/sn.
+                            <span class="text-yellow-400">Alternatif:</span> Gin (daha az aktif), Echo (daha yavaş)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">gRPC 1.65</div>
+                                <div class="text-sm text-slate-400">Internal services</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> HTTP/2, Protocol Buffers, 300k req/sn, streaming.
+                            <span class="text-yellow-400">Alternatif:</span> REST (daha yavaş), GraphQL (internal için fazla)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">PostgreSQL 16</div>
+                                <div class="text-sm text-slate-400">Primary database</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> ACID, JSONB, partitioning, 25+ yıl stability.
+                            <span class="text-yellow-400">Alternatif:</span> MySQL (daha az özellik), CockroachDB (maliyetli)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Redis 7.2 Cluster</div>
+                                <div class="text-sm text-slate-400">Cache & Session</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Sub-millisecond latency, pub/sub, clustering.
+                            <span class="text-yellow-400">Alternatif:</span> KeyDB (multi-thread), Dragonfly (yeni)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">ClickHouse 24.x</div>
+                                <div class="text-sm text-slate-400">Analytics database</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Columnar, 10B+ rows/s, real-time aggregation.
+                            <span class="text-yellow-400">Alternatif:</span> TimescaleDB (PostgreSQL tabanlı), Druid (karmaşık)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Frontend Layer -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Frontend Layer</h2>
+                
+                <div class="space-y-4">
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Next.js 14</div>
+                                <div class="text-sm text-slate-400">React framework</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> App Router, Server Components, SSR/SSG, Vercel.
+                            <span class="text-yellow-400">Alternatif:</span> Remix (daha küçük ekosistem), Nuxt (Vue)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">TypeScript 5.5</div>
+                                <div class="text-sm text-slate-400">Type safety</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Compile-time type checking, IDE support, maintainability.
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Tailwind CSS 3.4</div>
+                                <div class="text-sm text-slate-400">Styling</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Utility-first, tree-shaking, design system uyumluluğu.
+                            <span class="text-yellow-400">Alternatif:</span> Chakra UI (daha büyük bundle), MUI (override zor)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">TanStack Query v5</div>
+                                <div class="text-sm text-slate-400">Data fetching</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Caching, background refetch, optimistic updates.
+                            <span class="text-yellow-400">Alternatif:</span> SWR (daha az özellik), RTK Query (Redux bağımlılığı)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DevOps Layer -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">DevOps & Infrastructure</h2>
+                
+                <div class="space-y-4">
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Kubernetes 1.30</div>
+                                <div class="text-sm text-slate-400">Container orchestration</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Industry standard, auto-scaling, self-healing.
+                            <span class="text-yellow-400">Alternatif:</span> Docker Swarm (basit ama sınırlı), Nomad (HashiCorp)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Helm 3.15</div>
+                                <div class="text-sm text-slate-400">K8s package manager</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> Templating, versioning, rollback.
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">GitHub Actions</div>
+                                <div class="text-sm text-slate-400">CI/CD</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> GitHub entegrasyonu, matrix builds, marketplace.
+                            <span class="text-yellow-400">Alternatif:</span> GitLab CI (GitLab gerektirir), Jenkins (kendi yönet)
+                        </div>
+                    </div>
+
+                    <div class="tech-selected bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-semibold text-white">Prometheus + Grafana</div>
+                                <div class="text-sm text-slate-400">Monitoring</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">SEÇİLEN</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-slate-500">
+                            <span class="text-slate-400">Gerekçe:</span> CNCF graduated, K8s native, alertmanager.
+                            <span class="text-yellow-400">Alternatif:</span> Datadog (maliyetli), New Relic (maliyetli)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Stats -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Özet İstatistikler</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">54</div>
+                        <div class="text-slate-400">Seçilen Teknoloji</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-yellow-400 mb-2">16</div>
+                        <div class="text-slate-400">Alternatif</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-red-400 mb-2">16</div>
+                        <div class="text-slate-400">Reddedilen</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">86</div>
+                        <div class="text-slate-400">Toplam Değerlendirilen</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark Teknik Stack v2.1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

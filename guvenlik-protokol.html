@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Güvenlik Protokolleri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .security-level { border-left: 4px solid; }
+        .level-critical { border-color: #ef4444; }
+        .level-high { border-color: #f97316; }
+        .level-medium { border-color: #eab308; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">🔒</span>
+                </div>
+                <span class="font-semibold">Güvenlik Protokolleri</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-medium">GÜVENLİK</span>
+                    <span class="text-slate-500">v2.1.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Güvenlik Protokolleri</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Şifreleme, anahtar yönetimi, denetim kayıtları ve uyumluluk standartları.</p>
+            </header>
+
+            <!-- Encryption -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Şifreleme Standartları</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Veri Şifreleme</h3>
+                        <div class="space-y-3">
+                            <div class="security-level level-critical bg-slate-800 rounded-lg p-4">
+                                <div class="font-semibold text-white">AES-256-GCM</div>
+                                <div class="text-sm text-slate-400">Watermark deseni şifreleme</div>
+                                <div class="text-xs text-slate-500 mt-1">256-bit key, 96-bit nonce, 128-bit tag</div>
+                            </div>
+                            <div class="security-level level-high bg-slate-800 rounded-lg p-4">
+                                <div class="font-semibold text-white">ChaCha20-Poly1305</div>
+                                <div class="text-sm text-slate-400">API iletişimi (TLS 1.3)</div>
+                                <div class="text-xs text-slate-500 mt-1">Mobile/ARM cihazlar için optimize</div>
+                            </div>
+                            <div class="security-level level-high bg-slate-800 rounded-lg p-4">
+                                <div class="font-semibold text-white">RSA-4096</div>
+                                <div class="text-sm text-slate-400">Asimetrik şifreleme</div>
+                                <div class="text-xs text-slate-500 mt-1">Key exchange, dijital imza</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">İletişim Güvenliği</h3>
+                        <div class="space-y-3">
+                            <div class="security-level level-critical bg-slate-800 rounded-lg p-4">
+                                <div class="font-semibold text-white">TLS 1.3</div>
+                                <div class="text-sm text-slate-400">Tüm API iletişimi</div>
+                                <div class="text-xs text-slate-500 mt-1">Perfect Forward Secrecy (PFS)</div>
+                            </div>
+                            <div class="security-level level-high bg-slate-800 rounded-lg p-4">
+                                <div class="font-semibold text-white">mTLS</div>
+                                <div class="text-sm text-slate-400">Servisler arası iletişim</div>
+                                <div class="text-xs text-slate-500 mt-1">Mutual authentication</div>
+                            </div>
+                            <div class="security-level level-medium bg-slate-800 rounded-lg p-4">
+                                <div class="font-semibold text-white">VPN / Private Link</div>
+                                <div class="text-sm text-slate-400">On-premise deployment</div>
+                                <div class="text-xs text-slate-500 mt-1">Site-to-site, ExpressRoute</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Management -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Anahtar Yönetimi</h2>
+                
+                <div class="space-y-6">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="text-2xl mb-3">🔐</div>
+                            <h3 class="font-semibold text-white mb-2">TPM 2.0</h3>
+                            <p class="text-sm text-slate-400">Cihaz anahtarları TPM içinde saklanır. Hardware-based security.</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="text-2xl mb-3">🏛️</div>
+                            <h3 class="font-semibold text-white mb-2">HSM</h3>
+                            <p class="text-sm text-slate-400">Sunucu tarafı anahtarları HSM'de (FIPS 140-2 Level 3).</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="text-2xl mb-3">🔄</div>
+                            <h3 class="font-semibold text-white mb-2">Key Rotation</h3>
+                            <p class="text-sm text-slate-400">Otomatik anahtar değişimi: 90 günde bir.</p>
+                        </div>
+                    </div>
+
+                    <div class="code-block rounded-lg p-4">
+                        <div class="text-xs text-slate-500 mb-2">// Key Hierarchy</div>
+                        <pre class="mono text-sm text-green-400">Root Key (HSM)
+├── Tenant Master Key (per organization)
+│   ├── Device Key (per device, TPM-backed)
+│   │   └── Watermark Pattern Key (rotated daily)
+│   └── API Key (per integration)
+└── Audit Log Key (tamper-evident)</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Audit Logging -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Denetim Kayıtları</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Loglanan Olaylar</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                                <span class="text-slate-300">Device registration/unregistration</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                                <span class="text-slate-300">Watermark detection events</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                <span class="text-slate-300">Configuration changes</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                <span class="text-slate-300">User authentication events</span>
+                            </div>
+                            <div class="flex items-center gap-3 bg-slate-800 rounded-lg p-3">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                <span class="text-slate-300">API access logs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Log Format</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">{
+  "timestamp": "2026-02-07T10:30:00.123Z",
+  "event_type": "watermark_detected",
+  "severity": "high",
+  "actor": {
+    "type": "system",
+    "id": "detection_service"
+  },
+  "resource": {
+    "type": "image",
+    "id": "img_abc123"
+  },
+  "context": {
+    "device_id": "dev_123456",
+    "confidence": 0.94,
+    "source_ip": "10.0.1.100"
+  },
+  "integrity_hash": "sha256:def456..."
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compliance -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Uyumluluk Standartları</h2>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🇪🇺</div>
+                        <div class="font-semibold text-white">GDPR</div>
+                        <div class="text-sm text-slate-400">Avrupa veri koruma</div>
+                        <div class="text-xs text-green-400 mt-2">✓ Uyumlu</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🇹🇷</div>
+                        <div class="font-semibold text-white">KVKK</div>
+                        <div class="text-sm text-slate-400">Türkiye veri koruma</div>
+                        <div class="text-xs text-green-400 mt-2">✓ Uyumlu</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🏥</div>
+                        <div class="font-semibold text-white">HIPAA</div>
+                        <div class="text-sm text-slate-400">Sağlık veri güvenliği</div>
+                        <div class="text-xs text-green-400 mt-2">✓ Uyumlu</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">💳</div>
+                        <div class="font-semibold text-white">PCI DSS</div>
+                        <div class="text-sm text-slate-400">Ödeme kartı güvenliği</div>
+                        <div class="text-xs text-green-400 mt-2">✓ Uyumlu</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🏛️</div>
+                        <div class="font-semibold text-white">ISO 27001</div>
+                        <div class="text-sm text-slate-400">Bilgi güvenliği yönetimi</div>
+                        <div class="text-xs text-yellow-400 mt-2">~ Sertifikasyon sürecinde</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🔒</div>
+                        <div class="font-semibold text-white">SOC 2 Type II</div>
+                        <div class="text-sm text-slate-400">Güvenlik kontrolleri</div>
+                        <div class="text-xs text-yellow-400 mt-2">~ Sertifikasyon sürecinde</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🇺🇸</div>
+                        <div class="font-semibold text-white">FedRAMP</div>
+                        <div class="text-sm text-slate-400">ABD kamu bulut</div>
+                        <div class="text-xs text-slate-500 mt-2">Yol haritasında</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-3xl mb-3">🌐</div>
+                        <div class="font-semibold text-white">FIPS 140-2</div>
+                        <div class="text-sm text-slate-400">Kriptografik modüller</div>
+                        <div class="text-xs text-green-400 mt-2">✓ Level 3 HSM</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Checklist -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Güvenlik Kontrol Listesi</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Uygulama Güvenliği</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">Input validation</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">Parameterized queries (SQL injection prevention)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">XSS protection</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">CSRF tokens</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">Secure session management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Altyapı Güvenliği</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">Network segmentation</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">DDoS protection</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">WAF (Web Application Firewall)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">Vulnerability scanning</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400">✓</span>
+                                <span class="text-slate-300">Penetration testing (yıllık)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark Güvenlik Protokolleri v2.1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

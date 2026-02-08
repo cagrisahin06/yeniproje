@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Kurumsal Satış Sunumu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 2rem; }
+        .gradient-text { background: linear-gradient(135deg, #22c55e, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .metric-card { background: linear-gradient(145deg, #1e293b, #0f172a); }
+        .check-icon { color: #22c55e; }
+        .cross-icon { color: #ef4444; }
+        .nav-link { transition: all 0.3s ease; }
+        .nav-link:hover { color: #22c55e; }
+        .pricing-card { transition: all 0.3s ease; }
+        .pricing-card:hover { transform: scale(1.02); }
+        .testimonial-card { background: linear-gradient(145deg, #1e293b, #0f172a); }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">S</span>
+                </div>
+                <span class="font-semibold">Kurumsal Satış</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#painpoints" class="nav-link text-slate-400 text-sm">Ağrı Noktaları</a>
+                <a href="#solution" class="nav-link text-slate-400 text-sm">Çözüm</a>
+                <a href="#usecases" class="nav-link text-slate-400 text-sm">Kullanım</a>
+                <a href="#pricing" class="nav-link text-slate-400 text-sm">Fiyatlandırma</a>
+                <a href="#roi" class="nav-link text-slate-400 text-sm">ROI</a>
+                <a href="index.html" class="text-slate-400 hover:text-white transition text-sm">← Ana Sayfa</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <!-- Slide 1: Hero -->
+        <section class="slide relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-20 right-20 w-96 h-96 bg-green-500 rounded-full filter blur-3xl"></div>
+                <div class="absolute bottom-20 left-20 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl"></div>
+            </div>
+            <div class="max-w-6xl mx-auto text-center relative z-10">
+                <div class="inline-block px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm mb-6 border border-green-500/30">KURUMSAL SATIŞ SUNUMU</div>
+                <h1 class="text-7xl font-black text-white mb-6 leading-tight">
+                    İç Tehdit <span class="gradient-text">Koruması</span>
+                </h1>
+                <p class="text-2xl text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Veri sızıntılarını önleyin, kaynağı tespit edin, <br>
+                    <span class="text-green-400">kurumsal güvenliğinizi garanti altına alın</span>
+                </p>
+                <div class="flex justify-center gap-6 mb-12">
+                    <a href="#demo" class="px-8 py-4 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-xl font-semibold hover:from-green-600 hover:to-blue-700 transition-all">
+                        Demo Talep Et →
+                    </a>
+                    <a href="#solution" class="px-8 py-4 bg-slate-700 text-white rounded-xl font-semibold hover:bg-slate-600 transition-all">
+                        Daha Fazla Bilgi
+                    </a>
+                </div>
+                <div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <div class="text-3xl font-bold text-green-400">%97.3</div>
+                        <div class="text-sm text-slate-400">Tespit Doğruluğu</div>
+                    </div>
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <div class="text-3xl font-bold text-blue-400">&lt;5ms</div>
+                        <div class="text-sm text-slate-400">İşlem Süresi</div>
+                    </div>
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <div class="text-3xl font-bold text-purple-400">144Hz</div>
+                        <div class="text-sm text-slate-400">Ekran Desteği</div>
+                    </div>
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <div class="text-3xl font-bold text-pink-400">10K+</div>
+                        <div class="text-sm text-slate-400">Cihaz Ölçeği</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Pain Points -->
+        <section id="painpoints" class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm mb-4">AĞRI NOKTALARI</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Mevcut Güvenlik Çözümleri Yetersiz</h2>
+                    <p class="text-xl text-slate-400">Görsel veri sızıntıları büyük bir risk oluşturuyor</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="glass rounded-2xl p-8 border border-red-500/30">
+                        <h3 class="text-2xl font-semibold text-red-400 mb-6 flex items-center gap-3">
+                            <span class="text-3xl">❌</span> Mevcut Durum
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-red-400 font-bold">✗</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Ekran Görüntüsü Sızıntıları</div>
+                                    <div class="text-slate-400 text-sm">Print Screen, Snipping Tool ile çekilen görüntüler tespit edilemiyor</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-red-400 font-bold">✗</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Kamera Fotoğrafları</div>
+                                    <div class="text-slate-400 text-sm">Telefonla ekran çekimi tamamen görünmez kalıyor</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-red-400 font-bold">✗</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Kaynak Tespiti Yok</div>
+                                    <div class="text-slate-400 text-sm">Sızan dokümanın hangi cihazdan çıktığı belirlenemiyor</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-red-400 font-bold">✗</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Hukuki Delil Eksikliği</div>
+                                    <div class="text-slate-400 text-sm">Mahkemede kullanılabilir kanıt sunulamıyor</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-8 border border-green-500/30">
+                        <h3 class="text-2xl font-semibold text-green-400 mb-6 flex items-center gap-3">
+                            <span class="text-3xl">✅</span> Çözümümüz
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-green-400 font-bold">✓</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Görünmez Watermark</div>
+                                    <div class="text-slate-400 text-sm">Her ekran görüntüsüne benzersiz ve görünmez watermark</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-green-400 font-bold">✓</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Anında Kaynak Tespiti</div>
+                                    <div class="text-slate-400 text-sm">Sızıntı anında cihaz ve kullanıcı belirlenir</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-green-400 font-bold">✓</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">Kanıt Zinciri</div>
+                                    <div class="text-slate-400 text-sm">Hukuki süreçte kullanılabilir delil sunar</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-green-400 font-bold">✓</span>
+                                </span>
+                                <div>
+                                    <div class="text-white font-semibold">DLP Entegrasyonu</div>
+                                    <div class="text-slate-400 text-sm">Mevcut DLP çözümleriyle entegre çalışma</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="metric-card rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-black text-red-400 mb-2">$4.88M</div>
+                        <div class="text-slate-400">Ortalama Veri İhlali Maliyeti</div>
+                    </div>
+                    <div class="metric-card rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-black text-orange-400 mb-2">%74</div>
+                        <div class="text-slate-400">İç Tehdit Kaynaklı</div>
+                    </div>
+                    <div class="metric-card rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-black text-yellow-400 mb-2">287 Gün</div>
+                        <div class="text-slate-400">Ortalama Tespit Süresi</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Solution -->
+        <section id="solution" class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm mb-4">ÇÖZÜM</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Forensic Watermark Nasıl Çalışır?</h2>
+                    <p class="text-xl text-slate-400">4 adımda kesin tespit ve koruma</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 mb-12">
+                    <div class="feature-card glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🔢</span>
+                        </div>
+                        <div class="text-xl font-bold text-white mb-2">1. ID Atama</div>
+                        <p class="text-slate-400 text-sm">Her cihaza benzersiz bir kimlik numarası atanır</p>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🔐</span>
+                        </div>
+                        <div class="text-xl font-bold text-white mb-2">2. Gömme</div>
+                        <p class="text-slate-400 text-sm">ID ekran piksellerine görünmez şekilde gömülür</p>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="w-16 h-16 bg-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">📸</span>
+                        </div>
+                        <div class="text-xl font-bold text-white mb-2">3. Aktarım</div>
+                        <p class="text-slate-400 text-sm">Screenshot/fotoğrafta watermark otomatik taşınır</p>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 text-center border border-slate-700">
+                        <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🎯</span>
+                        </div>
+                        <div class="text-xl font-bold text-white mb-2">4. Tespit</div>
+                        <p class="text-slate-400 text-sm">Sızıntı anında kaynak cihaz belirlenir</p>
+                    </div>
+                </div>
+
+                <!-- Technical Features -->
+                <div class="glass rounded-2xl p-8 border border-slate-700">
+                    <h3 class="text-2xl font-semibold text-white mb-6 text-center">Teknik Özellikler</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl">⚙️</span>
+                                <span class="text-white font-semibold">Kernel Seviye</span>
+                            </div>
+                            <p class="text-slate-400 text-sm">WDDM 2.7+ driver entegrasyonu ile uygulama-bağımsız çalışma</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl">🎮</span>
+                                <span class="text-white font-semibold">GPU Hızlandırma</span>
+                            </div>
+                            <p class="text-slate-400 text-sm">CUDA/ROCm desteği ile &lt;5ms işlem süresi</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl">🔒</span>
+                                <span class="text-white font-semibold">Şifreleme</span>
+                            </div>
+                            <p class="text-slate-400 text-sm">AES-256-GCM ile watermark deseni şifreleme</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl">🛡️</span>
+                                <span class="text-white font-semibold">Hata Düzeltme</span>
+                            </div>
+                            <p class="text-slate-400 text-sm">Reed-Solomon ECC ile %85 başarı oranı</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl">🔄</span>
+                                <span class="text-white font-semibold">Periyodik Rotation</span>
+                            </div>
+                            <p class="text-slate-400 text-sm">24 saatte bir otomatik desen değişimi</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-2xl">📊</span>
+                                <span class="text-white font-semibold">Raporlama</span>
+                            </div>
+                            <p class="text-slate-400 text-sm">Detaylı analiz ve audit logları</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Use Cases -->
+        <section id="usecases" class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm mb-4">KULLANIM SENARYOLARI</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Sektörel Çözümler</h2>
+                    <p class="text-xl text-slate-400">Her sektöre özel güvenlik çözümleri</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="feature-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-4xl mb-4">🏦</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Bankacılık & Finans</h3>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Müşteri veri koruması</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Kredi raporları güvenliği</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> İç denetim dokümanları</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> BDDK uyumluluğu</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-4xl mb-4">🏥</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Sağlık</h3>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Hasta kayıt koruması (HIPAA)</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Tıbbi görüntü güvenliği</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Araştırma verileri</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> KVKK uyumluluğu</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-4xl mb-4">🏛️</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Kamu & Savunma</h3>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Devlet sırları koruma</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Stratejik planlar</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Kişisel veri koruması</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 5651 sayılı kanun</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-4xl mb-4">📱</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Telekomünikasyon</h3>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Abone veri koruması</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Şebeke mimarisi güvenliği</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Fiyatlandırma stratejileri</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Rekabetçi istihbarat</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-4xl mb-4">⚖️</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Hukuk</h3>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Müvekkil dosyaları</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Sözleşme taslakları</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dava stratejileri</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Avukat-müvekkil gizliliği</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-4xl mb-4">🔬</div>
+                        <h3 class="text-xl font-semibold text-white mb-3">Ar-Ge & Teknoloji</h3>
+                        <ul class="space-y-2 text-slate-400 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Patent başvuruları</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Formül ve algoritmalar</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Ürün yol haritaları</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Ticari sır koruma</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Competitive Advantage -->
+        <section class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm mb-4">REKABET AVANTAJI</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Neden Forensic Watermark?</h2>
+                    <p class="text-xl text-slate-400">Rakiplerimize göre üstün özellikler</p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 border border-slate-700 overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-4 text-slate-400 font-semibold">Özellik</th>
+                                <th class="text-center py-4 text-green-400 font-bold">Forensic Watermark</th>
+                                <th class="text-center py-4 text-slate-400">Rakip A</th>
+                                <th class="text-center py-4 text-slate-400">Rakip B</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">Kernel-seviye entegrasyon</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">GPU hızlandırma</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                                <td class="text-center text-yellow-400 text-xl">~</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">144Hz ekran desteği</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">Hibrit DCT-DWT-SVD</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">Reed-Solomon ECC</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">On-premise seçeneği</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-yellow-400 text-xl">~</td>
+                                <td class="text-center text-green-400 text-xl">✓</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-4">AD/LDAP entegrasyonu</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-green-400 text-xl">✓</td>
+                                <td class="text-center text-yellow-400 text-xl">~</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">SIEM entegrasyonu</td>
+                                <td class="text-center text-green-400 font-bold text-xl">✓</td>
+                                <td class="text-center text-yellow-400 text-xl">~</td>
+                                <td class="text-center text-red-400 text-xl">✗</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: ROI -->
+        <section id="roi" class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm mb-4">ROI ANALİZİ</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Yatırım Getirisi</h2>
+                    <p class="text-xl text-slate-400">1000 kullanıcı için örnek hesaplama</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="glass rounded-2xl p-8 border border-red-500/30">
+                        <h3 class="text-2xl font-semibold text-white mb-6">Maliyet</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Yıllık Lisans (1000 kullanıcı)</span>
+                                <span class="text-white font-semibold">$144K</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Kurulum & Entegrasyon</span>
+                                <span class="text-white font-semibold">$25K</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Eğitim</span>
+                                <span class="text-white font-semibold">$10K</span>
+                            </div>
+                            <div class="border-t border-slate-700 pt-4 flex justify-between items-center">
+                                <span class="text-slate-300 font-semibold">Toplam İlk Yıl</span>
+                                <span class="text-red-400 font-bold text-2xl">$179K</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-8 border border-green-500/30">
+                        <h3 class="text-2xl font-semibold text-white mb-6">Fayda</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Veri ihlali önleme</span>
+                                <span class="text-white font-semibold">$2M</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">İtibar koruma</span>
+                                <span class="text-white font-semibold">$500K</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-400">Uyumluluk cezası önleme</span>
+                                <span class="text-white font-semibold">$300K</span>
+                            </div>
+                            <div class="border-t border-slate-700 pt-4 flex justify-between items-center">
+                                <span class="text-slate-300 font-semibold">Toplam Fayda</span>
+                                <span class="text-green-400 font-bold text-2xl">$2.8M</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="inline-block glass rounded-2xl p-8 border border-green-500/30">
+                        <div class="text-slate-400 mb-2">Net ROI (İlk Yıl)</div>
+                        <div class="text-6xl font-black text-green-400">%1,464</div>
+                        <div class="text-slate-500 mt-2">Yatırımın 14.6 kat geri dönüşü</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Pricing -->
+        <section id="pricing" class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm mb-4">FİYATLANDIRMA</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Esnek Lisanslama Seçenekleri</h2>
+                    <p class="text-xl text-slate-400">Kurumunuzun büyüklüğüne göre seçenekler</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="pricing-card glass rounded-2xl p-8 border-2 border-slate-600">
+                        <div class="text-lg font-semibold text-white mb-2">Starter</div>
+                        <div class="text-4xl font-black text-blue-400 mb-4">$5<span class="text-lg text-slate-400 font-normal">/kullanıcı/ay</span></div>
+                        <p class="text-slate-400 text-sm mb-6">Küçük ve orta ölçekli kurumlar için</p>
+                        <ul class="space-y-3 text-slate-400 mb-8">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 100-500 kullanıcı</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Temel watermark</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Web yönetim paneli</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Email destek</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> %99.5 uptime SLA</li>
+                            <li class="flex items-center gap-2"><span class="text-slate-600">✗</span> API erişimi</li>
+                            <li class="flex items-center gap-2"><span class="text-slate-600">✗</span> AD/LDAP entegrasyonu</li>
+                        </ul>
+                        <button class="w-full py-3 bg-slate-700 text-white rounded-lg font-semibold hover:bg-slate-600 transition">Teklif Al</button>
+                    </div>
+                    
+                    <div class="pricing-card glass rounded-2xl p-8 border-2 border-purple-500 relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span class="px-3 py-1 bg-purple-500 text-white text-sm rounded-full">POPÜLER</span>
+                        </div>
+                        <div class="text-lg font-semibold text-white mb-2">Professional</div>
+                        <div class="text-4xl font-black text-purple-400 mb-4">$12<span class="text-lg text-slate-400 font-normal">/kullanıcı/ay</span></div>
+                        <p class="text-slate-400 text-sm mb-6">Büyük kurumlar için ideal</p>
+                        <ul class="space-y-3 text-slate-400 mb-8">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 500-5000 kullanıcı</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Gelişmiş algoritma</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> AD/LDAP entegrasyonu</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 7/24 telefon + email destek</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> %99.9 uptime SLA</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> API erişimi</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dedicated CSM</li>
+                        </ul>
+                        <button class="w-full py-3 bg-gradient-to-r from-purple-500 to-blue-600 text-white rounded-lg font-semibold hover:from-purple-600 hover:to-blue-700 transition">Teklif Al</button>
+                    </div>
+                    
+                    <div class="pricing-card glass rounded-2xl p-8 border-2 border-slate-600">
+                        <div class="text-lg font-semibold text-white mb-2">Enterprise</div>
+                        <div class="text-4xl font-black text-green-400 mb-4">Özel</div>
+                        <p class="text-slate-400 text-sm mb-6">Kurumsal ihtiyaçlar için özelleştirilmiş</p>
+                        <ul class="space-y-3 text-slate-400 mb-8">
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 5000+ kullanıcı</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Özel geliştirme</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> On-premise seçeneği</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 7/24 premium destek</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> %99.99 uptime SLA</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> On-site destek</li>
+                            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Özel SLA</li>
+                        </ul>
+                        <button class="w-full py-3 bg-slate-700 text-white rounded-lg font-semibold hover:bg-slate-600 transition">İletişime Geç</button>
+                    </div>
+                </div>
+
+                <!-- Support Tiers -->
+                <div class="glass rounded-2xl p-8 border border-slate-700">
+                    <h3 class="text-xl font-semibold text-white mb-6 text-center">Destek Seviyeleri</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-slate-800 rounded-xl p-6 text-center">
+                            <div class="text-2xl font-bold text-blue-400 mb-2">Standard</div>
+                            <div class="text-3xl font-bold text-white mb-4">$5<span class="text-lg text-slate-400">/ay</span></div>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li>8/5 Email destek</li>
+                                <li>24 saat yanıt süresi</li>
+                                <li>Knowledge base</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6 text-center border-2 border-purple-500">
+                            <div class="text-2xl font-bold text-purple-400 mb-2">Professional</div>
+                            <div class="text-3xl font-bold text-white mb-4">$12<span class="text-lg text-slate-400">/ay</span></div>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li>7/24 Telefon + Email</li>
+                                <li>4 saat yanıt süresi</li>
+                                <li>Dedicated CSM</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-6 text-center">
+                            <div class="text-2xl font-bold text-green-400 mb-2">Enterprise</div>
+                            <div class="text-3xl font-bold text-white mb-4">Özel</div>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li>7/24 Premium destek</li>
+                                <li>1 saat yanıt süresi</li>
+                                <li>On-site destek</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Implementation -->
+        <section class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm mb-4">UYGULAMA</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Kurulum Süreci</h2>
+                    <p class="text-xl text-slate-400">Hızlı ve sorunsuz devreye alma</p>
+                </div>
+
+                <div class="space-y-6 max-w-4xl mx-auto">
+                    <div class="flex items-center gap-6">
+                        <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center text-3xl font-bold text-white flex-shrink-0">1</div>
+                        <div class="flex-1 glass rounded-xl p-6 border border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-xl font-semibold text-white">Keşif ve Planlama</div>
+                                    <div class="text-slate-400">Mevcut altyapı analizi, gereksinim toplama, pilot kapsam belirleme</div>
+                                </div>
+                                <div class="text-blue-400 font-bold text-xl">1 hafta</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="w-20 h-20 bg-purple-500 rounded-2xl flex items-center justify-center text-3xl font-bold text-white flex-shrink-0">2</div>
+                        <div class="flex-1 glass rounded-xl p-6 border border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-xl font-semibold text-white">Pilot Kurulum</div>
+                                    <div class="text-slate-400">50-100 cihaz pilot, entegrasyon testleri, performans optimizasyonu</div>
+                                </div>
+                                <div class="text-purple-400 font-bold text-xl">2 hafta</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="w-20 h-20 bg-pink-500 rounded-2xl flex items-center justify-center text-3xl font-bold text-white flex-shrink-0">3</div>
+                        <div class="flex-1 glass rounded-xl p-6 border border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-xl font-semibold text-white">Eğitim</div>
+                                    <div class="text-slate-400">IT eğitimi, son kullanıcı bilgilendirme, yönetici paneli eğitimi</div>
+                                </div>
+                                <div class="text-pink-400 font-bold text-xl">1 hafta</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="w-20 h-20 bg-green-500 rounded-2xl flex items-center justify-center text-3xl font-bold text-white flex-shrink-0">4</div>
+                        <div class="flex-1 glass rounded-xl p-6 border border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-xl font-semibold text-white">Genel Dağıtım</div>
+                                    <div class="text-slate-400">Tüm cihazlara kurulum, monitoring, destek</div>
+                                </div>
+                                <div class="text-green-400 font-bold text-xl">2-4 hafta</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <div class="inline-block glass rounded-2xl p-6 border border-slate-700">
+                        <div class="text-slate-400 mb-2">Toplam Kurulum Süresi</div>
+                        <div class="text-4xl font-bold text-white">6-8 hafta</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Testimonials -->
+        <section class="slide">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm mb-4">MÜŞTERİ YORUMLARI</div>
+                    <h2 class="text-5xl font-bold text-white mb-4">Müşterilerimiz Ne Diyor?</h2>
+                    <p class="text-xl text-slate-400">Gerçek müşteri deneyimleri</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="testimonial-card rounded-2xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-1 mb-4">
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                        </div>
+                        <p class="text-slate-300 mb-6">"Forensic Watermark sayesinde bir veri sızıntısını 24 saat içinde tespit ettik. Kaynak cihazı ve kullanıcıyı anında belirledik."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                            <div>
+                                <div class="text-white font-semibold">Ahmet Y.</div>
+                                <div class="text-slate-400 text-sm">CISO, Finans Kurumu</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card rounded-2xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-1 mb-4">
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                        </div>
+                        <p class="text-slate-300 mb-6">"Kullanıcılar sistemin varlığını bile fark etmiyor. Ekran performansında hiçbir yavaşlama olmuyor. Mükemmel bir çözüm."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">M</div>
+                            <div>
+                                <div class="text-white font-semibold">Mehmet K.</div>
+                                <div class="text-slate-400 text-sm">IT Direktörü, Sağlık Kuruluşu</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card rounded-2xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-1 mb-4">
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                            <span class="text-yellow-400">★</span>
+                        </div>
+                        <p class="text-slate-300 mb-6">"HIPAA uyumluluğu için kritik bir araç. Hasta verilerinin güvenliğini sağlamak artık çok daha kolay."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">S</div>
+                            <div>
+                                <div class="text-white font-semibold">Selin T.</div>
+                                <div class="text-slate-400 text-sm">Bilgi Güvenliği Müdürü</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Son -->
+        <section id="demo" class="slide">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="inline-block px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm mb-4">SON</div>
+                <h2 class="text-5xl font-bold text-white mb-6">Kurumsal Satış Sunumu Sonu</h2>
+                <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">Demo ve değerlendirme seçenekleri mevcuttur.</p>
+
+                <div class="flex justify-center gap-6">
+                    <a href="index.html" class="px-8 py-4 bg-slate-700 text-white rounded-xl font-semibold hover:bg-slate-600 transition-all">
+                        Tüm Dokümanlar
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

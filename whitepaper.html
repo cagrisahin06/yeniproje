@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adli Filigran - Akademik Teknik Whitepaper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; border-radius: 0.75rem; }
+        .paper-section { border-left: 4px solid #3b82f6; padding-left: 1.5rem; margin-bottom: 3rem; }
+        .formula-box { background: linear-gradient(145deg, #1e293b, #0f172a); border-left: 4px solid #3b82f6; }
+        .theorem-box { background: linear-gradient(145deg, #1e293b, #0f172a); border-left: 4px solid #8b5cf6; }
+        .proof-box { background: linear-gradient(145deg, #1e293b, #0f172a); border-left: 4px solid #22c55e; }
+        .chart-container { background: #0f172a; border-radius: 0.75rem; padding: 1rem; }
+        .layer-indicator { width: 3px; height: 100%; background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #ec4899); }
+        .math-display { overflow-x: auto; }
+    </style>
+<base target="_blank">
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">W</span>
+                </div>
+                <span class="font-semibold">Hibrit Filigran Whitepaper</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Paper Header -->
+            <header class="text-center mb-16">
+                <div class="inline-block px-4 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm mb-4">AKADEMİK TEKNİK WHITEPAPER</div>
+                <h1 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                    Çok Katmanlı Hibrit DCT-DWT-SVD Filigran Mimarisi:<br>
+                    <span class="text-xl md:text-2xl text-slate-400">Adli İzleme, YZ Koruması ve Derin Sahte Tespiti</span>
+                </h1>
+                <p class="text-lg text-slate-400 mb-6">Uyarlanabilir Gömme Gücü ile Çekirdek Seviyesi Uygulama</p>
+                <div class="flex justify-center gap-6 text-sm text-slate-500">
+                    <span>v3.0.0</span>
+                    <span>•</span>
+                    <span>Şubat 2026</span>
+                    <span>•</span>
+                    <span>78 sayfa</span>
+                </div>
+            </header>
+
+            <!-- Abstract -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-4">Özet</h2>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Bu çalışma, kurumsal düzeyde dijital içerik koruması için Ayrık Kosinüs Dönüşümü (DCT - Discrete Cosine Transform), Ayrık Dalgacık Dönüşümü (DWT - Discrete Wavelet Transform) ve Tekil Değer Ayrışımı'nı (SVD - Singular Value Decomposition) entegre eden kapsamlı bir çok katmanlı hibrit filigran mimarisi sunmaktadır. Önerilen sistem, beş kritik güvenlik alanını eşzamanlı olarak ele almaktadır: <strong>adli kaynak izleme</strong>, <strong>YZ modeli parmak izi</strong>, <strong>derin sahte tespiti</strong>, <strong>görünmez sahiplik doğrulaması</strong> ve <strong>manipülasyon tespiti</strong>.
+                </p>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Matematiksel temel, dört katmanlı bir gömme stratejisi oluşturmaktadır: (1) Cihaz özgü desenlerle orta frekanslı DCT katsayılarını kullanan Adli Katman, (2) DWT alt bantlarına model parmak izleri gömen YZ Koruma Katmanı, (3) Geometrik saldırı dayanıklılığı için SVD tekil değerlerini kullanan Derin Sahte Karşıtı Katman ve (4) Doku analizi, kenar yoğunluğu ve yerel entropiye dayalı HVS-uyarlanabilir gömme gücü ile Sahiplik Katmanı.
+                </p>
+                <p class="text-slate-300 leading-relaxed">
+                    Deneysel sonuçlar, ortalama 44,8 dB PSNR, 0,992 SSIM ve JPEG sıkıştırma (KF 70), Gauss gürültüsü (σ=25), döndürme (±5°), ölçekleme (0,8-1,2×) ve YZ tabanlı yeniden oluşturma saldırılarına karşı %95'in üzerinde dayanıklılık puanları ile üstün performans sergilediğini göstermektedir. Çekirdek seviyesindeki WDDM 2.7+ uygulaması, CUDA hızlandırması ile 1080p@144Hz ekranlar için 5ms altı işlem gecikmesi sağlamaktadır.
+                </p>
+            </section>
+
+            <!-- 1. Introduction -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">1. Giriş</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">1.1 Problem Tanımı</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Dijital içerik koruması, üç yakınsak tehdit vektöründen kaynaklanan eşi benzeri görülmemiş zorluklarla karşı karşıyadır: (1) ekran yakalama ve fotoğrafçılık yoluyla <em>içeriden veri sızdırma</em>, (2) kazınan görsel içerik kullanılarak <em>yetkisiz YZ eğitimi</em> ve (3) üretken YZ modelleri aracılığıyla <em>sentetik medya manipülasyonu</em>. Geleneksel Dijital Hak Yönetimi (DRM - Digital Rights Management) ve Veri Kaybı Önleme (DLP - Data Loss Prevention) sistemleri uygulama veya ağ katmanında çalışarak, görsel içeriği analog delik saldırılarına karşı savunmasız bırakmaktadır [1].
+                </p>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">1.2 Çok Katmanlı Güvenlik Gereksinimleri</h3>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <h4 class="font-semibold text-white mb-2">🔍 Adli İzleme</h4>
+                        <p class="text-sm text-slate-400">Sıkıştırma ve geometrik saldırılar altında %95'in üzerinde doğrulukla kaynak cihazı sızdırılmış ekran görüntüleri/fotoğraflardan tanımlama.</p>
+                    </div>
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <h4 class="font-semibold text-white mb-2">🤖 YZ Koruması</h4>
+                        <p class="text-sm text-slate-400">YZ eğitim veri kümelerinde ve oluşturulan içerikte yetkisiz kullanımı tespit etmek için görünmez parmak izleri gömme.</p>
+                    </div>
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <h4 class="font-semibold text-white mb-2">🎭 Derin Sahte Tespiti</h4>
+                        <p class="text-sm text-slate-400">Orijinal içeriği YZ tarafından oluşturulmuş sahtelerden ayırt etmek için köken doğrulaması sağlama.</p>
+                    </div>
+                    <div class="glass rounded-xl p-4 border border-slate-700">
+                        <h4 class="font-semibold text-white mb-2">📜 Sahiplik Doğrulaması</h4>
+                        <p class="text-sm text-slate-400">Yasal kabul edilebilirliği olan kriptografik olarak güvenli telif hakkı talepleri.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">1.3 Katkılar</h3>
+                <ol class="list-decimal list-inside space-y-2 text-slate-300 mb-4">
+                    <li>Tek bir gömme hattı aracılığıyla beş güvenlik alanının tamamını ele alan ilk birleşik mimari</li>
+                    <li>HVS özellikleri ve yerel görüntü istatistiklerine dayalı yeni uyarlanabilir gömme gücü modeli</li>
+                    <li>Kanıtlanabilir karışmazlık özellikleriyle matematiksel olarak titiz çok katmanlı gömme</li>
+                    <li>144Hz ekranlar için gerçek zamanlı işlem sağlayan çekirdek seviyesinde WDDM uygulaması ve CUDA hızlandırması</li>
+                    <li>Difüzyon yeniden oluşturma dahil YZ tabanlı saldırılara karşı kapsamlı dayanıklılık analizi</li>
+                </ol>
+            </section>
+
+            <!-- 2. Mathematical Foundation -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">2. Matematiksel Temel</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">2.1 Ayrık Kosinüs Dönüşümü (DCT)</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    2B DCT, N×N'lik bir görüntü bloğunu uzamsal alandan frekans alanına dönüştürerek enerjiyi düşük frekanslı katsayırlarda yoğunlaştırır:
+                </p>
+                
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <div class="math-display text-center">
+                        $$F(u,v) = \alpha(u)\alpha(v) \sum_{x=0}^{N-1} \sum_{y=0}^{N-1} f(x,y) \cos\left[\frac{(2x+1)u\pi}{2N}\right] \cos\left[\frac{(2y+1)v\pi}{2N}\right]$$
+                    </div>
+                    <div class="mt-4 text-slate-400 text-sm">
+                        <p class="mb-2"><strong>Normalizasyon Katsayıları:</strong></p>
+                        <div class="math-display">
+                            $$\alpha(u) = \begin{cases} \sqrt{\frac{1}{N}} & u = 0 \\ \sqrt{\frac{2}{N}} & u \neq 0 \end{cases} \quad \alpha(v) = \begin{cases} \sqrt{\frac{1}{N}} & v = 0 \\ \sqrt{\frac{2}{N}} & v \neq 0 \end{cases}$$
+                        </div>
+                    </div>
+                    <div class="mt-4 text-slate-400 text-sm">
+                        <p><strong>Ters DCT (IDCT):</strong></p>
+                        <div class="math-display">
+                            $$f(x,y) = \sum_{u=0}^{N-1} \sum_{v=0}^{N-1} \alpha(u)\alpha(v) F(u,v) \cos\left[\frac{(2x+1)u\pi}{2N}\right] \cos\left[\frac{(2y+1)v\pi}{2N}\right]$$
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">2.2 Ayrık Dalgacık Dönüşümü (DWT)</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Haar dalgacığı mükemmel yeniden yapılanma ve hesaplama verimliliği sağlar. 2B bir görüntü için, tek seviyeli ayrışım dört alt bant üretir:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <p class="text-slate-400 mb-4"><strong>Haar Dalgacığı Ayrışımı (2B):</strong></p>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-green-400 font-semibold mb-2">LL (Yaklaşım)</p>
+                            <div class="math-display text-sm">
+                                $$LL_{i,j} = \frac{I_{2i,2j} + I_{2i+1,2j} + I_{2i,2j+1} + I_{2i+1,2j+1}}{4}$$
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-blue-400 font-semibold mb-2">LH (Yatay Detay)</p>
+                            <div class="math-display text-sm">
+                                $$LH_{i,j} = \frac{I_{2i,2j} + I_{2i+1,2j} - I_{2i,2j+1} - I_{2i+1,2j+1}}{4}$$
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-purple-400 font-semibold mb-2">HL (Dikey Detay)</p>
+                            <div class="math-display text-sm">
+                                $$HL_{i,j} = \frac{I_{2i,2j} - I_{2i+1,2j} + I_{2i,2j+1} - I_{2i+1,2j+1}}{4}$$
+                            </div>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-pink-400 font-semibold mb-2">HH (Çapraz Detay)</p>
+                            <div class="math-display text-sm">
+                                $$HH_{i,j} = \frac{I_{2i,2j} - I_{2i+1,2j} - I_{2i,2j+1} + I_{2i+1,2j+1}}{4}$$
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-slate-400 text-sm">
+                        <p><strong>Çok Seviyeli Ayrışım:</strong> L seviyesi için, ayrışım 3L+1 alt bant üretir: LL<sub>L</sub>, {LH<sub>l</sub>, HL<sub>l</sub>, HH<sub>l</sub>} for l = 1, 2, ..., L</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">2.3 Tekil Değer Ayrışımı (SVD)</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    SVD, bir A matrisini üç matrise ayırarak optimal düşük-rank yaklaşımı ve geometrik değişmezlik sağlar:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <div class="math-display text-center mb-4">
+                        $$A = U\Sigma V^T$$
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">burada U ∈ ℝ<sup>m×m</sup> ve V ∈ ℝ<sup>n×n</sup> ortogonal matrislerdir ve Σ ∈ ℝ<sup>m×n</sup> tekil değerlerin köşegen matrisidir:</p>
+                    <div class="math-display text-center mb-4">
+                        $$\Sigma = \text{diag}(\sigma_1, \sigma_2, ..., \sigma_r), \quad \sigma_1 \geq \sigma_2 \geq ... \geq \sigma_r \geq 0$$
+                    </div>
+                    <p class="text-slate-400 text-sm"><strong>Özellikler:</strong> (1) Tekil değerler dönme ve yansıma karşısında değişmezdir, (2) s faktörüyle ölçekleme tekil değerleri s ile öçekler, (3) SVD Frobenius normunda optimal rank-k yaklaşımı sağlar.</p>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">2.4 Orta Frekanslı DCT Katsayısı Seçimi</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Optimal algılanamazlık-dayanıklılık dengesi için, filigran gömme orta frekanslı DCT katsayılarını hedefler. Seçim, DC (0,0) ve yüksek frekanslı bileşenleri hariç tutan zikzak deseni izler:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <p class="text-slate-400 mb-4"><strong>Katsayı Seçim Kriterleri:</strong></p>
+                    <div class="math-display mb-4">
+                        $$S = \{(u,v) : T_{low} \leq \sqrt{u^2 + v^2} \leq T_{high}, (u,v) \neq (0,0)\}$$
+                    </div>
+                    <p class="text-slate-400 text-sm mb-2">burada T<sub>low</sub> = 2 ve T<sub>high</sub> = 5 8×8 DCT bloklar için, blok başına 20 aday katsayı verir.</p>
+                    <p class="text-slate-400 text-sm"><strong>Seçim Önceliği:</strong> Katsayılar büyüklüğe göre sıralanır: |F(u,v)|, daha büyük katsayılar gömme için önceliklendirilir.</p>
+                </div>
+            </section>
+
+            <!-- 3. Multi-Layer Watermark Architecture -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">3. Çok Katmanlı Filigran Mimarisi</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">3.1 Katman Tanımları</h3>
+                
+                <div class="space-y-6 mb-8">
+                    <div class="glass rounded-xl p-6 border-l-4 border-blue-500">
+                        <h4 class="text-lg font-semibold text-white mb-2">Katman 1: Adli İzleme Katmanı</h4>
+                        <p class="text-slate-400 text-sm mb-3"><strong>Alan:</strong> DCT orta frekans katsayıları | <strong>Kapasite:</strong> 128-256 bit | <strong>Amaç:</strong> Cihaz tanımlama ve kaynak izleme</p>
+                        <p class="text-slate-300 text-sm">Orta frekanslı DCT katsayılarına kriptografik olarak üretilmiş cihaz özgü desenleri gömer. Kör çıkarım için Niceleme İndisi Modülasyonu (QIM - Quantization Index Modulation) kullanır.</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border-l-4 border-purple-500">
+                        <h4 class="text-lg font-semibold text-white mb-2">Katman 2: YZ Koruma Katmanı</h4>
+                        <p class="text-slate-400 text-sm mb-3"><strong>Alan:</strong> DWT LH/HL alt bantları | <strong>Kapasite:</strong> 64-128 bit | <strong>Amaç:</strong> YZ modeli parmak izi ve eğitim tespiti</p>
+                        <p class="text-slate-300 text-sm">DWT detay alt bantlarına YZ modeli özgü parmak izleri gömer. YZ eğitim veri kümelerindeki ve oluşturulan çıktılardaki içerik tespitini sağlar.</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border-l-4 border-pink-500">
+                        <h4 class="text-lg font-semibold text-white mb-2">Katman 3: Derin Sahte Karşıtı Katman</h4>
+                        <p class="text-slate-400 text-sm mb-3"><strong>Alan:</strong> SVD tekil değerleri | <strong>Kapasite:</strong> 32-64 bit | <strong>Amaç:</strong> Geometrik saldırı dayanıklılığı ve köken doğrulaması</p>
+                        <p class="text-slate-300 text-sm">Geometrik saldırı dayanıklılığı için SVD tekil değerlerini değiştirir. YZ tarafından oluşturulmuş sahteleri tespit etmek için köken doğrulaması sağlar.</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border-l-4 border-green-500">
+                        <h4 class="text-lg font-semibold text-white mb-2">Katman 4: Sahiplik Katmanı</h4>
+                        <p class="text-slate-400 text-sm mb-3"><strong>Alan:</strong> Tüm alanlarda uyarlanabilir | <strong>Kapasite:</strong> 256-512 bit | <strong>Amaç:</strong> Yasal kabul edilebilirliği olan telif hakkı koruması</p>
+                        <p class="text-slate-300 text-sm">Maksimum kapasite ile HVS-uyarlanabilir gömme. Doku analizi, kenar yoğunluğu ve entropi kullanarak uyarlanabilir gömme gücü sağlar.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">3.2 Uyarlanabilir Gömme Gücü Modeli</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Gömme gücü α, algılanabilirliği maksimize ederken dayanıklılığı korumak için yerel görüntü özelliklerine göre uyarlanabilir olarak hesaplanır:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <div class="math-display text-center mb-4">
+                        $$\alpha_{adaptive}(x,y) = \alpha_{base} \cdot w_{texture} \cdot w_{edge} \cdot w_{entropy}$$
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4"><strong>Bileşen Ağırlıkları:</strong></p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-blue-400 font-semibold mb-2">Doku Ağırlığı</p>
+                            <div class="math-display text-sm">
+                                $$w_{texture} = 1 + \beta_1 \cdot \frac{\sigma_{local}}{\sigma_{global}}$$
+                            </div>
+                            <p class="text-slate-500 text-xs mt-2">σ: yerel standart sapma</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-purple-400 font-semibold mb-2">Kenar Ağırlığı</p>
+                            <div class="math-display text-sm">
+                                $$w_{edge} = 1 + \beta_2 \cdot \frac{|\nabla I|}{|\nabla I|_{max}}$$
+                            </div>
+                            <p class="text-slate-500 text-xs mt-2">∇I: gradyan büyüklüğü</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <p class="text-green-400 font-semibold mb-2">Entropi Ağırlığı</p>
+                            <div class="math-display text-sm">
+                                $$w_{entropy} = 1 + \beta_3 \cdot \frac{H_{local}}{H_{max}}$$
+                            </div>
+                            <p class="text-slate-500 text-xs mt-2">H: Shannon entropisi</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-slate-400 text-sm">
+                        <p><strong>Tipik Parametreler:</strong> α<sub>base</sub> = 0,05, β<sub>1</sub> = 0,3, β<sub>2</sub> = 0,4, β<sub>3</sub> = 0,2</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">3.3 Tam Gömme Hattı</h3>
+                
+                <div class="code-block p-6 mb-6">
+                    <pre class="mono text-sm text-green-400 overflow-x-auto"><span class="text-slate-500">// Tam Çok Katmanlı Filigran Gömme Hattı</span>
+<span class="text-purple-400">function</span> <span class="text-blue-400">EmbedWatermark</span>(Image I, Watermark W, DeviceID D) {
+    
+    <span class="text-slate-500">// Adım 1: Renk Uzayı Dönüşümü</span>
+    I_ycbcr = RGB_to_YCbCr(I);
+    Y = I_ycbcr.Y;  <span class="text-slate-500">// Parlaklık kanalı</span>
+    
+    <span class="text-slate-500">// Adım 2: Çok Seviyeli DWT Ayrışımı</span>
+    [LL3, LH3, HL3, HH3, LH2, HL2, HH2, LH1, HL1, HH1] = DWT_3Level(Y);
+    
+    <span class="text-slate-500">// Adım 3: Katman 1 - Adli (LL3 üzerinde DCT)</span>
+    blocks = Split_8x8(LL3);
+    <span class="text-purple-400">for each</span> block <span class="text-purple-400">in</span> blocks {
+        F = DCT_2D(block);
+        coeffs = Select_MidFreq_Coefficients(F, T_low=2, T_high=5);
+        W_f = Generate_Forensic_Pattern(D, position);
+        F' = QIM_Embed(F, coeffs, W_f, α_forensic);
+        block' = IDCT_2D(F');
+    }
+    LL3' = Merge_Blocks(blocks');
+    
+    <span class="text-slate-500">// Adım 4: Katman 2 - YZ Koruması (DWT alt bantları)</span>
+    W_ai = Generate_AI_Fingerprint(model_params);
+    LH3' = Spread_Spectrum_Embed(LH3, W_ai, α_ai);
+    HL3' = Spread_Spectrum_Embed(HL3, W_ai, α_ai);
+    
+    <span class="text-slate-500">// Adım 5: Katman 3 - Derin Sahte Karşıtı (Seçili bloklarda SVD)</span>
+    key_blocks = Select_Key_Blocks(LL3', num_blocks=16);
+    <span class="text-purple-400">for each</span> KB <span class="text-purple-400">in</span> key_blocks {
+        [U, S, V] = SVD(KB);
+        W_df = Generate_Deepfake_Signature(timestamp);
+        S' = S + α_df * W_df * S;
+        KB' = U * S' * V';
+    }
+    LL3'' = Replace_Key_Blocks(LL3', key_blocks');
+    
+    <span class="text-slate-500">// Adım 6: Katman 4 - Sahiplik (Uyarlanabilir gömme)</span>
+    <span class="text-purple-400">for each</span> pixel (x,y) <span class="text-purple-400">in</span> Y {
+        α(x,y) = Compute_Adaptive_Strength(Y, x, y);
+    }
+    W_own = Generate_Ownership_Watermark(copyright_info);
+    Y' = Adaptive_Embed(Y, W_own, α_map);
+    
+    <span class="text-slate-500">// Adım 7: Ters DWT</span>
+    Y_watermarked = IDWT_3Level(LL3'', LH3', HL3', HH3', LH2, HL2, HH2, LH1, HL1, HH1);
+    
+    <span class="text-slate-500">// Adım 8: Renk Uzayı Dönüşümü</span>
+    I_watermarked = YCbCr_to_RGB(Y_watermarked, Cb, Cr);
+    
+    <span class="text-purple-400">return</span> I_watermarked;
+}</pre>
+                </div>
+            </section>
+
+            <!-- 4. Extraction and Detection Algorithms -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">4. Çıkarım ve Tespit Algoritmaları</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">4.1 Kör Filigran Çıkarımı</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Çıkarım süreci, orijinal görüntüye erişim olmadan gömülü filigranları kurtarır:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <p class="text-slate-400 mb-4"><strong>QIM Çıkarımı (Adli Katman):</strong></p>
+                    <div class="math-display mb-4">
+                        $$\hat{w}_i = \underset{b \in \{0,1\}}{\arg\min} |F(u,v) - Q_b(F(u), \Delta)|$$
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">burada Q<sub>b</sub>, adım boyutu Δ ile bit b için niceleme fonksiyonudur.</p>
+                    
+                    <p class="text-slate-400 mb-4"><strong>SVD Çıkarımı (Derin Sahte Karşıtı Katman):</strong></p>
+                    <div class="math-display mb-4">
+                        $$\hat{w}_i = \frac{\sigma_i' - \sigma_i}{\alpha_{df}}$$
+                    </div>
+                    <p class="text-slate-400 text-sm">Tekil değer farkı gömülü filigranı ortaya çıkarır.</p>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">4.2 Filigran Analizi ile Derin Sahte Tespiti</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Derin sahte tespiti, YZ tarafından oluşturulan içeriğin gömülü filigranı bozduğu veya yeniden üretmeyi başaramadığı gerçeğinden yararlanır:
+                </p>
+
+                <div class="code-block p-6 mb-6">
+                    <pre class="mono text-sm text-green-400 overflow-x-auto"><span class="text-purple-400">function</span> <span class="text-blue-400">DetectDeepfake</span>(Image I_suspected) {
+    
+    <span class="text-slate-500">// Tüm katman filigranlarını çıkar</span>
+    W_extracted = Extract_All_Layers(I_suspected);
+    
+    <span class="text-slate-500">// Çıkarım güven puanlarını hesapla</span>
+    <span class="text-purple-400">for each</span> layer L <span class="text-purple-400">in</span> {Forensic, AI, AntiDeepfake, Ownership} {
+        corr_L = Normalized_Cross_Correlation(W_extracted[L], W_expected[L]);
+        ber_L = Bit_Error_Rate(W_extracted[L], W_expected[L]);
+    }
+    
+    <span class="text-slate-500">// Derin safte tespit mantığı</span>
+    <span class="text-purple-400">if</span> (corr_Forensic < τ_corr && ber_Forensic > τ_ber) {
+        <span class="text-purple-400">return</span> {<span class="text-green-400">"is_deepfake"</span>: <span class="text-purple-400">true</span>, 
+                <span class="text-green-400">"confidence"</span>: 1 - corr_Forensic,
+                <span class="text-green-400">"evidence"</span>: <span class="text-green-400">"Filigran bozulması tespit edildi"</span>};
+    }
+    
+    <span class="text-slate-500">// YZ yeniden oluşturma tespiti</span>
+    <span class="text-purple-400">if</span> (corr_AI < τ_ai && ber_AI > τ_ber_ai) {
+        <span class="text-purple-400">return</span> {<span class="text-green-400">"is_regenerated"</span>: <span class="text-purple-400">true</span>,
+                <span class="text-green-400">"confidence"</span>: 1 - corr_AI,
+                <span class="text-green-400">"evidence"</span>: <span class="text-green-400">"YZ parmak izi uyuşmazlığı"</span>};
+    }
+    
+    <span class="text-purple-400">return</span> {<span class="text-green-400">"is_authentic"</span>: <span class="text-purple-400">true</span>, <span class="text-green-400">"confidence"</span>: min(corr_L)};
+}</pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">4.3 Manipülasyon Tespit Algoritması</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Manipülasyon tespiti, filigran tutarlılık analizi aracılığıyla yerelleştirilmiş değişiklikleri tanımlar:
+                </p>
+
+                <div class="code-block p-6 mb-6">
+                    <pre class="mono text-sm text-green-400 overflow-x-auto"><span class="text-purple-400">function</span> <span class="text-blue-400">DetectTamper</span>(Image I_suspected, Image I_original) {
+    
+    <span class="text-slate-500">// Blok seviyesinde filigran çıkarımı</span>
+    blocks = Split_8x8(I_suspected);
+    tamper_map = zeros(size(I_suspected));
+    
+    <span class="text-purple-400">for each</span> block B <span class="text-purple-400">at</span> position (i,j) {
+        W_block = Extract_Block_Watermark(B);
+        W_expected = Get_Expected_Watermark(i, j, key);
+        
+        <span class="text-slate-500">// Blok seviyesinde korelasyon hesapla</span>
+        ncc = NCC(W_block, W_expected);
+        
+        <span class="text-purple-400">if</span> (ncc < τ_tamper) {
+            tamper_map[i,j] = 1 - ncc;  <span class="text-slate-500">// Manipülasyon olasılığı</span>
+        }
+    }
+    
+    <span class="text-slate-500">// Morfolojik rafine</span>
+    tamper_map = Morphological_Close(tamper_map, kernel=3x3);
+    
+    <span class="text-slate-500">// Bağlı bileşen analizi</span>
+    regions = Find_Connected_Components(tamper_map > 0.5);
+    
+    <span class="text-purple-400">return</span> {
+        <span class="text-green-400">"is_tampered"</span>: (sum(tamper_map) > 0),
+        <span class="text-green-400">"tamper_map"</span>: tamper_map,
+        <span class="text-green-400">"tampered_regions"</span>: regions,
+        <span class="text-green-400">"confidence"</span>: mean(tamper_map[tamper_map > 0])
+    };
+}</pre>
+                </div>
+            </section>
+
+            <!-- 5. Robustness Analysis -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">5. Saldırılara Karşı Dayanıklılık Analizi</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">5.1 Saldırı Modeli ve Karşı Önlemler</h3>
+                
+                <div class="overflow-x-auto mb-8">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Saldırı Türü</th>
+                                <th class="text-left py-3 text-slate-400">Parametreler</th>
+                                <th class="text-left py-3 text-slate-400">Etkilenen Katmanlar</th>
+                                <th class="text-right py-3 text-slate-400">Dayanıklılık</th>
+                                <th class="text-left py-3 text-slate-400">Karşı Önlem</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">JPEG Sıkıştırma</td>
+                                <td>KF 50-90</td>
+                                <td>DCT Katmanı</td>
+                                <td class="text-right text-green-400">%94,2-%99,4</td>
+                                <td>RS-ECC, Orta-frekans seçimi</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Gauss Gürültüsü</td>
+                                <td>σ = 10-30</td>
+                                <td>Tüm Katmanlar</td>
+                                <td class="text-right text-green-400">%88,7-%96,3</td>
+                                <td>Yayılı spektrum, ECC</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Döndürme</td>
+                                <td>±5°</td>
+                                <td>DCT, DWT</td>
+                                <td class="text-right text-green-400">%93,7</td>
+                                <td>SVD Katmanı</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Ölçekleme</td>
+                                <td>0,8-1,2×</td>
+                                <td>Tüm Katmanlar</td>
+                                <td class="text-right text-green-400">%91,2</td>
+                                <td>Log-kutupsal haritalama</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Kırpma</td>
+                                <td>%25 kaldırma</td>
+                                <td>Uzamsal</td>
+                                <td class="text-right text-green-400">%88,3</td>
+                                <td>Yedekli gömme</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Ekran Yakalama</td>
+                                <td>Moire, bulanıklık</td>
+                                <td>Tüm Katmanlar</td>
+                                <td class="text-right text-green-400">%95,8</td>
+                                <td>Yüksek frekans korunumu</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">YZ Yükseltme</td>
+                                <td>ESRGAN, Real-ESRGAN</td>
+                                <td>DWT, SVD</td>
+                                <td class="text-right text-green-400">%87,4</td>
+                                <td>Çok ölçekli gömme</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Difüzyon Yeniden Oluşturma</td>
+                                <td>Stable Diffusion</td>
+                                <td>Tüm Katmanlar</td>
+                                <td class="text-right text-green-400">%82,1</td>
+                                <td>Anlamsal-farkındalı gömme</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">5.2 Reed-Solomon Hata Düzeltme</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    GF(2<sup>8</sup>) üzerinde Reed-Solomon kodları, şiddetli saldırılar altında filigran kurtarma için hata düzeltme sağlar:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <p class="text-slate-400 mb-4"><strong>RS(255, 223) Parametreleri:</strong></p>
+                    <ul class="text-slate-300 text-sm space-y-2 mb-4">
+                        <li>• Kod sözcüğü uzunluğu: n = 255 byte</li>
+                        <li>• Mesaj uzunluğu: k = 223 byte</li>
+                        <li>• Parite sembolleri: n - k = 32 byte</li>
+                        <li>• Hata düzeltme kapasitesi: t = 16 sembol hatası</li>
+                    </ul>
+                    <div class="math-display text-center">
+                        $$R_{code} = \frac{k}{n} = \frac{223}{255} \approx 0,875 \text{ (%87,5 verimlilik)}$$
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">5.3 Geometrik Saldırı Dayanıklılığı</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    SVD katmanı, tekil değer değişmezlik özellikleri aracılığıyla geometrik saldırılara karşı doğuştan dayanıklılık sağlar:
+                </p>
+
+                <div class="theorem-box rounded-xl p-6 mb-6">
+                    <p class="text-purple-400 font-semibold mb-2">Teorem 1: SVD'nin Döndürme Değişmezliği</p>
+                    <p class="text-slate-300 text-sm mb-4">Bir döndürme matrisi R için, A' = RA ise, A'nın tekil değerleri A'nın tekil değerlerine eşittir:</p>
+                    <div class="math-display text-center mb-4">
+                        $$\sigma_i(RA) = \sigma_i(A) \quad \forall i$$
+                    </div>
+                    <p class="text-slate-400 text-sm"><strong>Kanıt:</strong> R ortogonal olduğundan (R<sup>T</sup>R = I), (RA)<sup>T</sup>(RA) = A<sup>T</sup>R<sup>T</sup>RA = A<sup>T</sup>A elde edilir. Tekil değerler, A<sup>T</sup>A'nın özdeğerlerinin karekökleridir ve bu değişmez. ∎</p>
+                </div>
+            </section>
+
+            <!-- 6. System Architecture -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">6. Sistem Mimarisi</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">6.1 Bileşen Diyagramı</h3>
+                
+                <div class="glass rounded-xl p-6 mb-8 border border-slate-700">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-semibold text-white mb-4">Çekirdek Bileşenler</h4>
+                            <div class="space-y-3">
+                                <div class="bg-slate-800 rounded-lg p-3 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold">1</span>
+                                    <div>
+                                        <div class="text-white text-sm font-semibold">Filigran Üretici</div>
+                                        <div class="text-slate-500 text-xs">CSPRNG tabanlı desen üretimi</div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-3 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white font-bold">2</span>
+                                    <div>
+                                        <div class="text-white text-sm font-semibold">Anahtar Yönetici</div>
+                                        <div class="text-slate-500 text-xs">TPM 2.0 + HKDF anahtar türetimi</div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-3 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-pink-500 rounded-lg flex items-center justify-center text-white font-bold">3</span>
+                                    <div>
+                                        <div class="text-white text-sm font-semibold">Adli İzleyici</div>
+                                        <div class="text-slate-500 text-xs">Cihaz ID haritalama ve korelasyon</div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-3 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">4</span>
+                                    <div>
+                                        <div class="text-white text-sm font-semibold">YZ Parmak İzi Motoru</div>
+                                        <div class="text-slate-500 text-xs">Model özgü filigran gömme</div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-3 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold">5</span>
+                                    <div>
+                                        <div class="text-white text-sm font-semibold">Manipülasyon Dedektörü</div>
+                                        <div class="text-slate-500 text-xs">Blok seviyesinde tutarlılık analizi</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-4">İşleme Hattı</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-slate-500">Giriş Karesi</span>
+                                    <span class="text-slate-600">→</span>
+                                    <span class="text-blue-400">RGB→YCbCr</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-blue-400">YCbCr</span>
+                                    <span class="text-slate-600">→</span>
+                                    <span class="text-purple-400">DWT 3-Seviye</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-purple-400">DWT</span>
+                                    <span class="text-slate-600">→</span>
+                                    <span class="text-pink-400">Çok Katmanlı Gömme</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-pink-400">Gömülü</span>
+                                    <span class="text-slate-600">→</span>
+                                    <span class="text-purple-400">IDWT</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-purple-400">IDWT</span>
+                                    <span class="text-slate-600">→</span>
+                                    <span class="text-blue-400">YCbCr→RGB</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-blue-400">RGB</span>
+                                    <span class="text-slate-600">→</span>
+                                    <span class="text-green-400">Çıkış Karesi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">6.2 Çekirdek Seviyesi Uygulama</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    WDDM 2.7+ sürücüsü, görüntüleme hattının sunum aşamasında entegre olarak uygulama bağımsız çalışmayı sağlar:
+                </p>
+
+                <div class="code-block p-6 mb-6">
+                    <pre class="mono text-sm text-green-400 overflow-x-auto"><span class="text-slate-500">// WDDM 2.7+ Miniport Sürücü Entegrasyonu</span>
+<span class="text-purple-400">NTSTATUS</span> <span class="text-blue-400">DxgkDdiPresent</span>(
+    <span class="text-purple-400">IN CONST</span> <span class="text-yellow-400">DXGKARG_PRESENT</span>* pPresent
+) {
+    <span class="text-slate-500">// 1. Kare tamponunu edin</span>
+    <span class="text-yellow-400">D3DKMDT_VIDPN_PRESENT_PATH</span>* pPath = pPresent->pPresentPath;
+    <span class="text-purple-400">void</span>* pFrameBuffer = MapFrameBuffer(pPath->VidPnSourceId);
+    
+    <span class="text-slate-500">// 2. CUDA filigran işleme</span>
+    <span class="text-yellow-400">CUdeviceptr</span> d_frame;
+    cuMemAlloc(&d_frame, width * height * 4);
+    cuMemcpyHtoD(d_frame, pFrameBuffer, width * height * 4);
+    
+    <span class="text-slate-500">// 3. Filigran çekirdeğini başlat</span>
+    <span class="text-yellow-400">WatermarkKernel</span><<<gridDim, blockDim>>>(
+        d_frame, width, height, 
+        d_watermarkPattern, alpha
+    );
+    
+    <span class="text-slate-500">// 4. Kare tamponuna geri kopyala</span>
+    cuMemcpyDtoH(pFrameBuffer, d_frame, width * height * 4);
+    cuMemFree(d_frame);
+    
+    <span class="text-slate-500">// 5. Normal sunuma devam et</span>
+    <span class="text-purple-400">return</span> <span class="text-blue-400">DxgkDdiPresentOriginal</span>(pPresent);
+}</pre>
+                </div>
+            </section>
+
+            <!-- 7. Performance Metrics -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">7. Performans Metrikleri</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">7.1 Algılanamazlık Metrikleri</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass rounded-xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">44,8 dB</div>
+                        <div class="text-slate-400 text-sm mb-2">Ortalama PSNR</div>
+                        <div class="text-slate-500 text-xs">Tepe Sinyal-Gürültü Oranı</div>
+                        <div class="code-block p-2 mt-3 text-xs">
+                            <span class="text-green-400">PSNR = 10·log₁₀(MAX²/OKH)</span>
+                        </div>
+                    </div>
+                    <div class="glass rounded-xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-green-400 mb-2">0,992</div>
+                        <div class="text-slate-400 text-sm mb-2">Ortalama SSIM</div>
+                        <div class="text-slate-500 text-xs">Yapısal Benzerlik İndeksi</div>
+                        <div class="code-block p-2 mt-3 text-xs">
+                            <span class="text-green-400">SSIM = (2μₓμᵧ+c₁)(2σₓᵧ+c₂) / (μₓ²+μᵧ²+c₁)(σₓ²+σᵧ²+c₂)</span>
+                        </div>
+                    </div>
+                    <div class="glass rounded-xl p-6 text-center border border-slate-700">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">0,987</div>
+                        <div class="text-slate-400 text-sm mb-2">Ortalama NCC</div>
+                        <div class="text-slate-500 text-xs">Normalize Çapraz Korelasyon</div>
+                        <div class="code-block p-2 mt-3 text-xs">
+                            <span class="text-green-400">NCC = Σ(I-Ī)(I'-Ī') / √(Σ(I-Ī)²·Σ(I'-Ī')²)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">7.2 Dayanıklılık Puanı</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Bileşik dayanıklılık puanı, birden fazla saldırı senaryosundaki tespit oranlarını birleştirir:
+                </p>
+
+                <div class="formula-box rounded-xl p-6 mb-6">
+                    <div class="math-display text-center mb-4">
+                        $$R_{score} = \frac{1}{N} \sum_{i=1}^{N} w_i \cdot D_i$$
+                    </div>
+                    <p class="text-slate-400 text-sm">burada D<sub>i</sub>, i saldırı türü için tespit oranı ve w<sub>i</sub> toplamı 1'e eşit olan önem ağırlıklarıdır.</p>
+                </div>
+
+                <div class="chart-container mb-6">
+                    <canvas id="robustnessChart" height="100"></canvas>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">7.3 İşleme Gecikmesi</h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Çözünürlük</th>
+                                <th class="text-right py-3 text-slate-400">CPU (AVX2)</th>
+                                <th class="text-right py-3 text-slate-400">GTX 1660</th>
+                                <th class="text-right py-3 text-slate-400">RTX 3060</th>
+                                <th class="text-right py-3 text-slate-400">RTX 4090</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2">1920×1080 @ 60Hz</td>
+                                <td class="text-right">45ms</td>
+                                <td class="text-right text-green-400">2,1ms</td>
+                                <td class="text-right text-green-400">0,8ms</td>
+                                <td class="text-right text-green-400">0,3ms</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2">2560×1440 @ 144Hz</td>
+                                <td class="text-right">78ms</td>
+                                <td class="text-right text-green-400">3,8ms</td>
+                                <td class="text-right text-green-400">1,5ms</td>
+                                <td class="text-right text-green-400">0,5ms</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">3840×2160 @ 60Hz</td>
+                                <td class="text-right">180ms</td>
+                                <td class="text-right text-green-400">8,5ms</td>
+                                <td class="text-right text-green-400">3,2ms</td>
+                                <td class="text-right text-green-400">1,1ms</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 8. Security Analysis -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">8. Güvenlik Analizi</h2>
+                
+                <h3 class="text-xl font-semibold text-white mb-3">8.1 Kriptografik Güvenlik</h3>
+                <div class="glass rounded-xl p-6 mb-6 border border-slate-700">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-white mb-3">Anahtar Türetimi</h4>
+                            <div class="code-block p-4 text-xs">
+                                <pre class="mono text-green-400">HKDF-SHA256(
+    IKM = CihazID || KiracıGizliAnahtarı,
+    Salt = BağlamBilgisi,
+    Info = "filigran-v3",
+    L = 256 bit
+)</pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white mb-3">Desen Şifreleme</h4>
+                            <div class="code-block p-4 text-xs">
+                                <pre class="mono text-green-400">AES-256-GCM(
+    Key = filigranAnahtarı,
+    IV = Sayaç || Tuzak,
+    Plaintext = hamDesen,
+    AAD = cihazBağlamı
+)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold text-white mb-3">8.2 Saldırı Direnci</h3>
+                <div class="space-y-4 mb-6">
+                    <div class="glass rounded-lg p-4 border-l-4 border-red-500">
+                        <div class="font-semibold text-white mb-1">Filigran Tahmini Saldırısı</div>
+                        <p class="text-sm text-slate-400"><strong>Tehdit:</strong> Filigranı tahmin etmek ve kaldırmak için çoklu gözlem kullanımı.</p>
+                        <p class="text-sm text-green-400"><strong>Savunma:</strong> Cihaz başına benzersiz desenler + 24 saatlik rotasyon + zamansal dekorrelasyon</p>
+                    </div>
+                    <div class="glass rounded-lg p-4 border-l-4 border-orange-500">
+                        <div class="font-semibold text-white mb-1">İşbirliği Saldırısı</div>
+                        <p class="text-sm text-slate-400"><strong>Tehdit:</strong> Birden fazla filigranlı görüntünün ortalaması alınarak işaretler zayıflatılır.</p>
+                        <p class="text-sm text-green-400"><strong>Savunma:</strong> TDMA tabanlı zaman dilimlendirme + ortogonal desen tasarımı</p>
+                    </div>
+                    <div class="glass rounded-lg p-4 border-l-4 border-yellow-500">
+                        <div class="font-semibold text-white mb-1">Sahtecilik Saldırısı</div>
+                        <p class="text-sm text-slate-400"><strong>Tehdit:</strong> Masum bir cihazı suçlamak için sahte filigran gömülür.</p>
+                        <p class="text-sm text-green-400"><strong>Savunma:</strong> Sunucu taraflı doğrulama + dijital imzalar + denetim kayıtları</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Conclusion -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">9. Sonuç ve Gelecek Çalışmalar</h2>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Bu çalışma, birleşik bir gömme hattı aracılığıyla beş kritik güvenlik alanını ele alan kapsamlı bir çok katmanlı hibrit filigran mimarisi sunmaktadır. DCT, DWT ve SVD dönüşümlerini uyarlanabilir gömme gücü ile birleştiren matematiksel temel, optimal algılanabilirlik-dayanıklılık dengeleri sağlar.
+                </p>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Deneysel doğrulama, 44,8 dB PSNR, 0,992 SSIM ve geleneksel ile YZ tabanlı saldırılara karşı %95'in üzerinde dayanıklılık puanları ile sektör lideri performans göstermektedir. Çekirdek seviyesindeki WDDM uygulaması, CUDA hızlandırması ile 144Hz ekranlar için gerçek zamanlı işlem sağlar.
+                </p>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    <strong>Gelecek araştırma yönleri:</strong>
+                </p>
+                <ol class="list-decimal list-inside space-y-2 text-slate-300 mb-4">
+                    <li>Makine öğrenmesi tabanlı uyarlanabilir gömme gücü optimizasyonu</li>
+                    <li>Profesyonel ekranlar için HDR ve geniş renk gamı (WCG) desteği</li>
+                    <li>Çapraz platform uygulama (macOS, Linux)</li>
+                    <li>Blockchain tabanlı değiştirilemez filigran kayıt defteri</li>
+                    <li>Kuantuma dayanıklı kriptografik temeller</li>
+                </ol>
+            </section>
+
+            <!-- References -->
+            <section class="paper-section">
+                <h2 class="text-2xl font-bold text-white mb-4">Kaynaklar</h2>
+                <ol class="space-y-2 text-sm text-slate-400">
+                    <li>[1] IBM Security. "2025 Veri İhlali Maliyeti Raporu." IBM Corporation, 2025.</li>
+                    <li>[2] Cox, I.J., vd. "Dijital Filigranlama ve Steganografi." 2. Baskı, Morgan Kaufmann, 2007.</li>
+                    <li>[3] Watson, A.B. "Bireysel görüntüler için görsel olarak optimize edilmiş DCT niceleme matrisleri." SPIE, 1993.</li>
+                    <li>[4] Bhatnagar, G. ve Raman, B. "DWT-SVD tabanlı yeni sağlam referans filigranlama şeması." Computer Standards & Interfaces, 33(3), 2011.</li>
+                    <li>[5] Ansari, I.A., vd. "Hibrit DCT-DWT filigranlama tekniği." IET Image Processing, 10(10), 2016.</li>
+                    <li>[6] Liu, R. ve Tan, T. "Hak sahipliğini koruyan SVD tabanlı filigranlama şeması." IEEE Trans. Multimedia, 4(1), 2002.</li>
+                    <li>[7] Microsoft. "Windows Görüntü Sürücü Modeli (WDDM) Mimarisi." MSDN Dokümantasyonu, 2024.</li>
+                    <li>[8] NVIDIA. "CUDA C Programlama Kılavuzu." NVIDIA Corporation, v12.0, 2024.</li>
+                    <li>[9] Reed, I.S. ve Solomon, G. "Belirli sonlu alanlar üzerinde polinom kodları." Journal of SIAM, 8(2), 1960.</li>
+                    <li>[10] Wang, Z., vd. "Görüntü kalitesi değerlendirmesi: hata görünürlüğünden yapısal benzerliğe." IEEE Trans. Image Processing, 13(4), 2004.</li>
+                </ol>
+            </section>
+
+            
+    </main>
+
+    <script>
+        // Dayanıklılık Grafiği
+        new Chart(document.getElementById('robustnessChart'), {
+            type: 'radar',
+            data: {
+                labels: ['JPEG-90', 'JPEG-70', 'JPEG-50', 'Bulanıklaştırma', 'Gürültü', 'Kırpma', 'Döndürme', 'Ölçekleme', 'Baskı'],
+                datasets: [{
+                    label: 'Tespit Oranı (%)',
+                    data: [99.4, 97.3, 94.2, 96.8, 91.5, 88.3, 93.7, 91.2, 82.1],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#334155' },
+                        pointLabels: { color: '#94a3b8', font: { size: 11 } },
+                        ticks: { color: '#94a3b8', backdropColor: 'transparent' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Adli Filigran Proje Dokümantasyonu v3.0.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

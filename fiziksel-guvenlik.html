@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Physical Security Modülü</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .sensor-card { border-left: 4px solid; }
+        .sensor-camera { border-color: #ef4444; }
+        .sensor-ir { border-color: #f97316; }
+        .sensor-proximity { border-color: #eab308; }
+        .sensor-audio { border-color: #22c55e; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">PS</span>
+                </div>
+                <span class="font-semibold">Physical Security</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-medium">PHYSICAL SECURITY</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Fiziksel Güvenlik Modülü</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Kamera algılama, ortam analizi, proximity detection ve shoulder surfing önleme. OS seviyesinde fiziksel tehdit koruması.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-red-400 mb-2">4</div>
+                        <div class="text-slate-400">Sensor Tipi</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">&lt;100ms</div>
+                        <div class="text-slate-400">Tepki Süresi</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">94%</div>
+                        <div class="text-slate-400">Tespit Doğruluğu</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">Edge</div>
+                        <div class="text-slate-400">AI Inference</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Model -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Fiziksel Tehdit Modeli</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-4xl mb-4">📱</div>
+                        <h3 class="font-semibold text-white mb-2">Telefon ile Çekim</h3>
+                        <p class="text-slate-400 text-sm mb-3">Çalışan ekranı telefon kamerasıyla fotoğraflar.</p>
+                        <div class="text-xs text-green-400">→ Lens reflection + CV detection</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-4xl mb-4">📷</div>
+                        <h3 class="font-semibold text-white mb-2">Gizli Kamera</h3>
+                        <p class="text-slate-400 text-sm mb-3">Ortama yerleştirilmiş gizli kamera ile kayıt.</p>
+                        <div class="text-xs text-green-400">→ IR reflection + RF detection</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-4xl mb-4">👁️</div>
+                        <h3 class="font-semibold text-white mb-2">Shoulder Surfing</h3>
+                        <p class="text-slate-400 text-sm mb-3">Omuz üzerinden ekran içeriğini izleme.</p>
+                        <div class="text-xs text-green-400">→ Proximity sensor + face detection</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-4xl mb-4">🎙️</div>
+                        <h3 class="font-semibold text-white mb-2">Audio Recording</h3>
+                        <p class="text-slate-400 text-sm mb-3">Gizli ses kayıt cihazı ile bilgi toplama.</p>
+                        <div class="text-xs text-green-400">→ Ultrasonic detection + RF scan</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sensor Architecture -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">Multi-Sensor Algılama Mimarisi</h2>
+                
+                <div class="space-y-4">
+                    <!-- Camera Detection -->
+                    <div class="sensor-card sensor-camera glass rounded-xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-red-400 text-2xl">📷</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Lens Reflection Detection</h3>
+                                <p class="text-slate-400 mb-4">Kamera lenslerinin karakteristik yansıma özelliklerini tespit eden computer vision sistemi.</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div class="code-block rounded-lg p-4">
+                                        <div class="text-xs text-slate-500 mb-2">// Lens Detection Algorithm</div>
+                                        <pre class="mono text-sm text-green-400">1. IR LED pulse (940nm)
+2. Capture reflection pattern
+3. CNN classification
+4. Lens signature matching
+5. Alert if camera detected</pre>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-300">Detection Range</span>
+                                                <span class="text-red-400">0.5 - 5 meters</span>
+                                            </div>
+                                        </div>
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-300">Accuracy</span>
+                                                <span class="text-red-400">94.2%</span>
+                                            </div>
+                                        </div>
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-300">False Positive</span>
+                                                <span class="text-red-400">&lt;2%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IR Detection -->
+                    <div class="sensor-card sensor-ir glass rounded-xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-orange-400 text-2xl">🔦</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">IR Reflection Analysis</h3>
+                                <p class="text-slate-400 mb-4">Kamera lenslerinin IR spektrumundaki benzersiz yansıma özelliklerini analiz eder.</p>
+                                
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-orange-400 font-semibold mb-2">IR LED Array</div>
+                                        <div class="text-sm text-slate-400">940nm + 850nm dual wavelength</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-orange-400 font-semibold mb-2">IR Camera</div>
+                                        <div class="text-sm text-slate-400">720p IR-sensitive sensor</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-orange-400 font-semibold mb-2">Processing</div>
+                                        <div class="text-sm text-slate-400">Real-time reflection analysis</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proximity Detection -->
+                    <div class="sensor-card sensor-proximity glass rounded-xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-yellow-400 text-2xl">📡</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Proximity & Presence Detection</h3>
+                                <p class="text-slate-400 mb-4">Ekran çevresindeki kişi varlığını ve mesafesini algılar.</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="code-block rounded-lg p-4">
+                                        <div class="text-xs text-slate-500 mb-2">// Proximity Sensors</div>
+                                        <pre class="mono text-sm text-green-400">- Time-of-Flight (ToF) sensor
+- mmWave radar (60GHz)
+- Ultrasonic sensor
+- PIR motion detector
+- Ambient light sensor</pre>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="text-yellow-400 font-semibold mb-1">Shoulder Surfing Zone</div>
+                                            <div class="text-sm text-slate-400">0.5 - 1.5m behind user</div>
+                                        </div>
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="text-yellow-400 font-semibold mb-1">Warning Zone</div>
+                                            <div class="text-sm text-slate-400">1.5 - 3m behind user</div>
+                                        </div>
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="text-yellow-400 font-semibold mb-1">Safe Zone</div>
+                                            <div class="text-sm text-slate-400">&gt;3m from screen</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audio Detection -->
+                    <div class="sensor-card sensor-audio glass rounded-xl p-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-green-400 text-2xl">🎙️</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Audio & RF Detection</h3>
+                                <p class="text-slate-400 mb-4">Gizli ses kayıt cihazlarını ve RF sinyallerini tespit eder.</p>
+                                
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-green-400 font-semibold mb-2">Ultrasonic Detection</div>
+                                        <div class="text-sm text-slate-400">20-50kHz frequency sweep</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-green-400 font-semibold mb-2">RF Scanner</div>
+                                        <div class="text-sm text-slate-400">100MHz - 6GHz range</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-green-400 font-semibold mb-2">Audio Fingerprint</div>
+                                        <div class="text-sm text-slate-400">Recording device signatures</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Response Actions -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Otomatik Yanıt Aksiyonları</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Tehdit Seviyeleri</h3>
+                        <div class="space-y-3">
+                            <div class="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-yellow-400">Level 1 - Warning</span>
+                                    <span class="text-xs text-slate-500">Proximity detected</span>
+                                </div>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Ekran kenarında uyarı göster</li>
+                                    <li>• Log kaydı oluştur</li>
+                                    <li>• Kullanıcıya bildirim gönder</li>
+                                </ul>
+                            </div>
+                            <div class="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-orange-400">Level 2 - Alert</span>
+                                    <span class="text-xs text-slate-500">Possible camera</span>
+                                </div>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Ekran içeriğini blur yap</li>
+                                    <li>• Watermark güçlendir</li>
+                                    <li>• Admin'e alert gönder</li>
+                                </ul>
+                            </div>
+                            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-red-400">Level 3 - Lockdown</span>
+                                    <span class="text-xs text-slate-500">Camera confirmed</span>
+                                </div>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Ekranı karart</li>
+                                    <li>• Session'ı kilitle</li>
+                                    <li>• Security team alert</li>
+                                    <li>• Fotoğraf kaydet</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Response Flow</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">func OnThreatDetected(level, source) {
+    switch level {
+    case WARNING:
+        ShowBorderAlert()
+        LogEvent(source)
+        NotifyUser()
+        
+    case ALERT:
+        BlurScreenContent()
+        EnhanceWatermark()
+        NotifyAdmin()
+        StartRecording()
+        
+    case LOCKDOWN:
+        DimScreen(0%)
+        LockSession()
+        TriggerAlarm()
+        CaptureEvidence()
+        NotifySecurity()
+    }
+}</pre>
+                        </div>
+                        <div class="mt-4 bg-slate-800 rounded-lg p-4">
+                            <div class="text-sm text-slate-400">
+                                <span class="text-white font-semibold">Not:</span> Tüm aksiyonlar configurable. Her organizasyon kendi policy'sini tanımlayabilir.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ML Model Architecture -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Edge AI Inference Mimarisi</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Model Specifications</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Architecture</span>
+                                    <span class="text-blue-400">YOLOv8n + Custom CNN</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Model Size</span>
+                                    <span class="text-blue-400">15 MB (quantized INT8)</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Inference Time</span>
+                                    <span class="text-blue-400">&lt;30ms (CPU)</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">CPU Usage</span>
+                                    <span class="text-blue-400">&lt;5% (background)</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">Memory</span>
+                                    <span class="text-blue-400">~100 MB RAM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Local Processing Pipeline</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Edge AI Pipeline (No Cloud)
+1. Frame Capture (30fps)
+   ↓
+2. Preprocessing (resize, normalize)
+   ↓
+3. Object Detection (YOLOv8n)
+   ↓
+4. Lens Classification (CNN)
+   ↓
+5. Temporal Filtering (5-frame)
+   ↓
+6. Threat Assessment
+   ↓
+7. Response Trigger
+
+Total Latency: ~80ms</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hardware Requirements -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Donanım Gereksinimleri</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Bileşen</th>
+                                <th class="text-left py-3 text-slate-400">Minimum</th>
+                                <th class="text-left py-3 text-slate-400">Önerilen</th>
+                                <th class="text-left py-3 text-slate-400">Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Webcam</td>
+                                <td class="py-3">720p</td>
+                                <td class="py-3 text-green-400">1080p + IR</td>
+                                <td class="py-3">4K + ToF</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">CPU</td>
+                                <td class="py-3">Intel i5 8th</td>
+                                <td class="py-3 text-green-400">Intel i7 10th+</td>
+                                <td class="py-3">Intel i7 + NPU</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">RAM</td>
+                                <td class="py-3">8 GB</td>
+                                <td class="py-3 text-green-400">16 GB</td>
+                                <td class="py-3">32 GB</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">IR Sensor</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3 text-green-400">Optional</td>
+                                <td class="py-3">Built-in</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">ToF Sensor</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3 text-green-400">-</td>
+                                <td class="py-3">Built-in</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Privacy Considerations -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Gizlilik ve Compliance</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="font-semibold text-white mb-4">Privacy-by-Design</h3>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Tüm işleme local (cloud'a veri gitmez)</li>
+                            <li>• Kamera görüntüsü kaydedilmez</li>
+                            <li>• Sadece metadata ve alert'ler loglanır</li>
+                            <li>• Kullanıcı consent gereklidir</li>
+                            <li>• GDPR/KVKK uyumlu</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="font-semibold text-white mb-4">Data Handling</h3>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Frame'ler bellekte işlenir, disk'e yazılmaz</li>
+                            <li>• Sadece tehdit anında görüntü kaydedilir</li>
+                            <li>• Log retention: 90 gün (configurable)</li>
+                            <li>• Audit trail tam şeffaf</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Threat Modeling STRIDE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .stride-s { border-left: 4px solid #ef4444; }
+        .stride-t { border-left: 4px solid #f97316; }
+        .stride-r { border-left: 4px solid #eab308; }
+        .stride-i { border-left: 4px solid #22c55e; }
+        .stride-d { border-left: 4px solid #3b82f6; }
+        .stride-e { border-left: 4px solid #8b5cf6; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-rose-500 to-red-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">TM</span>
+                </div>
+                <span class="font-semibold">Threat Modeling</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-rose-500/20 text-rose-400 rounded-full text-sm font-medium">STRIDE</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">STRIDE Threat Modeling</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Microsoft STRIDE metodolojisi ile kapsamlı tehdit modellemesi. Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege analizi.</p>
+            </header>
+
+            <!-- STRIDE Overview -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">STRIDE Kategorileri</h2>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="stride-s bg-slate-800 rounded-xl p-5">
+                        <div class="text-2xl mb-2">👤</div>
+                        <h3 class="font-bold text-red-400 mb-1">Spoofing</h3>
+                        <p class="text-slate-400 text-sm">Kimlik taklidi, sahte cihaz/kullanıcı</p>
+                    </div>
+                    <div class="stride-t bg-slate-800 rounded-xl p-5">
+                        <div class="text-2xl mb-2">✏️</div>
+                        <h3 class="font-bold text-orange-400 mb-1">Tampering</h3>
+                        <p class="text-slate-400 text-sm">Veri/değişiklik, watermark manipülasyonu</p>
+                    </div>
+                    <div class="stride-r bg-slate-800 rounded-xl p-5">
+                        <div class="text-2xl mb-2">🚫</div>
+                        <h3 class="font-bold text-yellow-400 mb-1">Repudiation</h3>
+                        <p class="text-slate-400 text-sm">İnkar edilebilirlik, log eksikliği</p>
+                    </div>
+                    <div class="stride-i bg-slate-800 rounded-xl p-5">
+                        <div class="text-2xl mb-2">👁️</div>
+                        <h3 class="font-bold text-green-400 mb-1">Information Disclosure</h3>
+                        <p class="text-slate-400 text-sm">Yetkisiz erişim, veri sızıntısı</p>
+                    </div>
+                    <div class="stride-d bg-slate-800 rounded-xl p-5">
+                        <div class="text-2xl mb-2">⛔</div>
+                        <h3 class="font-bold text-blue-400 mb-1">Denial of Service</h3>
+                        <p class="text-slate-400 text-sm">Hizmet kesintisi, performans düşüklüğü</p>
+                    </div>
+                    <div class="stride-e bg-slate-800 rounded-xl p-5">
+                        <div class="text-2xl mb-2">⬆️</div>
+                        <h3 class="font-bold text-purple-400 mb-1">Elevation of Privilege</h3>
+                        <p class="text-slate-400 text-sm">Yetki yükseltme, kernel exploit</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Analysis -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">Detaylı Tehdit Analizi</h2>
+                
+                <div class="space-y-4">
+                    <!-- Spoofing -->
+                    <div class="stride-s glass rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-red-400 mb-4">S - Spoofing (Kimlik Taklidi)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Tehditler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Sahte device ID üretme</li>
+                                    <li>• TPM spoofing</li>
+                                    <li>• Certificate forgery</li>
+                                    <li>• MAC address spoofing</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>✓ Hardware-bound identity</li>
+                                    <li>✓ TPM attestation</li>
+                                    <li>✓ Certificate pinning</li>
+                                    <li>✓ Multi-factor device auth</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tampering -->
+                    <div class="stride-t glass rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-orange-400 mb-4">T - Tampering (Veri Değiştirme)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Tehditler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Watermark kaldırma</li>
+                                    <li>• Driver binary patching</li>
+                                    <li>• Config file modification</li>
+                                    <li>• Registry tampering</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>✓ Code signing</li>
+                                    <li>✓ Runtime integrity checks</li>
+                                    <li>✓ Tamper-evident logs</li>
+                                    <li>✓ Watchdog monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repudiation -->
+                    <div class="stride-r glass rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-4">R - Repudiation (İnkar)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Tehditler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Log silme</li>
+                                    <li>• Activity denial</li>
+                                    <li>• Timestamp manipulation</li>
+                                    <li>• Audit trail gaps</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>✓ Immutable logs</li>
+                                    <li>✓ Centralized logging</li>
+                                    <li>✓ Digital signatures</li>
+                                    <li>✓ Blockchain anchoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Information Disclosure -->
+                    <div class="stride-i glass rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-green-400 mb-4">I - Information Disclosure (Bilgi Sızıntısı)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Tehditler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Watermark pattern exposure</li>
+                                    <li>• Key leakage</li>
+                                    <li>• Memory dump</li>
+                                    <li>• Side-channel attacks</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>✓ Key encryption (TPM/HSM)</li>
+                                    <li>✓ Memory protection</li>
+                                    <li>✓ Constant-time algorithms</li>
+                                    <li>✓ Pattern rotation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Denial of Service -->
+                    <div class="stride-d glass rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-blue-400 mb-4">D - Denial of Service (Hizmet Kesintisi)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Tehditler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Driver crash</li>
+                                    <li>• Resource exhaustion</li>
+                                    <li>• Detection flooding</li>
+                                    <li>• Backend overload</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>✓ Graceful degradation</li>
+                                    <li>✓ Rate limiting</li>
+                                    <li>✓ Auto-recovery</li>
+                                    <li>✓ Load balancing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Elevation of Privilege -->
+                    <div class="stride-e glass rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-purple-400 mb-4">E - Elevation of Privilege (Yetki Yükseltme)</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Tehditler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>• Kernel exploit</li>
+                                    <li>• Driver vulnerability</li>
+                                    <li>• Privilege escalation</li>
+                                    <li>• Token manipulation</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-2">Önlemler</h4>
+                                <ul class="text-sm text-slate-400 space-y-1">
+                                    <li>✓ Least privilege</li>
+                                    <li>✓ Driver signing</li>
+                                    <li>✓ PatchGuard compatible</li>
+                                    <li>✓ Regular security audits</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Risk Matrix -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Risk Matrisi</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Threat</th>
+                                <th class="text-left py-3 text-slate-400">Likelihood</th>
+                                <th class="text-left py-3 text-slate-400">Impact</th>
+                                <th class="text-left py-3 text-slate-400">Risk</th>
+                                <th class="text-left py-3 text-slate-400">Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Driver Tampering</td>
+                                <td class="py-3 text-yellow-400">Medium</td>
+                                <td class="py-3 text-red-400">Critical</td>
+                                <td class="py-3 text-red-400">High</td>
+                                <td class="py-3"><span class="px-2 py-1 bg-red-500 text-white text-xs rounded">P1</span></td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Watermark Removal</td>
+                                <td class="py-3 text-yellow-400">Medium</td>
+                                <td class="py-3 text-orange-400">High</td>
+                                <td class="py-3 text-orange-400">High</td>
+                                <td class="py-3"><span class="px-2 py-1 bg-orange-500 text-white text-xs rounded">P2</span></td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Key Extraction</td>
+                                <td class="py-3 text-green-400">Low</td>
+                                <td class="py-3 text-red-400">Critical</td>
+                                <td class="py-3 text-orange-400">Medium</td>
+                                <td class="py-3"><span class="px-2 py-1 bg-orange-500 text-white text-xs rounded">P2</span></td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">DoS Attack</td>
+                                <td class="py-3 text-green-400">Low</td>
+                                <td class="py-3 text-yellow-400">Medium</td>
+                                <td class="py-3 text-yellow-400">Low</td>
+                                <td class="py-3"><span class="px-2 py-1 bg-yellow-500 text-white text-xs rounded">P3</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Log Tampering</td>
+                                <td class="py-3 text-green-400">Low</td>
+                                <td class="py-3 text-orange-400">High</td>
+                                <td class="py-3 text-yellow-400">Medium</td>
+                                <td class="py-3"><span class="px-2 py-1 bg-yellow-500 text-white text-xs rounded">P3</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

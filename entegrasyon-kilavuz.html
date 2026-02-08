@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Entegrasyon Kılavuzu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .integration-card { transition: all 0.3s ease; }
+        .integration-card:hover { transform: translateY(-4px); }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">🔗</span>
+                </div>
+                <span class="font-semibold">Entegrasyon Kılavuzu</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm font-medium">ENTEGRASYON</span>
+                    <span class="text-slate-500">v2.1.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Entegrasyon Kılavuzu</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">SIEM, IAM, MDM ve diğer kurumsal sistemlerle entegrasyon talimatları.</p>
+            </header>
+
+            <!-- SIEM Integrations -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">SIEM Entegrasyonları</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">📊</span>
+                            <h3 class="text-lg font-semibold text-white">Splunk</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// HTTP Event Collector (HEC)</div>
+                            <pre class="mono text-sm text-green-400">curl -k https://splunk:8088/services/collector/event \
+  -H "Authorization: Splunk &lt;token&gt;" \
+  -d '{"sourcetype": "forensicwatermark", 
+       "event": {"device_id": "dev_123", 
+                 "action": "watermark_detected"}}'</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• HTTP Event Collector kullanır</li>
+                            <li>• JSON formatında log gönderimi</li>
+                            <li>• Splunk CIM uyumlu</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">🔍</span>
+                            <h3 class="text-lg font-semibold text-white">IBM QRadar</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// DSM Configuration</div>
+                            <pre class="mono text-sm text-green-400">Log Source Type: Forensic Watermark
+Protocol: Syslog
+IP: &lt;fw_server_ip&gt;
+Port: 514
+Format: LEEF (Log Event Extended Format)</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Syslog üzerinden log gönderimi</li>
+                            <li>• LEEF formatı desteği</li>
+                            <li>• Built-in DSM kullanılabilir</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">☁️</span>
+                            <h3 class="text-lg font-semibold text-white">Microsoft Sentinel</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// Log Analytics Workspace</div>
+                            <pre class="mono text-sm text-green-400">POST https://&lt;workspace&gt;.ods.opinsights.azure.com/api/logs?api-version=2016-04-01
+Content-Type: application/json
+Authorization: SharedKey &lt;workspace&gt;:&lt;signature&gt;
+
+{
+  "DeviceId": "dev_123",
+  "EventType": "WatermarkDetected",
+  "TimeGenerated": "2026-02-07T10:30:00Z"
+}</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Log Analytics API kullanır</li>
+                            <li>• Custom table oluşturma</li>
+                            <li>• KQL sorguları ile analiz</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">🔎</span>
+                            <h3 class="text-lg font-semibold text-white">Elastic Security</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// Filebeat Configuration</div>
+                            <pre class="mono text-sm text-green-400">filebeat.inputs:
+- type: http
+  enabled: true
+  listen_address: 0.0.0.0
+  listen_port: 8080
+
+output.elasticsearch:
+  hosts: ["https://elastic:9200"]
+  index: "forensicwatermark-%{+yyyy.MM.dd}"</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Filebeat HTTP input kullanır</li>
+                            <li>• ECS (Elastic Common Schema) uyumlu</li>
+                            <li>• Detection rules entegrasyonu</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IAM Integrations -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Identity & Access Management</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">🪟</span>
+                            <h3 class="text-lg font-semibold text-white">Active Directory / LDAP</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// LDAP Configuration</div>
+                            <pre class="mono text-sm text-green-400">ldap:
+  url: "ldaps://ad.company.com:636"
+  base_dn: "DC=company,DC=com"
+  bind_dn: "CN=fw-service,OU=ServiceAccounts,DC=company,DC=com"
+  bind_password: "${LDAP_PASSWORD}"
+  user_search_filter: "(sAMAccountName=%s)"
+  group_search_base: "OU=Groups,DC=company,DC=com"</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• LDAPS (SSL) bağlantısı</li>
+                            <li>• Grup bazlı yetkilendirme</li>
+                            <li>• Otomatik kullanıcı senkronizasyonu</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">☁️</span>
+                            <h3 class="text-lg font-semibold text-white">Azure AD / Entra ID</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// OIDC Configuration</div>
+                            <pre class="mono text-sm text-green-400">oidc:
+  issuer: "https://login.microsoftonline.com/&lt;tenant&gt;/v2.0"
+  client_id: "&lt;application_client_id&gt;"
+  client_secret: "${AZURE_CLIENT_SECRET}"
+  redirect_url: "https://fw.company.com/auth/callback"
+  scopes: ["openid", "profile", "email"]</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• OIDC / OAuth2 desteği</li>
+                            <li>• SSO (Single Sign-On)</li>
+                            <li>• MFA entegrasyonu</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">🔐</span>
+                            <h3 class="text-lg font-semibold text-white">Okta</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// SAML Configuration</div>
+                            <pre class="mono text-sm text-green-400">saml:
+  idp_metadata_url: "https://company.okta.com/app/xxx/sso/saml/metadata"
+  sp_entity_id: "forensicwatermark"
+  sp_acs_url: "https://fw.company.com/saml/acs"
+  name_id_format: "emailAddress"
+  attribute_mapping:
+    email: "user.email"
+    groups: "user.groups"</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• SAML 2.0 desteği</li>
+                            <li>• Just-In-Time provisioning</li>
+                            <li>• Group push</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">📧</span>
+                            <h3 class="text-lg font-semibold text-white">Google Workspace</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// OAuth2 Configuration</div>
+                            <pre class="mono text-sm text-green-400">google:
+  client_id: "&lt;google_client_id&gt;.apps.googleusercontent.com"
+  client_secret: "${GOOGLE_CLIENT_SECRET}"
+  redirect_url: "https://fw.company.com/auth/google/callback"
+  hosted_domain: "company.com"
+  scopes: ["openid", "email", "profile"]</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• OAuth2 desteği</li>
+                            <li>• Domain kısıtlaması</li>
+                            <li>• Google Groups senkronizasyonu</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MDM Integrations -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">MDM/EMM Entegrasyonları</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">🪟</span>
+                            <h3 class="text-lg font-semibold text-white">Microsoft Intune</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// Win32 App Deployment</div>
+                            <pre class="mono text-sm text-green-400">&lt;Installation&gt;
+  &lt;InstallCommand&gt;msiexec /i ForensicWatermark.msi /qn&lt;/InstallCommand&gt;
+  &lt;UninstallCommand&gt;msiexec /x {GUID} /qn&lt;/UninstallCommand&gt;
+  &lt;InstallBehavior&gt;system&lt;/InstallBehavior&gt;
+&lt;/Installation&gt;</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Win32 app deployment</li>
+                            <li>• Configuration profiles</li>
+                            <li>• Compliance policies</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">☁️</span>
+                            <h3 class="text-lg font-semibold text-white">VMware Workspace ONE</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// AirWatch API</div>
+                            <pre class="mono text-sm text-green-400">POST /api/mdm/devices/commands
+Authorization: aw-tenant-code: &lt;api_key&gt;
+
+{
+  "DeviceId": 12345,
+  "Command": "InstallApplication",
+  "ApplicationId": "com.forensicwatermark.agent"
+}</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• AirWatch REST API</li>
+                            <li>• Product provisioning</li>
+                            <li>• Sensors & reports</li>
+                        </ul>
+                    </div>
+
+                    <div class="integration-card bg-slate-800 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-2xl">🍎</span>
+                            <h3 class="text-lg font-semibold text-white">Jamf Pro</h3>
+                        </div>
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <div class="text-xs text-slate-500 mb-2">// Policy Configuration</div>
+                            <pre class="mono text-sm text-green-400">&lt;policy&gt;
+  &lt;general&gt;
+    &lt;name&gt;Forensic Watermark&lt;/name&gt;
+    &lt;enabled&gt;true&lt;/enabled&gt;
+  &lt;/general&gt;
+  &lt;package_configuration&gt;
+    &lt;packages&gt;
+      &lt;package&gt;ForensicWatermark.pkg&lt;/package&gt;
+    &lt;/packages&gt;
+  &lt;/package_configuration&gt;
+&lt;/policy&gt;</pre>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Policy-based deployment</li>
+                            <li>• Smart groups</li>
+                            <li>• Extension attributes</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Webhooks -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Webhook'lar</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Webhook Yapılandırması</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">POST /v1/webhooks
+{
+  "url": "https://company.com/webhook/fw",
+  "events": [
+    "watermark.detected",
+    "device.registered",
+    "device.unregistered"
+  ],
+  "secret": "whsec_xxx",
+  "active": true
+}</pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Webhook Payload</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">{
+  "event": "watermark.detected",
+  "timestamp": "2026-02-07T10:30:00Z",
+  "data": {
+    "device_id": "dev_123456",
+    "confidence": 0.94,
+    "image_hash": "sha256:abc..."
+  },
+  "signature": "sha256=xxx"
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark Entegrasyon Kılavuzu v2.1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Anti Screen Recording</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">AS</span>
+                </div>
+                <span class="font-semibold">Anti Screen Recording</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium">ANTI-RECORDING</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Anti Screen Recording Sistemi</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">OBS, Bandicam, Snipping Tool ve diğer ekran kayıt yazılımlarını kernel seviyesinde tespit ve engelleme. HDMI capture cihazlarına karşı koruma.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-cyan-400 mb-2">50+</div>
+                        <div class="text-slate-400">Blocked Apps</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">Kernel</div>
+                        <div class="text-slate-400">Level Protection</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">&lt;10ms</div>
+                        <div class="text-slate-400">Detection Time</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">HDMI</div>
+                        <div class="text-slate-400">Capture Block</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Vectors -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Engellenen Kayıt Yöntemleri</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">🎥</div>
+                        <h3 class="font-semibold text-white mb-2">Software Recorders</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• OBS Studio</li>
+                            <li>• Bandicam</li>
+                            <li>• Camtasia</li>
+                            <li>• Snagit</li>
+                            <li>• ScreenFlow</li>
+                            <li>• XSplit</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">🔌</div>
+                        <h3 class="font-semibold text-white mb-2">Hardware Capture</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• HDMI capture cards</li>
+                            <li>• DisplayPort grabbers</li>
+                            <li>• USB video adapters</li>
+                            <li>• External recorders</li>
+                            <li>• KVM switches</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">📸</div>
+                        <h3 class="font-semibold text-white mb-2">Built-in Tools</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Snipping Tool</li>
+                            <li>• Print Screen</li>
+                            <li>• Xbox Game Bar</li>
+                            <li>• QuickTime Player</li>
+                            <li>• Browser extensions</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kernel Architecture -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">Kernel-Level Engelleme Mimarisi</h2>
+                
+                <div class="space-y-4">
+                    <!-- WDDM Hook -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-red-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-red-400 font-bold">K1</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">WDDM Present Hook</h3>
+                                <p class="text-slate-400 mb-4">DxgkDdiPresent fonksiyonunu hooklayarak her frame'de watermark uygulama ve kayıt tespiti.</p>
+                                
+                                <div class="code-block rounded-lg p-4">
+                                    <pre class="mono text-sm text-green-400">// WDDM Hook - Frame Processing
+NTSTATUS Hooked_Present(DXGKARG_PRESENT* pPresent) {
+    // Check for recording software
+    if (DetectRecordingProcess()) {
+        LogSecurityEvent(EVENT_SCREEN_RECORDING_DETECTED);
+        NotifyAdmin();
+    }
+    
+    // Apply watermark before display
+    ApplyWatermark(pPresent->pDestination);
+    
+    // Call original
+    return Original_Present(pPresent);
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Process Monitoring -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-orange-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-orange-400 font-bold">K2</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Process & Window Monitoring</h3>
+                                <p class="text-slate-400 mb-4">Kayıt yazılımlarının process oluşturma ve pencere açma aktivitelerini real-time izleme.</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="code-block rounded-lg p-4">
+                                        <pre class="mono text-sm text-green-400">// Process Creation Callback
+void OnProcessCreate(HANDLE pid) {
+    char name[MAX_PATH];
+    GetProcessName(pid, name);
+    
+    if (IsRecordingSoftware(name)) {
+        BlockProcess(pid);
+        AlertSecurityTeam();
+    }
+}</pre>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="text-orange-400 font-semibold text-sm">Detection Methods</div>
+                                            <ul class="text-xs text-slate-400 mt-1 space-y-1">
+                                                <li>• Process name matching</li>
+                                                <li>• Window class detection</li>
+                                                <li>• File handle monitoring</li>
+                                                <li>• API hook detection</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API Hooking Detection -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-yellow-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-yellow-400 font-bold">K3</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Graphics API Monitoring</h3>
+                                <p class="text-slate-400 mb-4">DirectX, OpenGL, Vulkan API çağrılarını izleyerek ekran okuma girişimlerini tespit etme.</p>
+                                
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-yellow-400 font-semibold mb-2">DirectX</div>
+                                        <div class="text-xs text-slate-400">IDXGIOutput::TakeScreenshot<br>ID3D11DeviceContext::CopyResource</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-yellow-400 font-semibold mb-2">OpenGL</div>
+                                        <div class="text-xs text-slate-400">glReadPixels<br>glCopyTexImage2D</div>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4">
+                                        <div class="text-yellow-400 font-semibold mb-2">Vulkan</div>
+                                        <div class="text-xs text-slate-400">vkCmdCopyImage<br>vkMapMemory</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware Detection -->
+                    <div class="glass rounded-xl p-6 border-l-4 border-green-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-green-400 font-bold">K4</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-white mb-2">Hardware Capture Detection</h3>
+                                <p class="text-slate-400 mb-4">HDMI/DisplayPort capture cihazlarını EDID analizi ve görüntü sinyali monitörü ile tespit etme.</p>
+                                
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="code-block rounded-lg p-4">
+                                        <pre class="mono text-sm text-green-400">// EDID Analysis
+bool DetectCaptureDevice() {
+    EDID edid = ReadDisplayEDID();
+    
+    // Check for capture vendor IDs
+    if (IsKnownCaptureVendor(edid.vendor)) {
+        return true;
+    }
+    
+    // Check for suspicious capabilities
+    if (edid.no_hdcp || edid.no_hdmi) {
+        return true;
+    }
+    
+    return false;
+}</pre>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="bg-slate-800 rounded-lg p-3">
+                                            <div class="text-green-400 font-semibold text-sm">Detection Signals</div>
+                                            <ul class="text-xs text-slate-400 mt-1 space-y-1">
+                                                <li>• Unknown vendor ID</li>
+                                                <li>• HDCP bypass flags</li>
+                                                <li>• Duplicate display detection</li>
+                                                <li>• Signal quality anomalies</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bypass Protection -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Bypass Koruması</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Bilinen Bypass Yöntemleri</h3>
+                        <div class="space-y-3">
+                            <div class="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+                                <div class="font-semibold text-red-400 mb-1">VM Escape</div>
+                                <p class="text-sm text-slate-400">Sanal makine dışından host'a erişim</p>
+                                <div class="text-xs text-green-400 mt-2">→ VM detection + host agent</div>
+                            </div>
+                            <div class="bg-orange-500/10 rounded-lg p-4 border border-orange-500/30">
+                                <div class="font-semibold text-orange-400 mb-1">Driver Unloading</div>
+                                <p class="text-sm text-slate-400">Kernel driver'ı devre dışı bırakma</p>
+                                <div class="text-xs text-green-400 mt-2">→ Tamper detection + watchdog</div>
+                            </div>
+                            <div class="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30">
+                                <div class="font-semibold text-yellow-400 mb-1">Hook Evasion</div>
+                                <p class="text-sm text-slate-400">Doğrudan kernel API çağrıları</p>
+                                <div class="text-xs text-green-400 mt-2">→ Kernel callback + integrity check</div>
+                            </div>
+                            <div class="bg-purple-500/10 rounded-lg p-4 border border-purple-500/30">
+                                <div class="font-semibold text-purple-400 mb-1">Hardware Emulation</div>
+                                <p class="text-sm text-slate-400">Sahte EDID ve device spoofing</p>
+                                <div class="text-xs text-green-400 mt-2">→ Multi-factor verification</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Anti-Tamper Önlemleri</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-green-400">✓</span>
+                                    <span class="text-white font-semibold">Watchdog Timer</span>
+                                </div>
+                                <p class="text-sm text-slate-400">Driver heartbeat monitoring, 5s interval</p>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-green-400">✓</span>
+                                    <span class="text-white font-semibold">Code Integrity</span>
+                                </div>
+                                <p class="text-sm text-slate-400">Runtime hash verification of driver code</p>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-green-400">✓</span>
+                                    <span class="text-white font-semibold">PatchGuard Compatible</span>
+                                </div>
+                                <p class="text-sm text-slate-400">Windows PatchGuard bypass detection</p>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="text-green-400">✓</span>
+                                    <span class="text-white font-semibold">Secure Boot Required</span>
+                                </div>
+                                <p class="text-sm text-slate-400">UEFI Secure Boot enforcement</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Response Actions -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Otomatik Yanıt Aksiyonları</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Detection Type</th>
+                                <th class="text-left py-3 text-slate-400">Immediate Action</th>
+                                <th class="text-left py-3 text-slate-400">Screen Action</th>
+                                <th class="text-left py-3 text-slate-400">Notification</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Software Recorder</td>
+                                <td class="py-3">Kill process + block</td>
+                                <td class="py-3">Warning banner</td>
+                                <td class="py-3">User + Admin</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Hardware Capture</td>
+                                <td class="py-3">Disable output</td>
+                                <td class="py-3">Screen lock</td>
+                                <td class="py-3">Admin + Security</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Print Screen</td>
+                                <td class="py-3">Intercept + log</td>
+                                <td class="py-3">Watermark enhance</td>
+                                <td class="py-3">Log only</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Snipping Tool</td>
+                                <td class="py-3">Block + redirect</td>
+                                <td class="py-3">Custom message</td>
+                                <td class="py-3">User + Admin</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

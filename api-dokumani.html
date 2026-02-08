@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - API Dokümantasyonu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .endpoint { border-left: 4px solid #3b82f6; }
+        .endpoint-post { border-color: #22c55e; }
+        .endpoint-get { border-color: #3b82f6; }
+        .endpoint-delete { border-color: #ef4444; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">API</span>
+                </div>
+                <span class="font-semibold">API Dokümantasyonu</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">API v1.0</span>
+                    <span class="text-slate-500">REST + gRPC</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">API Dokümantasyonu</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Forensic Watermark REST API ve gRPC servisleri için tam referans.</p>
+            </header>
+
+            <!-- Base URL -->
+            <section class="glass rounded-2xl p-6 mb-8 border border-slate-700">
+                <h2 class="text-lg font-semibold text-white mb-4">Base URL</h2>
+                <div class="code-block rounded-lg p-4">
+                    <code class="mono text-green-400">https://api.forensicwatermark.com/v1</code>
+                </div>
+            </section>
+
+            <!-- Authentication -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Kimlik Doğrulama</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-3">API Key</h3>
+                        <p class="text-slate-400 mb-4">Tüm API istekleri API Key ile kimlik doğrulaması gerektirir. Key'i header'da gönderin:</p>
+                        <div class="code-block rounded-lg p-4">
+                            <code class="mono text-green-400">Authorization: Bearer &lt;your_api_key&gt;</code>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-3">OAuth2 (Enterprise)</h3>
+                        <p class="text-slate-400 mb-4">Enterprise plan için OAuth2 desteği:</p>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">POST /oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id=&lt;client_id&gt;
+&client_secret=&lt;client_secret&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rate Limiting -->
+            <section class="glass rounded-2xl p-8 mb-8 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Rate Limiting</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-lg font-semibold text-white mb-2">Starter</div>
+                        <div class="text-3xl font-bold text-blue-400 mb-2">100</div>
+                        <div class="text-sm text-slate-400">req/dakika</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-lg font-semibold text-white mb-2">Professional</div>
+                        <div class="text-3xl font-bold text-purple-400 mb-2">1,000</div>
+                        <div class="text-sm text-slate-400">req/dakika</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-lg font-semibold text-white mb-2">Enterprise</div>
+                        <div class="text-3xl font-bold text-green-400 mb-2">10,000</div>
+                        <div class="text-sm text-slate-400">req/dakika</div>
+                    </div>
+                </div>
+                <div class="mt-6 code-block rounded-lg p-4">
+                    <pre class="mono text-sm text-green-400">HTTP 429 Too Many Requests
+{
+  "error": "rate_limit_exceeded",
+  "message": "Rate limit exceeded. Retry after 60 seconds.",
+  "retry_after": 60
+}</pre>
+                </div>
+            </section>
+
+            <!-- Endpoints -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">Endpoint'ler</h2>
+
+                <!-- Devices -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-white mb-4">Devices</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="endpoint endpoint-get glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                                <code class="mono text-white">/devices</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Tüm cihazları listele</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Response</div>
+                                <pre class="mono text-sm text-green-400">{
+  "devices": [
+    {
+      "id": "dev_1234567890",
+      "name": "DESKTOP-ABC123",
+      "user": "user@company.com",
+      "status": "active",
+      "last_seen": "2026-02-07T10:30:00Z",
+      "os": "Windows 11",
+      "gpu": "NVIDIA RTX 3060"
+    }
+  ],
+  "total": 150,
+  "page": 1,
+  "per_page": 20
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="endpoint endpoint-get glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                                <code class="mono text-white">/devices/{id}</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Cihaz detaylarını getir</p>
+                        </div>
+
+                        <div class="endpoint endpoint-post glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-green-500 text-white text-sm rounded">POST</span>
+                                <code class="mono text-white">/devices</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Yeni cihaz kaydet</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Request</div>
+                                <pre class="mono text-sm text-green-400">{
+  "name": "DESKTOP-ABC123",
+  "user_id": "usr_123456",
+  "hardware_id": "hw_abcdef123456"
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="endpoint endpoint-delete glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-red-500 text-white text-sm rounded">DELETE</span>
+                                <code class="mono text-white">/devices/{id}</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Cihazı sil (unregister)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detection -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-white mb-4">Detection</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="endpoint endpoint-post glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-green-500 text-white text-sm rounded">POST</span>
+                                <code class="mono text-white">/detect</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Görüntüdeki watermark'ı tespit et</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Request (multipart/form-data)</div>
+                                <pre class="mono text-sm text-green-400">POST /v1/detect
+Content-Type: multipart/form-data
+
+image: &lt;file&gt;
+confidence_threshold: 0.85 (optional, default: 0.80)</pre>
+                            </div>
+                            <div class="code-block rounded-lg p-4 mt-4">
+                                <div class="text-xs text-slate-500 mb-2">Response</div>
+                                <pre class="mono text-sm text-green-400">{
+  "detected": true,
+  "device_id": "dev_1234567890",
+  "confidence": 0.94,
+  "timestamp": "2026-02-07T10:30:00Z",
+  "image_hash": "sha256:abc123...",
+  "processing_time_ms": 145
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="endpoint endpoint-get glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                                <code class="mono text-white">/detections</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Tespit geçmişini listele</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Query Parameters</div>
+                                <pre class="mono text-sm text-green-400">?device_id=dev_1234567890
+&start_date=2026-01-01
+&end_date=2026-02-07
+&page=1
+&per_page=20</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watermark Config -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-white mb-4">Watermark Configuration</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="endpoint endpoint-get glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                                <code class="mono text-white">/config/watermark</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Mevcut watermark konfigürasyonunu getir</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Response</div>
+                                <pre class="mono text-sm text-green-400">{
+  "strength": 0.5,
+  "algorithm": "dct_dwt_svd",
+  "ecc_enabled": true,
+  "hvs_masking": true,
+  "rotation_interval_hours": 24
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="endpoint endpoint-post glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-green-500 text-white text-sm rounded">POST</span>
+                                <code class="mono text-white">/config/watermark</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Watermark konfigürasyonunu güncelle</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Request</div>
+                                <pre class="mono text-sm text-green-400">{
+  "strength": 0.6,
+  "rotation_interval_hours": 12
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-white mb-4">Analytics</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="endpoint endpoint-get glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                                <code class="mono text-white">/analytics/summary</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Özet analitik verileri</p>
+                            <div class="code-block rounded-lg p-4">
+                                <div class="text-xs text-slate-500 mb-2">Response</div>
+                                <pre class="mono text-sm text-green-400">{
+  "total_devices": 150,
+  "active_devices": 142,
+  "total_detections": 23,
+  "detections_this_month": 5,
+  "average_confidence": 0.91
+}</pre>
+                            </div>
+                        </div>
+
+                        <div class="endpoint endpoint-get glass rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                                <code class="mono text-white">/analytics/timeline</code>
+                            </div>
+                            <p class="text-slate-400 mb-4">Zaman çizelgesi analitiği</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Codes -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Hata Kodları</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Kod</th>
+                                <th class="text-left py-3 text-slate-400">HTTP</th>
+                                <th class="text-left py-3 text-slate-400">Açıklama</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2 mono text-red-400">unauthorized</td>
+                                <td class="py-2">401</td>
+                                <td class="py-2">Geçersiz veya eksik API key</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2 mono text-red-400">forbidden</td>
+                                <td class="py-2">403</td>
+                                <td class="py-2">Yetkisiz erişim</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2 mono text-red-400">not_found</td>
+                                <td class="py-2">404</td>
+                                <td class="py-2">Kaynak bulunamadı</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2 mono text-red-400">rate_limit_exceeded</td>
+                                <td class="py-2">429</td>
+                                <td class="py-2">Rate limit aşıldı</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-2 mono text-red-400">invalid_image</td>
+                                <td class="py-2">400</td>
+                                <td class="py-2">Geçersiz görüntü formatı</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 mono text-red-400">internal_error</td>
+                                <td class="py-2">500</td>
+                                <td class="py-2">Sunucu hatası</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- gRPC -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">gRPC Servisleri</h2>
+                <div class="code-block rounded-lg p-4">
+                    <pre class="mono text-sm text-green-400">syntax = "proto3";
+package forensicwatermark.v1;
+
+service DeviceService {
+  rpc RegisterDevice(RegisterDeviceRequest) returns (Device);
+  rpc GetDevice(GetDeviceRequest) returns (Device);
+  rpc ListDevices(ListDevicesRequest) returns (ListDevicesResponse);
+  rpc UnregisterDevice(UnregisterDeviceRequest) returns (Empty);
+}
+
+service DetectionService {
+  rpc DetectWatermark(DetectRequest) returns (DetectResponse);
+  rpc StreamDetections(StreamDetectionsRequest) returns (stream Detection);
+}
+
+message Device {
+  string id = 1;
+  string name = 2;
+  string user_id = 3;
+  DeviceStatus status = 4;
+  string last_seen = 5;
+}</pre>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark API Dokümantasyonu v1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

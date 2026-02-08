@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - ROI Hesaplama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">ROI</span>
+                </div>
+                <span class="font-semibold">ROI Hesaplama</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-medium">ROI</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">ROI Hesaplama</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Yatırım getirisi analizi, maliyet-fayda hesaplama ve toplam sahip olma maliyeti (TCO) değerlendirmesi.</p>
+            </header>
+
+            <!-- Cost of Data Breach -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Veri Sızıntısı Maliyeti (IBM 2025)</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-red-400 mb-2">$4.88M</div>
+                        <div class="text-slate-400">Ortalama Maliyet</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">$9.5M</div>
+                        <div class="text-slate-400">Healthcare</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-yellow-400 mb-2">$7.2M</div>
+                        <div class="text-slate-400">Finance</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">280 Gün</div>
+                        <div class="text-slate-400">Tespit Süresi</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investment Costs -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Yatırım Maliyetleri (500 Kullanıcı)</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">İlk Yıl Maliyetleri</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Lisans (500 x $150)</span>
+                                <span class="text-white font-semibold">$75,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Kurulum & Entegrasyon</span>
+                                <span class="text-white font-semibold">$20,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Eğitim</span>
+                                <span class="text-white font-semibold">$10,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Donanım (opsiyonel)</span>
+                                <span class="text-white font-semibold">$15,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3 border-t border-slate-700">
+                                <span class="text-white font-semibold">Toplam Yıl 1</span>
+                                <span class="text-green-400 font-bold">$120,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Yıllık Tekrarlayan Maliyetler</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Lisans Yenileme</span>
+                                <span class="text-white font-semibold">$75,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Destek (Gold)</span>
+                                <span class="text-white font-semibold">$15,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Eğitim (yeni çalışanlar)</span>
+                                <span class="text-white font-semibold">$5,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3 border-t border-slate-700">
+                                <span class="text-white font-semibold">Toplam Yıllık</span>
+                                <span class="text-green-400 font-bold">$95,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefits -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Faydalar (5 Yıllık)</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Doğrudan Faydalar</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Sızıntı önleme (1 olay)</span>
+                                <span class="text-green-400 font-semibold">$4,880,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Uyumluluk cezası önleme</span>
+                                <span class="text-green-400 font-semibold">$500,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Dava/ihbar maliyeti önleme</span>
+                                <span class="text-green-400 font-semibold">$300,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Dolaylı Faydalar</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">İtibar koruma</span>
+                                <span class="text-green-400 font-semibold">$1,000,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Müşteri kaybı önleme</span>
+                                <span class="text-green-400 font-semibold">$800,000</span>
+                            </div>
+                            <div class="flex justify-between bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Operasyonel verimlilik</span>
+                                <span class="text-green-400 font-semibold">$200,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 bg-green-500/10 rounded-xl p-6 border border-green-500/30">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white font-semibold">Toplam 5 Yıllık Fayda</span>
+                        <span class="text-green-400 font-bold text-2xl">$7,680,000</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROI Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">ROI Özeti</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-green-500/10 rounded-xl p-6 text-center border border-green-500/30">
+                        <div class="text-5xl font-bold text-green-400 mb-2">6,300%</div>
+                        <div class="text-slate-400">5 Yıllık ROI</div>
+                    </div>
+                    <div class="bg-blue-500/10 rounded-xl p-6 text-center border border-blue-500/30">
+                        <div class="text-5xl font-bold text-blue-400 mb-2">1 Hafta</div>
+                        <div class="text-slate-400">Geri Ödeme Süresi</div>
+                    </div>
+                    <div class="bg-purple-500/10 rounded-xl p-6 text-center border border-purple-500/30">
+                        <div class="text-5xl font-bold text-purple-400 mb-2">$7.5M</div>
+                        <div class="text-slate-400">Net Fayda (5 Yıl)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Rakiplerle Maliyet Karşılaştırması</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Çözüm</th>
+                                <th class="text-right py-3 text-slate-400">Yıllık Maliyet</th>
+                                <th class="text-right py-3 text-slate-400">5 Yıl TCO</th>
+                                <th class="text-right py-3 text-slate-400">Fark</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3 text-green-400 font-semibold">Forensic Watermark</td>
+                                <td class="py-3 text-right">$95,000</td>
+                                <td class="py-3 text-right">$500,000</td>
+                                <td class="py-3 text-right text-green-400">-</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Forcepoint DLP</td>
+                                <td class="py-3 text-right">$120,000</td>
+                                <td class="py-3 text-right">$650,000</td>
+                                <td class="py-3 text-right text-green-400">+$150,000</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Digital Guardian</td>
+                                <td class="py-3 text-right">$150,000</td>
+                                <td class="py-3 text-right">$800,000</td>
+                                <td class="py-3 text-right text-green-400">+$300,000</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Broadcom DLP</td>
+                                <td class="py-3 text-right">$110,000</td>
+                                <td class="py-3 text-right">$600,000</td>
+                                <td class="py-3 text-right text-green-400">+$100,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

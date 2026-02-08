@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - AI Leak Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">AI</span>
+                </div>
+                <span class="font-semibold">AI Leak Detection</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-violet-500/20 text-violet-400 rounded-full text-sm font-medium">AI DETECTION</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">AI Tabanlı Sızıntı Tespiti</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Deepfake detection, AI-generated content analizi, behavioral analytics ve anomaly detection ile proaktif sızıntı önleme.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-violet-400 mb-2">98.2%</div>
+                        <div class="text-slate-400">Deepfake Detect</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">95.7%</div>
+                        <div class="text-slate-400">AI Content</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-pink-400 mb-2">92.4%</div>
+                        <div class="text-slate-400">Anomaly Detect</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-rose-400 mb-2">&lt;2%</div>
+                        <div class="text-slate-400">False Positive</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Detection Modules -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-8">AI Tespit Modülleri</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Deepfake Detection -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-violet-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-violet-400 text-2xl">🎭</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Deepfake Detection</h3>
+                                <p class="text-slate-400 text-sm">Face manipulation tespiti</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-4">FaceForensics++, FaceSwap, DeepFaceLab gibi deepfake yöntemlerini tespit eden CNN+LSTM modeli.</p>
+                        
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <pre class="mono text-sm text-green-400">// Deepfake Detection Pipeline
+1. Face Detection (MTCNN)
+2. Facial Landmarks (68 points)
+3. Spatial Analysis (CNN)
+4. Temporal Analysis (LSTM)
+5. Artifact Detection
+6. Confidence Scoring</pre>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-violet-400 font-semibold text-sm">Architecture</div>
+                                <div class="text-slate-400 text-xs">EfficientNet-B4 + LSTM</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-violet-400 font-semibold text-sm">Accuracy</div>
+                                <div class="text-slate-400 text-xs">98.2% (FaceForensics++)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI-Generated Content -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-purple-400 text-2xl">🤖</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">AI-Generated Content</h3>
+                                <p class="text-slate-400 text-sm">GAN/Diffusion detection</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-4">Stable Diffusion, DALL-E, Midjourney ile üretilmiş görüntüleri tespit eden frekans analizi modeli.</p>
+                        
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <pre class="mono text-sm text-green-400">// AI Content Detection
+1. DCT Frequency Analysis
+2. Noise Pattern Analysis
+3. GAN Fingerprint Detection
+4. Artifact Detection
+5. Statistical Analysis
+6. Model Classification</pre>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-purple-400 font-semibold text-sm">Architecture</div>
+                                <div class="text-slate-400 text-xs">ResNet-50 + Frequency CNN</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-purple-400 font-semibold text-sm">Accuracy</div>
+                                <div class="text-slate-400 text-xs">95.7% (GenImage)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Behavioral Analytics -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-pink-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-pink-400 text-2xl">📊</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Behavioral Analytics</h3>
+                                <p class="text-slate-400 text-sm">User behavior analysis</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-4">Kullanıcı davranış pattern'lerini analiz ederek anomali ve insider threat tespiti.</p>
+                        
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <pre class="mono text-sm text-green-400">// Behavioral Analysis
+1. Baseline Profile Creation
+2. Real-time Activity Monitoring
+3. Anomaly Score Calculation
+4. Risk Scoring
+5. Threat Classification
+6. Alert Generation</pre>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-pink-400 font-semibold text-sm">Architecture</div>
+                                <div class="text-slate-400 text-xs">LSTM Autoencoder</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-pink-400 font-semibold text-sm">Accuracy</div>
+                                <div class="text-slate-400 text-xs">92.4% (Insider threat)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Watermark Recovery -->
+                    <div class="glass rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-rose-500/20 rounded-lg flex items-center justify-center">
+                                <span class="text-rose-400 text-2xl">🔍</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">AI-Enhanced Watermark Recovery</h3>
+                                <p class="text-slate-400 text-sm">Damaged watermark restoration</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 mb-4">Hasarlı veya düşük kaliteli watermark'ları AI ile restore eden super-resolution modeli.</p>
+                        
+                        <div class="code-block rounded-lg p-4 mb-4">
+                            <pre class="mono text-sm text-green-400">// Watermark Recovery
+1. Preprocessing (denoise, enhance)
+2. Super-Resolution (ESRGAN)
+3. Pattern Extraction
+4. Error Correction (RS)
+5. Device ID Recovery</pre>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-rose-400 font-semibold text-sm">Architecture</div>
+                                <div class="text-slate-400 text-xs">ESRGAN + Custom CNN</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-rose-400 font-semibold text-sm">Recovery Rate</div>
+                                <div class="text-slate-400 text-xs">+35% improvement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Model Training -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Model Eğitim Altyapısı</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">📚</div>
+                        <h3 class="font-semibold text-white mb-2">Dataset</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• 10M+ labeled images</li>
+                            <li>• 500K+ deepfake videos</li>
+                            <li>• 50+ generation models</li>
+                            <li>• Continuous collection</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">🖥️</div>
+                        <h3 class="font-semibold text-white mb-2">Training Infrastructure</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• 64x NVIDIA A100</li>
+                            <li>• 2TB RAM</li>
+                            <li>• Distributed training</li>
+                            <li>• AutoML pipeline</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-2xl mb-3">🔄</div>
+                        <h3 class="font-semibold text-white mb-2">Continuous Learning</h3>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Weekly model updates</li>
+                            <li>• A/B testing</li>
+                            <li>• Feedback loop</li>
+                            <li>• Adversarial training</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Detection Sunucusu Planı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+        .flow-step { position: relative; }
+        .flow-step::after {
+            content: '↓';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #64748b;
+            font-size: 20px;
+        }
+        .flow-step:last-child::after { display: none; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">🔍</span>
+                </div>
+                <span class="font-semibold">Detection Sunucusu</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm font-medium">DETECTION</span>
+                    <span class="text-slate-500">v2.1.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Detection Sunucusu Planı</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Sızıntı tespit sunucusu mimarisi, analiz pipeline'ı ve cihaz identifikasyon sistemi.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Özet</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">~150ms</div>
+                        <div class="text-slate-400">Analiz Süresi</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">%97.3</div>
+                        <div class="text-slate-400">Tespit Doğruluğu</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-purple-400 mb-2">10K+</div>
+                        <div class="text-slate-400">Saatlik İşlem</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">JPEG 70</div>
+                        <div class="text-slate-400">Min. Kalite</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works - Simple Explanation -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-8">Nasıl Çalışır?</h2>
+                
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div class="flow-step bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-3">📸</div>
+                        <div class="font-semibold text-white mb-2">1. Sızıntı</div>
+                        <div class="text-sm text-slate-400">Çalışan ekran fotoğrafı çeker ve sızdırır</div>
+                    </div>
+                    <div class="flow-step bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-3">📤</div>
+                        <div class="font-semibold text-white mb-2">2. Yükleme</div>
+                        <div class="text-sm text-slate-400">Fotoğraf detection sunucusuna yüklenir</div>
+                    </div>
+                    <div class="flow-step bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-3">🔬</div>
+                        <div class="font-semibold text-white mb-2">3. Analiz</div>
+                        <div class="text-sm text-slate-400">Sunucu görüntüyü analiz eder</div>
+                    </div>
+                    <div class="flow-step bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-3">🎯</div>
+                        <div class="font-semibold text-white mb-2">4. Tespit</div>
+                        <div class="text-sm text-slate-400">Watermark'tan cihaz ID'si çıkarılır</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-3">✅</div>
+                        <div class="font-semibold text-white mb-2">5. Rapor</div>
+                        <div class="text-sm text-slate-400">Hangi bilgisayardan çekildiği belirlenir</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Architecture -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Sistem Mimarisi</h2>
+                
+                <div class="bg-slate-900 rounded-xl p-8">
+                    <!-- Upload Layer -->
+                    <div class="mb-6">
+                        <div class="text-sm text-slate-500 mb-3">📤 UPLOAD LAYER</div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-blue-500/20 rounded-lg p-4 text-center border border-blue-500/50">
+                                <div class="text-white font-semibold">Web Portal</div>
+                                <div class="text-xs text-slate-400">Drag & drop</div>
+                            </div>
+                            <div class="bg-blue-500/20 rounded-lg p-4 text-center border border-blue-500/50">
+                                <div class="text-white font-semibold">API</div>
+                                <div class="text-xs text-slate-400">Programmatic</div>
+                            </div>
+                            <div class="bg-blue-500/20 rounded-lg p-4 text-center border border-blue-500/50">
+                                <div class="text-white font-semibold">Email</div>
+                                <div class="text-xs text-slate-400">Attachment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Processing Layer -->
+                    <div class="mb-6">
+                        <div class="text-sm text-slate-500 mb-3">⚙️ PROCESSING LAYER</div>
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="bg-purple-500/20 rounded-lg p-4 text-center border border-purple-500/50">
+                                <div class="text-white font-semibold">Preprocessing</div>
+                                <div class="text-xs text-slate-400">Resize, denoise</div>
+                            </div>
+                            <div class="bg-purple-500/20 rounded-lg p-4 text-center border border-purple-500/50">
+                                <div class="text-white font-semibold">DCT-DWT-SVD</div>
+                                <div class="text-xs text-slate-400">Inverse transform</div>
+                            </div>
+                            <div class="bg-purple-500/20 rounded-lg p-4 text-center border border-purple-500/50">
+                                <div class="text-white font-semibold">RS Decode</div>
+                                <div class="text-xs text-slate-400">Error correction</div>
+                            </div>
+                            <div class="bg-purple-500/20 rounded-lg p-4 text-center border border-purple-500/50">
+                                <div class="text-white font-semibold">Pattern Match</div>
+                                <div class="text-xs text-slate-400">Device lookup</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Storage Layer -->
+                    <div>
+                        <div class="text-sm text-slate-500 mb-3">💾 STORAGE LAYER</div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-green-500/20 rounded-lg p-4 text-center border border-green-500/50">
+                                <div class="text-white font-semibold">PostgreSQL</div>
+                                <div class="text-xs text-slate-400">Device registry</div>
+                            </div>
+                            <div class="bg-green-500/20 rounded-lg p-4 text-center border border-green-500/50">
+                                <div class="text-white font-semibold">S3/MinIO</div>
+                                <div class="text-xs text-slate-400">Image storage</div>
+                            </div>
+                            <div class="bg-green-500/20 rounded-lg p-4 text-center border border-green-500/50">
+                                <div class="text-white font-semibold">ClickHouse</div>
+                                <div class="text-xs text-slate-400">Analytics</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detection Pipeline Detail -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Analiz Pipeline Detayı</h2>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-white mb-2">Görüntü Alımı & Validasyon</h3>
+                            <p class="text-slate-400 mb-3">Yüklenen görüntü format, boyut ve bütünlük kontrolünden geçer.</p>
+                            <div class="code-block rounded-lg p-4">
+                                <pre class="mono text-sm text-green-400">Desteklenen formatlar: JPEG, PNG, BMP, TIFF, PDF
+Max boyut: 50MB
+Min çözünürlük: 640x480</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-white mb-2">Ön İşleme (Preprocessing)</h3>
+                            <p class="text-slate-400 mb-3">Görüntü analiz için hazırlanır - gürültü temizleme, normalize etme.</p>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-slate-800 rounded-lg p-4">
+                                    <div class="text-white font-semibold mb-1">Denoising</div>
+                                    <div class="text-sm text-slate-400">Gaussian blur kaldırma</div>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-4">
+                                    <div class="text-white font-semibold mb-1">Resize</div>
+                                    <div class="text-sm text-slate-400">Standart boyuta getirme</div>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-4">
+                                    <div class="text-white font-semibold mb-1">Normalize</div>
+                                    <div class="text-sm text-slate-400">0-1 aralığına çekme</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-white mb-2">Transformasyon (DCT-DWT-SVD)</h3>
+                            <p class="text-slate-400 mb-3">Gömülü watermark'ı çıkarmak için ters dönüşümler uygulanır.</p>
+                            <div class="code-block rounded-lg p-4">
+                                <pre class="mono text-sm text-green-400">// Ters DCT-DWT-SVD
+1. RGB → YCbCr dönüşümü
+2. 8x8 DCT blokları (ters)
+3. Haar DWT 3-seviye (ters)
+4. SVD singular value çıkarımı</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0 font-bold">4</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-white mb-2">Hata Düzeltme (Reed-Solomon)</h3>
+                            <p class="text-slate-400 mb-3">Sıkıştırma/saldırı sonrası bozulan veriyi RS-ECC ile düzeltme.</p>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-300">RS(255, 223) - 16 hata düzeltme kapasitesi</span>
+                                    <span class="text-green-400">%85 başarı</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-6">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 font-bold">5</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-white mb-2">Pattern Eşleme & Cihaz Tespiti</h3>
+                            <p class="text-slate-400 mb-3">Çıkarılan watermark deseni veritabanındaki cihazlarla karşılaştırılır.</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="code-block rounded-lg p-4">
+                                    <div class="text-xs text-slate-500 mb-2">Correlation Algorithm</div>
+                                    <pre class="mono text-sm text-green-400">confidence = cross_correlation(
+    extracted_pattern,
+    device_patterns_db
+)
+if confidence > 0.80:
+    return device_id</pre>
+                                </div>
+                                <div class="bg-slate-800 rounded-lg p-4">
+                                    <div class="text-white font-semibold mb-2">Eşleşme Kriterleri</div>
+                                    <ul class="text-sm text-slate-400 space-y-1">
+                                        <li>• Confidence ≥ %80: Kesin eşleşme</li>
+                                        <li>• Confidence %60-80: Olası eşleşme</li>
+                                        <li>• Confidence < %60: Eşleşme yok</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Endpoints -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Detection API Endpoint'leri</h2>
+                
+                <div class="space-y-4">
+                    <div class="bg-slate-800 rounded-lg p-6 border-l-4 border-green-500">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="px-3 py-1 bg-green-500 text-white text-sm rounded">POST</span>
+                            <code class="mono text-white">/v1/detect</code>
+                        </div>
+                        <p class="text-slate-400 mb-4">Görüntüde watermark tespiti yapar</p>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Request
+POST /v1/detect
+Content-Type: multipart/form-data
+Authorization: Bearer &lt;api_key&gt;
+
+image: &lt;file&gt;
+confidence_threshold: 0.80 (optional)
+
+// Response
+{
+  "detected": true,
+  "device_id": "dev_1234567890",
+  "device_name": "DESKTOP-ABC123",
+  "user_email": "john.doe@company.com",
+  "confidence": 0.94,
+  "timestamp": "2026-02-07T10:30:00Z",
+  "analysis_time_ms": 145
+}</pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-6 border-l-4 border-blue-500">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                            <code class="mono text-white">/v1/detections/{id}</code>
+                        </div>
+                        <p class="text-slate-400">Tespit detaylarını getirir</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-lg p-6 border-l-4 border-blue-500">
+                        <div class="flex items-center gap-4 mb-3">
+                            <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded">GET</span>
+                            <code class="mono text-white">/v1/detections</code>
+                        </div>
+                        <p class="text-slate-400">Tespit geçmişini listeler (filtreleme destekli)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Performans Özellikleri</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">İşlem Süreleri</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">1080p Görüntü</span>
+                                <span class="text-green-400 font-semibold">~120ms</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">4K Görüntü</span>
+                                <span class="text-green-400 font-semibold">~350ms</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">PDF (10 sayfa)</span>
+                                <span class="text-yellow-400 font-semibold">~2sn</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Ölçeklenebilirlik</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Tek Sunucu</span>
+                                <span class="text-blue-400 font-semibold">100 req/s</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">3 Sunucu (Load Balanced)</span>
+                                <span class="text-blue-400 font-semibold">300 req/s</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-slate-800 rounded-lg p-3">
+                                <span class="text-slate-300">Auto-scaling (10 pod)</span>
+                                <span class="text-blue-400 font-semibold">1000 req/s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deployment Options -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Deployment Seçenekleri</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-xl font-semibold text-white mb-3">☁️ SaaS</div>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Bizim sunucularımızda</li>
+                            <li>• Otomatik güncellemeler</li>
+                            <li>• $0.10/detections</li>
+                            <li>• API erişimi</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 border-2 border-purple-500">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xl font-semibold text-white">🏢 Private Cloud</span>
+                            <span class="px-2 py-1 bg-purple-500 text-white text-xs rounded">POPÜLER</span>
+                        </div>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Kendi AWS/Azure/GCP hesabınız</li>
+                            <li>• Veri sizde kalır</li>
+                            <li>• Yıllık lisans</li>
+                            <li>• Tam kontrol</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-xl font-semibold text-white mb-3">🏛️ On-Premise</div>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Kendi datacenter'ınızda</li>
+                            <li>• Air-gapped seçeneği</li>
+                            <li>• Enterprise lisans</li>
+                            <li>• Maximum güvenlik</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hardware Requirements -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Donanım Gereksinimleri</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Bileşen</th>
+                                <th class="text-left py-3 text-slate-400">Minimum</th>
+                                <th class="text-left py-3 text-slate-400">Önerilen</th>
+                                <th class="text-left py-3 text-slate-400">Yüksek Yük</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">CPU</td>
+                                <td class="py-3">4 core</td>
+                                <td class="py-3 text-green-400">8 core</td>
+                                <td class="py-3">16+ core</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">RAM</td>
+                                <td class="py-3">8 GB</td>
+                                <td class="py-3 text-green-400">16 GB</td>
+                                <td class="py-3">32+ GB</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">GPU</td>
+                                <td class="py-3">-</td>
+                                <td class="py-3 text-green-400">NVIDIA T4</td>
+                                <td class="py-3">NVIDIA A10G</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">Disk</td>
+                                <td class="py-3">100 GB SSD</td>
+                                <td class="py-3 text-green-400">500 GB SSD</td>
+                                <td class="py-3">1+ TB NVMe</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">Network</td>
+                                <td class="py-3">1 Gbps</td>
+                                <td class="py-3 text-green-400">1 Gbps</td>
+                                <td class="py-3">10 Gbps</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center text-slate-500 text-sm">
+                <p>Forensic Watermark Detection Sunucusu Planı v2.1.0 | Son Güncelleme: Şubat 2026</p>
+            </footer>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+            <p class="text-slate-500 text-sm mt-2">Forensic Watermark Proje Dokümantasyonu v2.1.0 | Şubat 2026</p>
+            <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+        </div>
+    </footer>
+</body>
+</html>

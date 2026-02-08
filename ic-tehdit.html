@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - Insider Threat Modülü</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">IT</span>
+                </div>
+                <span class="font-semibold">Insider Threat</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm font-medium">INSIDER THREAT</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">Insider Threat Modülü</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Kullanıcı davranış analizi, risk skorlama ve iç tehdit tespiti. MITRE ATT&CK insider threat framework uyumlu.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-orange-400 mb-2">%74</div>
+                        <div class="text-slate-400">İnsider Kaynaklı</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-red-400 mb-2">$15M</div>
+                        <div class="text-slate-400">Ortalama Maliyet</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-yellow-400 mb-2">92%</div>
+                        <div class="text-slate-400">Tespit Oranı</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-green-400 mb-2">&lt;1%</div>
+                        <div class="text-slate-400">False Positive</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Types -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Insider Threat Tipleri</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">😈</div>
+                        <h3 class="font-semibold text-white mb-2">Malicious Insider</h3>
+                        <p class="text-slate-400 text-sm mb-3">Kasıtlı veri sızdırma, sabotaj, casusluk.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Data exfiltration</li>
+                            <li>• IP theft</li>
+                            <li>• Sabotage</li>
+                            <li>• Fraud</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">😔</div>
+                        <h3 class="font-semibold text-white mb-2">Negligent Insider</h3>
+                        <p class="text-slate-400 text-sm mb-3">Dikkatsizlik, eğitim eksikliği sonucu sızıntı.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Phishing victim</li>
+                            <li>• Misconfiguration</li>
+                            <li>• Lost device</li>
+                            <li>• Weak passwords</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <div class="text-3xl mb-4">🎭</div>
+                        <h3 class="font-semibold text-white mb-2">Compromised Insider</h3>
+                        <p class="text-slate-400 text-sm mb-3">Hesabı ele geçirilmiş kullanıcı.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Credential theft</li>
+                            <li>• Session hijacking</li>
+                            <li>• Social engineering</li>
+                            <li>• Malware infection</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Behavioral Indicators -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Davranış Göstergeleri</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Technical Indicators</h3>
+                        <div class="space-y-2">
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-orange-400 font-semibold text-sm">Unusual Access Patterns</div>
+                                <div class="text-slate-400 text-xs">Off-hours access, bulk downloads</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-orange-400 font-semibold text-sm">Data Movement</div>
+                                <div class="text-slate-400 text-xs">USB usage, cloud uploads, email attachments</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-orange-400 font-semibold text-sm">Privilege Escalation</div>
+                                <div class="text-slate-400 text-xs">Unauthorized access attempts</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-orange-400 font-semibold text-sm">Security Evasion</div>
+                                <div class="text-slate-400 text-xs">VPN usage, proxy, anonymization</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-4">Organizational Indicators</h3>
+                        <div class="space-y-2">
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-red-400 font-semibold text-sm">Performance Issues</div>
+                                <div class="text-slate-400 text-xs">Disgruntled employee signs</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-red-400 font-semibold text-sm">Job Changes</div>
+                                <div class="text-slate-400 text-xs">Resignation, termination, new job</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-red-400 font-semibold text-sm">Financial Stress</div>
+                                <div class="text-slate-400 text-xs">Financial problems, lifestyle changes</div>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-3">
+                                <div class="text-red-400 font-semibold text-sm">External Contacts</div>
+                                <div class="text-slate-400 text-xs">Competitor connections</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Risk Scoring -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Risk Skorlama Modeli</h2>
+                <div class="code-block rounded-lg p-4 mb-6">
+                    <pre class="mono text-sm text-green-400">// Insider Threat Risk Score
+Risk_Score = (Technical_Indicators * 0.4) + 
+             (Behavioral_Indicators * 0.3) + 
+             (Organizational_Risk * 0.2) + 
+             (Historical_Pattern * 0.1)
+
+Thresholds:
+- 0-30: Low Risk (Monitor)
+- 31-60: Medium Risk (Alert)
+- 61-80: High Risk (Investigate)
+- 81-100: Critical Risk (Immediate Action)</pre>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-green-500/10 rounded-lg p-4 text-center border border-green-500/30">
+                        <div class="text-green-400 font-bold">0-30</div>
+                        <div class="text-slate-400 text-sm">Low Risk</div>
+                    </div>
+                    <div class="bg-yellow-500/10 rounded-lg p-4 text-center border border-yellow-500/30">
+                        <div class="text-yellow-400 font-bold">31-60</div>
+                        <div class="text-slate-400 text-sm">Medium Risk</div>
+                    </div>
+                    <div class="bg-orange-500/10 rounded-lg p-4 text-center border border-orange-500/30">
+                        <div class="text-orange-400 font-bold">61-80</div>
+                        <div class="text-slate-400 text-sm">High Risk</div>
+                    </div>
+                    <div class="bg-red-500/10 rounded-lg p-4 text-center border border-red-500/30">
+                        <div class="text-red-400 font-bold">81-100</div>
+                        <div class="text-slate-400 text-sm">Critical Risk</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detection Pipeline -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Tespit Pipeline</h2>
+                <div class="bg-slate-900 rounded-xl p-6">
+                    <div class="grid grid-cols-5 gap-2 items-center text-center mb-6">
+                        <div>
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">📊</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Collect</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">🧠</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Analyze</div>
+                        </div>
+                        <div class="text-slate-600">→</div>
+                        <div>
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">⚡</span>
+                            </div>
+                            <div class="text-xs text-slate-400">Alert</div>
+                        </div>
+                    </div>
+                    <div class="code-block rounded-lg p-4">
+                        <pre class="mono text-sm text-green-400">// Insider Threat Detection
+1. Data Collection
+   - User activity logs
+   - File access patterns
+   - Network traffic
+   - Endpoint telemetry
+
+2. Behavior Analysis
+   - Baseline profiling
+   - Anomaly detection
+   - Peer group analysis
+
+3. Risk Scoring
+   - Real-time calculation
+   - Trend analysis
+   - Correlation
+
+4. Alert & Response
+   - SOC notification
+   - Automated actions
+   - Investigation support</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Privacy Considerations -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Gizlilik ve Etik</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="font-semibold text-white mb-4">Privacy-by-Design</h3>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• İş amacıyla sınırlı izleme</li>
+                            <li>• Şeffaf bildirim</li>
+                            <li>• Veri minimizasyonu</li>
+                            <li>• Erişim logları</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6">
+                        <h3 class="font-semibold text-white mb-4">Legal Compliance</h3>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li>• Çalışan izni</li>
+                            <li>• GDPR/KVKK uyumlu</li>
+                            <li>• İş sözleşmesi hükümleri</li>
+                            <li>• Sendika görüşmesi (varsa)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>

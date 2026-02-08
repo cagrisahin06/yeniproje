@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Watermark - SIEM SOC Entegrasyonu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .code-block { background: #0d1117; border: 1px solid #30363d; }
+    </style>
+</head>
+<body class="gradient-bg text-slate-200 min-h-screen">
+    <nav class="fixed top-0 w-full glass border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">SI</span>
+                </div>
+                <span class="font-semibold">SIEM/SOC Integration</span>
+            </div>
+            <a href="index.html" class="text-slate-400 hover:text-white transition">← Ana Sayfa</a>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm font-medium">SIEM/SOC</span>
+                    <span class="text-slate-500">v3.0.0</span>
+                </div>
+                <h1 class="text-5xl font-bold text-white mb-4">SIEM & SOC Entegrasyonu</h1>
+                <p class="text-xl text-slate-400 max-w-3xl">Splunk, QRadar, Sentinel, ArcSight ve diğer SIEM platformlarıyla tam entegrasyon. CEF, LEEF, Syslog formatlarında olay aktarımı.</p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Executive Summary</h2>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-indigo-400 mb-2">15+</div>
+                        <div class="text-slate-400">SIEM Platforms</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-blue-400 mb-2">CEF/LEEF</div>
+                        <div class="text-slate-400">Standard Formats</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-cyan-400 mb-2">Real-time</div>
+                        <div class="text-slate-400">Event Streaming</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-sky-400 mb-2">50+</div>
+                        <div class="text-slate-400">Event Types</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Supported Platforms -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Desteklenen SIEM Platformları</h2>
+                
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">📊</div>
+                        <div class="text-white font-semibold text-sm">Splunk</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">🔷</div>
+                        <div class="text-white font-semibold text-sm">QRadar</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">☁️</div>
+                        <div class="text-white font-semibold text-sm">Azure Sentinel</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">🔶</div>
+                        <div class="text-white font-semibold text-sm">ArcSight</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">🔍</div>
+                        <div class="text-white font-semibold text-sm">Elastic</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">🛡️</div>
+                        <div class="text-white font-semibold text-sm">Chronicle</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">📈</div>
+                        <div class="text-white font-semibold text-sm">Datadog</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">🔧</div>
+                        <div class="text-white font-semibold text-sm">LogRhythm</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">🌐</div>
+                        <div class="text-white font-semibold text-sm">Sumo Logic</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Native</div>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-2">⚙️</div>
+                        <div class="text-white font-semibold text-sm">Generic Syslog</div>
+                        <div class="text-xs text-green-400 mt-1">✓ Universal</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Types -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">Olay Tipleri ve Seviyeleri</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="text-left py-3 text-slate-400">Event Type</th>
+                                <th class="text-left py-3 text-slate-400">Severity</th>
+                                <th class="text-left py-3 text-slate-400">Description</th>
+                                <th class="text-left py-3 text-slate-400">CEF Category</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">watermark_detected</td>
+                                <td class="py-3"><span class="text-red-400">Critical</span></td>
+                                <td class="py-3">Sızıntı tespit edildi</td>
+                                <td class="py-3">securityEvent</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">screen_recording_detected</td>
+                                <td class="py-3"><span class="text-orange-400">High</span></td>
+                                <td class="py-3">Ekran kayıt yazılımı tespiti</td>
+                                <td class="py-3">securityEvent</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">camera_detected</td>
+                                <td class="py-3"><span class="text-orange-400">High</span></td>
+                                <td class="py-3">Kamera algılama</td>
+                                <td class="py-3">securityEvent</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">attestation_failed</td>
+                                <td class="py-3"><span class="text-yellow-400">Medium</span></td>
+                                <td class="py-3">Device attestation başarısız</td>
+                                <td class="py-3">systemEvent</td>
+                            </tr>
+                            <tr class="border-b border-slate-800">
+                                <td class="py-3">user_anomaly</td>
+                                <td class="py-3"><span class="text-yellow-400">Medium</span></td>
+                                <td class="py-3">Kullanıcı davranış anomalisi</td>
+                                <td class="py-3">behavioralAnalytics</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">device_registered</td>
+                                <td class="py-3"><span class="text-green-400">Info</span></td>
+                                <td class="py-3">Yeni cihaz kaydı</td>
+                                <td class="py-3">systemEvent</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- CEF Format -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">CEF Format Örneği</h2>
+                
+                <div class="code-block rounded-lg p-4">
+                    <pre class="mono text-sm text-green-400">CEF:0|Berasoft|ForensicWatermark|3.0.0|watermark_detected|Data Leak Detected|10|
+cs1=dev_123456 cs1Label=deviceId
+src=10.0.1.100
+suser=john.doe@company.com
+fname=confidential_doc.jpg
+fileHash=sha256:abc123...
+confidence=0.94
+sourcePlatform=telegram
+msg="Sensitive document leaked on Telegram"
+rt=Feb 07 2026 14:30:00 GMT</pre>
+                </div>
+            </section>
+
+            <!-- SOAR Integration -->
+            <section class="glass rounded-2xl p-8 mb-12 border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-6">SOAR Otomasyonu</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">Otomatik Playbook'lar</h3>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="text-indigo-400 font-semibold mb-2">Leak Detected Playbook</div>
+                                <ol class="text-sm text-slate-400 space-y-1">
+                                    <li>1. Alert SOC team</li>
+                                    <li>2. Create incident ticket</li>
+                                    <li>3. Isolate device</li>
+                                    <li>4. Capture forensic evidence</li>
+                                    <li>5. Notify manager</li>
+                                </ol>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4">
+                                <div class="text-blue-400 font-semibold mb-2">Camera Detected Playbook</div>
+                                <ol class="text-sm text-slate-400 space-y-1">
+                                    <li>1. Blur screen content</li>
+                                    <li>2. Log event</li>
+                                    <li>3. Alert user</li>
+                                    <li>4. Capture photo</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-white mb-4">API Endpoints</h3>
+                        <div class="code-block rounded-lg p-4">
+                            <pre class="mono text-sm text-green-400">// Get Events
+GET /api/v1/siem/events
+
+// Webhook Registration
+POST /api/v1/siem/webhooks
+{
+  "url": "https://siem.company.com/webhook",
+  "events": ["watermark_detected"],
+  "auth": "bearer_token"
+}
+
+// Health Check
+GET /api/v1/siem/health</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-slate-700 py-8 px-6 mt-12">
+                <div class="max-w-7xl mx-auto text-center">
+                    <p class="text-slate-400 font-semibold">Berasoft Yazılım LTD. ŞTİ. tarafından hazırlanmıştır</p>
+                    <p class="text-slate-500 text-sm mt-2">Forensic Watermark Enterprise Security Platform v3.0.0 | Şubat 2026</p>
+                    <p class="text-slate-600 text-sm mt-1">Tüm hakları saklıdır. © 2026 Berasoft Yazılım</p>
+                </div>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>
